@@ -88,7 +88,7 @@ public final class SensibleLong
     /**
      * Constructor that sets the valid range.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the minimum value
+     * An <code>IllegalArgumentException</code> exception is thrown if the minimum value
      * is greater than the maximum value.
      *
      * @param minValue the minimum valid value
@@ -117,7 +117,7 @@ public final class SensibleLong
      * Constructor that sets the number value using the given long integer value if the number is
      * between the minimum and the maximum values.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the minimum value
+     * An <code>IllegalArgumentException</code> exception is thrown if the minimum value
      * is greater than the maximum value or the given value is not in range.
      *
      * @param minValue the minimum valid value
@@ -149,7 +149,7 @@ public final class SensibleLong
      * Constructor that sets the number value using the given <code>SensibleLong</code> object
      * value and the given range if the number is between the minimum and the maximum values.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the minimum value
+     * An <code>IllegalArgumentException</code> exception is thrown if the minimum value
      * is greater than the maximum value or the given value is not in range.
      *
      * @param minValue the minimum valid value
@@ -180,7 +180,7 @@ public final class SensibleLong
      * Constructor that sets the number value using the given <code>Long</code> object value and
      * the given range if the number is between the minimum and the maximum values.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the minimum value
+     * An <code>IllegalArgumentException</code> exception is thrown if the minimum value
      * is greater than the maximum value or the given value is not in range.
      *
      * @param minValue the minimum valid value
@@ -198,7 +198,7 @@ public final class SensibleLong
     /**
      * Constructor that sets the number value using the given <code>String</code> object value.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the given string
+     * An <code>IllegalArgumentException</code> exception is thrown if the given string
      * does not represent a valid long integer number.
      *
      * @param source the string representation of the source value
@@ -214,7 +214,7 @@ public final class SensibleLong
      * Constructor that sets the number value using the given <code>String</code> object value and
      * the given range if the number is between the minimum and the maximum values.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the minimum value
+     * An <code>IllegalArgumentException</code> exception is thrown if the minimum value
      * is greater than the maximum value or the given value is not in range or the given string does
      * not represent a valid long integer number.
      *
@@ -362,7 +362,7 @@ public final class SensibleLong
      * is stored (if this property exists). If necessary, the implementation has to invoke the
      * <code>setValid(boolean)</code> method to change the data value valid state.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the given string
+     * An <code>IllegalArgumentException</code> exception is thrown if the given string
      * does not represent a valid long integer value, or the new value is not in range and the
      * change value action is invoked from a setter method.
      *
@@ -616,7 +616,7 @@ public final class SensibleLong
      * Changes the <code>minValue</code> property value and fires the property change event. It
      * checks if the number is in range and sets the valid property.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the minimum value
+     * An <code>IllegalArgumentException</code> exception is thrown if the minimum value
      * is greater than the maximum value.
      *
      * @param newValue the property new value
@@ -643,7 +643,7 @@ public final class SensibleLong
      * Changes the <code>maxValue</code> property value and fires the property change event. It
      * checks if the number is in range and sets the valid property.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the minimum value
+     * An <code>IllegalArgumentException</code> exception is thrown if the minimum value
      * is greater than the maximum value.
      *
      * @param newValue the property new value
@@ -683,7 +683,7 @@ public final class SensibleLong
     /**
      * Changes the data value using the given <code>SensibleLong</code> object value.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the new value is
+     * An <code>IllegalArgumentException</code> exception is thrown if the new value is
      * not in range.
      *
      * @param newValue the new value
@@ -698,7 +698,7 @@ public final class SensibleLong
     /**
      * Changes the data value using the given <code>Long</code> object value.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the new value is
+     * An <code>IllegalArgumentException</code> exception is thrown if the new value is
      * not in range.
      *
      * @param newValue the new value
@@ -713,7 +713,7 @@ public final class SensibleLong
     /**
      * Changes the data value using the given <code>String</code> object.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the new value is
+     * An <code>IllegalArgumentException</code> exception is thrown if the new value is
      * not in range.
      *
      * @param newValue the string representation of the new value
@@ -729,7 +729,7 @@ public final class SensibleLong
      * Changes the valid range and fires the property change events. It checks if the number is in
      * range and sets the valid property.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the minimum value
+     * An <code>IllegalArgumentException</code> exception is thrown if the minimum value
      * is greater than the maximum value.
      *
      * @param newMinValue the new minimum value
@@ -759,7 +759,7 @@ public final class SensibleLong
      * Changes the data value using the given long integer value and fires the property change
      * event.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the new value is
+     * An <code>IllegalArgumentException</code> exception is thrown if the new value is
      * not in range.
      *
      * @param newValue the new value

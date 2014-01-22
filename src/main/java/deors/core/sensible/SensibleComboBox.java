@@ -320,7 +320,7 @@ public final class SensibleComboBox
     /**
      * This method loads the combo with the values in the history file.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the history file
+     * An <code>IllegalArgumentException</code> exception is thrown if the history file
      * does not exist, could not be created, could not be read or it is not valid.
      */
     private void loadValues() {
@@ -509,7 +509,7 @@ public final class SensibleComboBox
      * the method reorders the existing entries and positions the current selected item in the combo
      * as the last (most recent) entry.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the history file
+     * An <code>IllegalArgumentException</code> exception is thrown if the history file
      * could not be updated.
      */
     public void updateHistory() {

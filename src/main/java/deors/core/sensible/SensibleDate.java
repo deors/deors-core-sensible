@@ -189,7 +189,7 @@ public final class SensibleDate
     /**
      * Constructor that sets the date using the given integer values.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the given integer
+     * An <code>IllegalArgumentException</code> exception is thrown if the given integer
      * values does not represent a valid date.
      *
      * @param year the date year
@@ -244,7 +244,7 @@ public final class SensibleDate
     /**
      * Constructor that sets the date using the given <code>String</code> object value.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the given string
+     * An <code>IllegalArgumentException</code> exception is thrown if the given string
      * object does not represent a valid date.
      *
      * @param source the string object used to set the date value
@@ -349,7 +349,7 @@ public final class SensibleDate
      * is stored (if this property exists). If necessary, the implementation has to invoke the
      * <code>setValid(boolean)</code> method to change the data value valid state.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the string does
+     * An <code>IllegalArgumentException</code> exception is thrown if the string does
      * not represent a valid date and the change value action is invoked from a setter method.
      *
      * @param newValue the data new value as a string
@@ -1007,7 +1007,7 @@ public final class SensibleDate
     /**
      * Changes the date value using the given <code>String</code> object.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the given string
+     * An <code>IllegalArgumentException</code> exception is thrown if the given string
      * object does not represent a valid date.
      *
      * @param newValue the string representation of the new value
@@ -1024,7 +1024,7 @@ public final class SensibleDate
      * valid values are <code>DMY_DATE_FORMAT</code>, <code>MDY_DATE_FORMAT</code> and
      * <code>YMD_DATE_FORMAT</code>.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the new date
+     * An <code>IllegalArgumentException</code> exception is thrown if the new date
      * format is not valid.
      *
      * @param newValue the property new value
@@ -1136,7 +1136,7 @@ public final class SensibleDate
     /**
      * Changes the date value using the given integer values and fires the property change event.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the given integer
+     * An <code>IllegalArgumentException</code> exception is thrown if the given integer
      * values does not represent a valid date.
      *
      * @param newYear the date new year

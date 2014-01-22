@@ -190,7 +190,7 @@ public final class SensibleBigDecimal
      * the parameters means there is no limit in the precission of the integer and/or the fractional
      * part of the number.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the maximum
+     * An <code>IllegalArgumentException</code> exception is thrown if the maximum
      * integer and/or fractional digits values are less than -1.
      *
      * @param maxIntegerDigits the maximum integer digits
@@ -209,7 +209,7 @@ public final class SensibleBigDecimal
      * of <code>-1</code> in any or both of the precission parameters means there is no limit in
      * the precission of the integer and/or the fractional part of the number.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the maximum
+     * An <code>IllegalArgumentException</code> exception is thrown if the maximum
      * integer and/or fractional digits values are less than -1.
      *
      * @param maxIntegerDigits the maximum integer digits
@@ -230,7 +230,7 @@ public final class SensibleBigDecimal
      * Constructor that sets the number value using the given <code>java.math.BigDecimal</code>
      * object value.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the number is not
+     * An <code>IllegalArgumentException</code> exception is thrown if the number is not
      * valid.
      *
      * @param number the source value
@@ -248,7 +248,7 @@ public final class SensibleBigDecimal
      * precission parameters means there is no limit in the precission of the integer and/or the
      * fractional part of the number.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the number is not
+     * An <code>IllegalArgumentException</code> exception is thrown if the number is not
      * valid or the maximum integer and/or fractional digits values are less than -1.
      *
      * @param maxIntegerDigits the maximum integer digits
@@ -270,7 +270,7 @@ public final class SensibleBigDecimal
      * <code>-1</code> in any or both of the precission parameters means there is no limit in the
      * precission of the integer and/or the fractional part of the number.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the number is not
+     * An <code>IllegalArgumentException</code> exception is thrown if the number is not
      * valid or the maximum integer and/or fractional digits values are less than -1.
      *
      * @param maxIntegerDigits the maximum integer digits
@@ -293,7 +293,7 @@ public final class SensibleBigDecimal
      * Constructor that sets the number value using the given <code>SensibleBigDecimal</code>
      * object value.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the number is not
+     * An <code>IllegalArgumentException</code> exception is thrown if the number is not
      * valid.
      *
      * @param number the source value
@@ -311,7 +311,7 @@ public final class SensibleBigDecimal
      * precission parameters means there is no limit in the precission of the integer and/or the
      * fractional part of the number.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the number is not
+     * An <code>IllegalArgumentException</code> exception is thrown if the number is not
      * valid or the maximum integer and/or fractional digits values are less than -1.
      *
      * @param maxIntegerDigits the maximum integer digits
@@ -334,7 +334,7 @@ public final class SensibleBigDecimal
      * <code>-1</code> in any or both of the precission parameters means there is no limit in the
      * precission of the integer and/or the fractional part of the number.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the number is not
+     * An <code>IllegalArgumentException</code> exception is thrown if the number is not
      * valid or the maximum integer and/or fractional digits values are less than -1.
      *
      * @param maxIntegerDigits the maximum integer digits
@@ -356,7 +356,7 @@ public final class SensibleBigDecimal
     /**
      * Constructor that sets the number value using the given <code>String</code> object value.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the string is not
+     * An <code>IllegalArgumentException</code> exception is thrown if the string is not
      * a valid number.
      *
      * @param source the string representation of the source value
@@ -374,7 +374,7 @@ public final class SensibleBigDecimal
      * parameters means there is no limit in the precission of the integer and/or the fractional
      * part of the number.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the string is not
+     * An <code>IllegalArgumentException</code> exception is thrown if the string is not
      * a valid number or the maximum integer and/or fractional digits values are less than -1.
      *
      * @param maxIntegerDigits the maximum integer digits
@@ -396,7 +396,7 @@ public final class SensibleBigDecimal
      * in any or both of the precission parameters means there is no limit in the precission of the
      * integer and/or the fractional part of the number.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the string is not
+     * An <code>IllegalArgumentException</code> exception is thrown if the string is not
      * a valid number or the maximum integer and/or fractional digits values are less than -1.
      *
      * @param maxIntegerDigits the maximum integer digits
@@ -722,7 +722,7 @@ public final class SensibleBigDecimal
      * is stored (if this property exists). If necessary, the implementation has to invoke the
      * <code>setValid(boolean)</code> method to change the data value valid state.
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the string does
+     * An <code>IllegalArgumentException</code> exception is thrown if the string does
      * not represent a valid big decimal value.
      *
      * @param newValue the data new value as a string
@@ -1231,7 +1231,7 @@ public final class SensibleBigDecimal
      * Changes the <code>maxIntegerDigits</code> property value and fires the property change
      * event. The change is only allowed if number is zero.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the number is not
+     * An <code>IllegalArgumentException</code> exception is thrown if the number is not
      * zero or the maximum integer digits value is less than -1.
      *
      * @param newValue the property new value
@@ -1262,7 +1262,7 @@ public final class SensibleBigDecimal
      * Changes the <code>maxFractionalDigits</code> property value and fires the property change
      * event. The change is only allowed if number is zero.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the number is not
+     * An <code>IllegalArgumentException</code> exception is thrown if the number is not
      * zero or the maximum fractional digits value is less than -1.
      *
      * @param newValue the property new value
@@ -1291,7 +1291,7 @@ public final class SensibleBigDecimal
      * Changes the <code>negativeAllowed</code> property value and fires the property change
      * event. The change is only allowed if number is zero.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the number is not
+     * An <code>IllegalArgumentException</code> exception is thrown if the number is not
      * zero.
      *
      * @param newValue the property new value
@@ -1353,7 +1353,7 @@ public final class SensibleBigDecimal
      * Changes the data value using the given <code>java.math.BigDecimal</code> value and fires
      * the property change event.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the new value
+     * An <code>IllegalArgumentException</code> exception is thrown if the new value
      * format is not valid.
      *
      * @param newValue the new value

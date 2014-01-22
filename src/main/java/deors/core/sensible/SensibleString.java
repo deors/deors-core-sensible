@@ -137,7 +137,7 @@ public final class SensibleString
     /**
      * Constructor that sets the maximum length of the string.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the maximum length
+     * An <code>IllegalArgumentException</code> exception is thrown if the maximum length
      * is less than <code>-1</code> or zero.
      *
      * @param maxLength the maximum length
@@ -166,7 +166,7 @@ public final class SensibleString
      * the given maximum length. If the given string length is greater than the given maximum length
      * and the maximum length is not equal to <code>-1</code>, the final string is truncated.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the maximum length
+     * An <code>IllegalArgumentException</code> exception is thrown if the maximum length
      * is less than <code>-1</code> or zero.
      *
      * @param maxLength the maximum length
@@ -199,7 +199,7 @@ public final class SensibleString
      * maximum length and the maximum length is not equal to <code>-1</code>, the final string is
      * truncated.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the maximum length
+     * An <code>IllegalArgumentException</code> exception is thrown if the maximum length
      * is less than <code>-1</code> or zero.
      *
      * @param maxLength the maximum length
@@ -654,7 +654,7 @@ public final class SensibleString
      * valid values are <code>NO_CASING</code>, <code>TO_LOWER_CASE</code>,
      * <code>TO_UPPER_CASE</code> and <code>CAPITALIZE</code>.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the new casing
+     * An <code>IllegalArgumentException</code> exception is thrown if the new casing
      * mode is not valid.
      *
      * @param newValue the property new value
@@ -691,7 +691,7 @@ public final class SensibleString
      * the value length is greater than the maximum string length and the maximum length is not
      * equal to <code>-1</code>, the final string is truncated.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the maximum length
+     * An <code>IllegalArgumentException</code> exception is thrown if the maximum length
      * is less than <code>-1</code> or zero.
      *
      * @param newValue the property new value

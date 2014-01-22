@@ -273,7 +273,7 @@ public final class SensibleSpinner
         /**
          * Constructor that sets the spinner data.<br>
          *
-         * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the spinner
+         * An <code>IllegalArgumentException</code> exception is thrown if the spinner
          * data is not an instance of <code>SensibleBigDecimal</code>, <code>SensibleInteger</code>,
          * <code>SensibleLong</code> or <code>SensibleString</code> classes.
          *
@@ -387,7 +387,7 @@ public final class SensibleSpinner
     /**
      * Changes the <code>data</code> property value and fires the property change event.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the spinner
+     * An <code>IllegalArgumentException</code> exception is thrown if the spinner
      * data is not an instance of <code>SensibleBigDecimal</code>, <code>SensibleInteger</code>,
      * <code>SensibleLong</code> or <code>SensibleString</code> classes.
      *
@@ -417,7 +417,7 @@ public final class SensibleSpinner
     /**
      * Changes the editor used by this spinner instance.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the data bean
+     * An <code>IllegalArgumentException</code> exception is thrown if the data bean
      * is not set, the editor has already been set or the given editor is not a
      * <code>SensibleSpinnerEditor</code> object.
      *
@@ -447,7 +447,7 @@ public final class SensibleSpinner
     /**
      * Changes the model used by this spinner instance.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the data bean
+     * An <code>IllegalArgumentException</code> exception is thrown if the data bean
      * is not setted, the model has already been setted or the given model is not a
      * <code>SensibleSpinnerModel</code> object.
      *

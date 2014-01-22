@@ -107,7 +107,7 @@ public final class SensibleBoolean
      * <code>BOOLEAN_TRUE_AS_STRING</code> and <code>BOOLEAN_FALSE_AS_STRING</code>. The string
      * comparision is performed ignoring the case.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the string does
+     * An <code>IllegalArgumentException</code> exception is thrown if the string does
      * not represent a valid boolean value.
      *
      * @param source the string object used to initialize the flag
@@ -221,7 +221,7 @@ public final class SensibleBoolean
      * <code>BOOLEAN_TRUE_AS_STRING</code> and <code>BOOLEAN_FALSE_AS_STRING</code>. The
      * comparison is performed ignoring the case. The boolean data type is always valid.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the string does
+     * An <code>IllegalArgumentException</code> exception is thrown if the string does
      * not represent a valid boolean value.
      *
      * @param newValue the data new value as a string
@@ -515,7 +515,7 @@ public final class SensibleBoolean
      * <code>BOOLEAN_TRUE_AS_STRING</code> and <code>BOOLEAN_FALSE_AS_STRING</code>. The string
      * comparision is performed ignoring the case.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the string does
+     * An <code>IllegalArgumentException</code> exception is thrown if the string does
      * not represent a valid boolean value.
      *
      * @param newValue the string representation of the new value

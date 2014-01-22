@@ -173,7 +173,7 @@ public final class SensibleTime
     /**
      * Constructor that sets the time using the given integer values.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the given integer
+     * An <code>IllegalArgumentException</code> exception is thrown if the given integer
      * values does not represent a valid time.
      *
      * @param hour the time hour
@@ -191,7 +191,7 @@ public final class SensibleTime
      * Constructor that sets the time using the given integer values and sets the 'time with
      * seconds' flag.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the given integer
+     * An <code>IllegalArgumentException</code> exception is thrown if the given integer
      * values does not represent a valid time.
      *
      * @param timeWithSeconds the 'time with seconds' flag
@@ -265,7 +265,7 @@ public final class SensibleTime
     /**
      * Constructor that sets the time using the given <code>String</code> object value.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the given string
+     * An <code>IllegalArgumentException</code> exception is thrown if the given string
      * object does not represent a valid time.
      *
      * @param source the string object used to set the time value
@@ -281,7 +281,7 @@ public final class SensibleTime
      * Constructor that sets the time using the given <code>String</code> object value and sets
      * the 'time with seconds' flag.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the given string
+     * An <code>IllegalArgumentException</code> exception is thrown if the given string
      * object does not represent a valid time.
      *
      * @param timeWithSeconds the 'time with seconds' flag
@@ -404,7 +404,7 @@ public final class SensibleTime
      * is stored (if this property exists). If necessary, the implementation has to invoke the
      * <code>setValid(boolean)</code> method to change the data value valid state.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the string does
+     * An <code>IllegalArgumentException</code> exception is thrown if the string does
      * not represent a valid time and the change value action is invoked from a setter method.
      *
      * @param newValue the data new value as a string
@@ -1031,7 +1031,7 @@ public final class SensibleTime
     /**
      * Changes the time value using the given integer values and fires the property change event.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the given integer
+     * An <code>IllegalArgumentException</code> exception is thrown if the given integer
      * values does not represent a valid time.
      *
      * @param newHour the time new hour

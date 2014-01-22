@@ -113,7 +113,7 @@ public abstract class SensibleObject
     /**
      * Changes the value of a field given by index.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the field index is
+     * An <code>IllegalArgumentException</code> exception is thrown if the field index is
      * not defined.
      *
      * @param index the field index
@@ -138,7 +138,7 @@ public abstract class SensibleObject
     /**
      * Changes the value of a field given by index.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the field index is
+     * An <code>IllegalArgumentException</code> exception is thrown if the field index is
      * not defined.
      *
      * @param index the field index
@@ -168,7 +168,7 @@ public abstract class SensibleObject
     /**
      * Changes the value of a field given by name.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the field name is
+     * An <code>IllegalArgumentException</code> exception is thrown if the field name is
      * not defined.
      *
      * @param name the field name
@@ -182,7 +182,7 @@ public abstract class SensibleObject
     /**
      * Changes the value of a field given by name.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the field name is
+     * An <code>IllegalArgumentException</code> exception is thrown if the field name is
      * not defined.
      *
      * @param name the field name
@@ -196,7 +196,7 @@ public abstract class SensibleObject
     /**
      * Changes the value of all the fields.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the given object
+     * An <code>IllegalArgumentException</code> exception is thrown if the given object
      * definition does not match this object definition.
      *
      * @param newValue the new value
@@ -378,7 +378,7 @@ public abstract class SensibleObject
     /**
      * Returns a field from the object definition given by index.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the field index is
+     * An <code>IllegalArgumentException</code> exception is thrown if the field index is
      * not defined.
      *
      * @param index the field index
@@ -401,7 +401,7 @@ public abstract class SensibleObject
     /**
      * Returns a field from the object definition given by name.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the field name is
+     * An <code>IllegalArgumentException</code> exception is thrown if the field name is
      * not defined.
      *
      * @param name the field name
@@ -438,7 +438,7 @@ public abstract class SensibleObject
     /**
      * Returns the index of a field from the object definition.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the field name is
+     * An <code>IllegalArgumentException</code> exception is thrown if the field name is
      * not defined.
      *
      * @param name the field name
@@ -476,7 +476,7 @@ public abstract class SensibleObject
     /**
      * Returns the name of a field from the object definition.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the field index is
+     * An <code>IllegalArgumentException</code> exception is thrown if the field index is
      * not defined.
      *
      * @param index the field index
@@ -660,7 +660,7 @@ public abstract class SensibleObject
      * Changes the value of a field given by index and fires the property change event in the
      * object.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the field index is
+     * An <code>IllegalArgumentException</code> exception is thrown if the field index is
      * not defined.
      *
      * @param index the field index
@@ -693,7 +693,7 @@ public abstract class SensibleObject
      * Changes the value of a field given by index and fires the property change event in the
      * object.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the field index is
+     * An <code>IllegalArgumentException</code> exception is thrown if the field index is
      * not defined or the given object type is not the same as the field type.
      *
      * @param index the field index
@@ -731,7 +731,7 @@ public abstract class SensibleObject
      * Changes the value of a field given by name and fires the property change event in the
      * object.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the field name is
+     * An <code>IllegalArgumentException</code> exception is thrown if the field name is
      * not defined.
      *
      * @param name the field name
@@ -746,7 +746,7 @@ public abstract class SensibleObject
      * Changes the value of a field given by name and fires the property change event in the
      * object.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the field name is
+     * An <code>IllegalArgumentException</code> exception is thrown if the field name is
      * not defined or the given object type is not the same as the field type.
      *
      * @param name the field name
@@ -760,7 +760,7 @@ public abstract class SensibleObject
     /**
      * Changes the value of all the fields and fires the property change events in the object.<br>
      *
-     * A <code>java.lang.IllegalArgumentException</code> exception is thrown if the given object
+     * An <code>IllegalArgumentException</code> exception is thrown if the given object
      * definition does not match this object definition.
      *
      * @param newValue the new value
