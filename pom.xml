@@ -201,7 +201,7 @@
                                 <include>**/it/*TestCase.java</include>
                             </includes>
                             <excludes><!-- this test case needs a desktop session (Swing IT with AWT Robot/Fest) so it will not run inside Jenkins if started as a service -->
-                                <exclude>deors/sensible/it/SensibleObjectIntegrationTestCase.java</exclude>
+                                <exclude>**/it/SensibleObjectIntegrationTestCase.java</exclude>
                             </excludes>
                         </configuration>
                         <executions>
