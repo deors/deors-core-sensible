@@ -30,7 +30,7 @@
         <jacoco.version>0.6.3.201306030806</jacoco.version>
         <easymock.version>3.1</easymock.version>
         <powermock.version>1.5.1</powermock.version>
-        <fest.version>1.2</fest.version>
+        <fest.version>1.2.1</fest.version>
     </properties>
 
     <build>
