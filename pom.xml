@@ -14,23 +14,29 @@
     <properties>
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 
-        <sonar.reuseExistingRulesConfiguration>true</sonar.reuseExistingRulesConfiguration>
-        <sonar.squid.analyse.property.accessors>false</sonar.squid.analyse.property.accessors>
-        <sonar.findbugs.excludesFilters>${project.basedir}/findbugs-filter.xml</sonar.findbugs.excludesFilters>
-        <sonar.jacoco.itReportPath>${project.build.directory}/jacoco.itest</sonar.jacoco.itReportPath>
-
         <java.version>1.7</java.version>
 
         <deors.core.version>1.0-SNAPSHOT</deors.core.version>
-        <slf4j.version>1.6.4</slf4j.version>
+
+        <slf4j.version>1.7.5</slf4j.version>
         <log4j.version>1.2.16</log4j.version>
         <xstream.version>1.4.3</xstream.version>
 
         <junit.version>4.10</junit.version>
-        <jacoco.version>0.6.3.201306030806</jacoco.version>
         <easymock.version>3.1</easymock.version>
         <powermock.version>1.5.1</powermock.version>
         <fest.version>1.2.1</fest.version>
+
+        <jacoco.version>0.7.1.201405082137</jacoco.version>
+        <jacoco.path>${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar</jacoco.path>
+        <jacoco.report>${project.build.directory}/jacoco.itest</jacoco.report>
+        <jacoco.agentConfig>-javaagent:${jacoco.path}=destfile=${jacoco.report}</jacoco.agentConfig>
+
+        <jacoco-listeners.version>2.2.1</jacoco-listeners.version>
+
+        <sonar.jacoco.itReportPath>${jacoco.report}</sonar.jacoco.itReportPath>
+        <sonar.squid.analyse.property.accessors>false</sonar.squid.analyse.property.accessors>
+        <sonar.findbugs.excludesFilters>${project.basedir}/findbugs-filter.xml</sonar.findbugs.excludesFilters>
     </properties>
 
     <build>
@@ -107,6 +113,7 @@
             <artifactId>deors.core.commons</artifactId>
             <version>${deors.core.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -136,13 +143,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jacoco</groupId>
-            <artifactId>org.jacoco.agent</artifactId>
-            <version>${jacoco.version}</version>
-            <classifier>runtime</classifier>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -184,11 +184,10 @@
     </dependencies>
 
     <profiles>
+        <!-- Fest-based integration tests are excluded allowing for -->
+        <!-- verification in headless continuous integration processes -->
         <profile>
-            <id>disable-swing-ui-tests</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
+            <id>itests</id>
             <build>
                 <plugins>
                     <plugin>
@@ -196,11 +195,12 @@
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <version>2.15</version>
                         <configuration>
-                            <argLine>-javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar=destfile=${project.build.directory}/jacoco.itest</argLine>
                             <includes>
                                 <include>**/it/*TestCase.java</include>
                             </includes>
-                            <excludes><!-- this test case needs a desktop session (Swing IT with AWT Robot/Fest) so it will not run inside Jenkins if started as a service -->
+                            <excludes>
+                                <!-- Fest-based integration tests need a desktop session for AWT Robot -->
+                                <!-- so they will not run inside headless continuous integration processes -->
                                 <exclude>**/it/SensibleObjectIntegrationTestCase.java</exclude>
                             </excludes>
                         </configuration>
@@ -217,8 +217,10 @@
                 </plugins>
             </build>
         </profile>
+        <!-- Fest-based integration tests are included -->
+        <!-- allowing for verification in desktop sessions -->
         <profile>
-            <id>swing-ui-tests</id>
+            <id>itests-with-fest</id>
             <build>
                 <plugins>
                     <plugin>
@@ -226,7 +228,6 @@
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <version>2.15</version>
                         <configuration>
-                            <argLine>-javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar=destfile=${project.build.directory}/jacoco.itest</argLine>
                             <includes>
                                 <include>**/it/*TestCase.java</include>
                             </includes>
@@ -243,6 +244,137 @@
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+        <!-- calculate test code coverage metrics with SonarQube and JaCoCo -->
+        <!-- for unit tests, coverage is measured per individual test -->
+        <!-- for integration tests, coverage is measured for all tests combined -->
+        <!-- Fest-based integration tests are excluded allowing for -->
+        <!-- verification in headless continuous integration processes -->
+        <profile>
+            <id>coverage-per-test</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.15</version>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/it/*TestCase.java</exclude>
+                            </excludes>
+                            <properties>
+                                <property>
+                                    <name>listener</name>
+                                    <value>org.sonar.java.jacoco.JUnitListener</value>
+                                </property>
+                            </properties>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>2.15</version>
+                        <configuration>
+                            <argLine>${jacoco.agentConfig}</argLine>
+                            <includes>
+                                <include>**/it/*TestCase.java</include>
+                            </includes>
+                            <excludes>
+                                <!-- Fest-based integration tests need a desktop session for AWT Robot -->
+                                <!-- so they will not run inside headless continuous integration processes -->
+                                <exclude>**/it/SensibleObjectIntegrationTestCase.java</exclude>
+                            </excludes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>integration-test</id>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>org.jacoco.agent</artifactId>
+                    <version>${jacoco.version}</version>
+                    <classifier>runtime</classifier>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.codehaus.sonar-plugins.java</groupId>
+                    <artifactId>sonar-jacoco-listeners</artifactId>
+                    <version>${jacoco-listeners.version}</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <!-- calculate test code coverage metrics with SonarQube and JaCoCo -->
+        <!-- for unit tests, coverage is measured per individual test -->
+        <!-- for integration tests, coverage is measured for all tests combined -->
+        <!-- Fest-based integration tests are included -->
+        <!-- allowing for verification in desktop sessions -->
+        <profile>
+            <id>coverage-per-test-with-fest</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.15</version>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/it/*TestCase.java</exclude>
+                            </excludes>
+                            <properties>
+                                <property>
+                                    <name>listener</name>
+                                    <value>org.sonar.java.jacoco.JUnitListener</value>
+                                </property>
+                            </properties>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>2.15</version>
+                        <configuration>
+                            <argLine>${jacoco.agentConfig}</argLine>
+                            <includes>
+                                <include>**/it/*TestCase.java</include>
+                            </includes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>integration-test</id>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>org.jacoco.agent</artifactId>
+                    <version>${jacoco.version}</version>
+                    <classifier>runtime</classifier>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.codehaus.sonar-plugins.java</groupId>
+                    <artifactId>sonar-jacoco-listeners</artifactId>
+                    <version>${jacoco-listeners.version}</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
         </profile>
     </profiles>
 
