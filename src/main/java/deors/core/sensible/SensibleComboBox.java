@@ -11,14 +11,17 @@ import deors.core.commons.INIFileManager;
  * Definition for a combo box control with values loaded from a history file.<br>
  *
  * The history file is a configuration file managed using an instance of the
- * <code>INIFileManager</code> class. The format of the keys in this file is as follows:<br>
+ * <code>INIFileManager</code> class. The format of the keys in this file is as follows:
+ *
+ * <ol>
  * <li>First, a <code>maxEntries</code> key with the maximum number of entries to be remembered
  * in the history file.</li>
  * <li>Next, a list of entries with the names <code>0</code>, <code>1</code>, ...,
  * <code><i>maxEntries - 1</i></code>. The corresponding values are the history entries that
  * will be loaded in the combo box list. The combo is loaded when the property
  * <code>historyFileName</code> changes or when the <code>updateHistory()</code> method is
- * called.</li><br>
+ * called.</li>
+ * </ol>
  *
  * If the history file does not exist it is created with an empty history list and using the
  * <code>DEFAULT_MAX_ENTRIES</code> property for the value of the <code>maxEntries</code> key.<br>
@@ -29,7 +32,9 @@ import deors.core.commons.INIFileManager;
  * The history entries are used as the auto-completion list for the <code>SensibleTextField</code>
  * object used as the combo editor.<br>
  *
- * The control has two history modes:<br>
+ * The control has two history modes:
+ *
+ * <ol>
  * <li>The default one, <code>FULL_HISTORY</code>, updates the history file with the user
  * selections and positions first in the history the last selected entry. If the control is
  * not editable, then it is not possible to add new entries, but the existing ones will be
@@ -37,7 +42,8 @@ import deors.core.commons.INIFileManager;
  * <li>The second mode, <code>REMEMBER_AND_SELECT</code>, uses the <code>lastSelected</code>
  * key in the history file to remember what was the last selection made by the user. When the
  * combo is loaded this selection is maintained. In this mode the combo is always not
- * editable.<br>
+ * editable.</li>
+ * </ol>
  *
  * @author deors
  * @version 1.0

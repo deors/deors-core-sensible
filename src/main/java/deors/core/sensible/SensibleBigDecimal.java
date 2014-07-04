@@ -1178,9 +1178,10 @@ public final class SensibleBigDecimal
      * Changes the <code>decimalSeparator</code> property value and fires the property change
      * event.
      *
-     * @param newValue the property new value
+     * An <code>IllegalArgumentException</code> exception is thrown if the new value
+     * format is not valid.
      *
-     * @throws java.lang.IllegalArgumentException
+     * @param newValue the property new value
      *
      * @see SensibleBigDecimal#decimalSeparator
      * @see SensibleBigDecimal#getDecimalSeparator()
@@ -1204,9 +1205,10 @@ public final class SensibleBigDecimal
     /**
      * Changes the <code>groupSeparator</code> property value and fires the property change event.
      *
-     * @param newValue the property new value
+     * An <code>IllegalArgumentException</code> exception is thrown if the new value
+     * format is not valid.
      *
-     * @throws java.lang.IllegalArgumentException
+     * @param newValue the property new value
      *
      * @see SensibleBigDecimal#groupSeparator
      * @see SensibleBigDecimal#getGroupSeparator()
@@ -1235,8 +1237,6 @@ public final class SensibleBigDecimal
      * zero or the maximum integer digits value is less than -1.
      *
      * @param newValue the property new value
-     *
-     * @throws java.lang.IllegalArgumentException
      *
      * @see SensibleBigDecimal#maxIntegerDigits
      * @see SensibleBigDecimal#getMaxIntegerDigits()
@@ -1415,7 +1415,7 @@ public final class SensibleBigDecimal
     /**
      * Returns a string representation valid for sorting data. For the big decimal data type the
      * method aligns the integer part in a string long enough to match any valid number with the
-     * current integer part precission and then appends the decimal part.
+     * current integer part precision and then appends the decimal part.
      *
      * @return a string representation valid for sorting data
      */

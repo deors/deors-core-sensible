@@ -16,7 +16,9 @@ import java.util.Arrays;
  * A <code>SensibleObject</code> object can also be used to customize the presentation of a
  * <code>SensibleTable</code> object.<br>
  *
- * The steps needed to create a new <code>SensibleObject</code> are:<br>
+ * The steps needed to create a new <code>SensibleObject</code> are:
+ *
+ * <ol>
  * <li>1. Create a new class that extends <code>SensibleObject</code>.</li>
  * <li>2. Implement the default constructor. Define local variables, one for each field in the object
  * definition and initialize each with the appropriate settings as maximum lengths for strings or
@@ -34,7 +36,8 @@ import java.util.Arrays;
  * the property change events.</li>
  * <li>4. Define accessors and mutators for the properties if desired. Accessors must use the
  * <code>getField()</code> methods and mutators must use the <code>setField()</code> methods so the
- * property change events in the object are raised.</li><br>
+ * property change events in the object are raised.</li>
+ * </ol>
  *
  * @author deors
  * @version 1.0
