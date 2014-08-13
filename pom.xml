@@ -14,7 +14,7 @@
     <properties>
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 
-        <java.version>1.7</java.version>
+        <java.version>1.8</java.version>
 
         <deors.core.version>1.0-SNAPSHOT</deors.core.version>
 
@@ -36,7 +36,6 @@
 
         <jacoco-listeners.version>2.4</jacoco-listeners.version>
 
-        <sonar.jacoco.itReportPath>${jacoco.itReport}</sonar.jacoco.itReportPath>
         <sonar.squid.analyse.property.accessors>false</sonar.squid.analyse.property.accessors>
         <sonar.findbugs.excludesFilters>${project.basedir}/findbugs-filter.xml</sonar.findbugs.excludesFilters>
     </properties>
