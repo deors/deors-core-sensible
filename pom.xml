@@ -26,6 +26,7 @@
         <easymock.version>3.2</easymock.version>
         <powermock.version>1.5.5</powermock.version>
         <fest.version>1.2.1</fest.version>
+        <pitest.version>1.1.0</pitest.version>
 
         <jacoco.version>0.7.1.201405082137</jacoco.version>
         <jacoco.path>${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar</jacoco.path>
@@ -93,6 +94,22 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>${pitest.version}</version>
+                <configuration>
+                    <targetClasses>
+                        <param>deors.core.sensible.*</param>
+                    </targetClasses>
+                    <excludedClasses>
+                        <param>deors.core.sensible.it.*</param>
+                    </excludedClasses>
+                    <outputFormats>
+                        <outputFormat>XML</outputFormat> 
+                    </outputFormats>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
