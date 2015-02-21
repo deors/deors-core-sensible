@@ -4,13 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import deors.core.sensible.SensibleContext;
-import deors.core.sensible.SensibleInteger;
-import deors.core.sensible.SensibleString;
 
 public class SensibleIntegerTestCase {
 
@@ -127,6 +126,15 @@ public class SensibleIntegerTestCase {
     }
 
     @Test
+    public void testOutOfRange1ChangeValue() {
+
+        SensibleInteger i = new SensibleInteger(0, 1000);
+        i.changeValue("1200");
+
+        assertFalse(i.isValid());
+    }
+
+    @Test
     public void testOutOfRange2() {
 
         thrown.expect(IllegalArgumentException.class);
@@ -134,6 +142,58 @@ public class SensibleIntegerTestCase {
 
         SensibleInteger i = new SensibleInteger(0, 1000);
         i.setNumber("-100");
+    }
+
+    @Test
+    public void testOutOfRange2ChangeValue() {
+
+        SensibleInteger i = new SensibleInteger(0, 1000);
+        i.changeValue("-100");
+
+        assertFalse(i.isValid());
+    }
+
+    @Test
+    public void testZeroOutOfRange() {
+
+        SensibleInteger i = new SensibleInteger(100, 1000);
+        i.changeValue("");
+
+        assertFalse(i.isValid());
+
+        i.changeValue("-");
+
+        assertFalse(i.isValid());
+
+        i.changeValue("100");
+
+        assertTrue(i.isValid());
+
+        i = new SensibleInteger(-10, 10);
+        i.changeValue("");
+
+        assertTrue(i.isValid());
+
+        i.changeValue("-");
+
+        assertTrue(i.isValid());
+
+        i.changeValue("100");
+
+        assertFalse(i.isValid());
+
+        i = new SensibleInteger(-1000, -10);
+        i.changeValue("");
+
+        assertFalse(i.isValid());
+
+        i.changeValue("-");
+
+        assertFalse(i.isValid());
+
+        i.changeValue("-100");
+
+        assertTrue(i.isValid());
     }
 
     @Test
@@ -238,6 +298,15 @@ public class SensibleIntegerTestCase {
     }
 
     @Test
+    public void testHashCode() {
+
+        SensibleInteger i1 = new SensibleInteger(5);
+        SensibleInteger i2 = new SensibleInteger(5);
+
+        assertEquals(i1.hashCode(), i2.hashCode());
+    }
+
+    @Test
     public void testToString() {
 
         SensibleInteger i = new SensibleInteger(123);
@@ -253,5 +322,77 @@ public class SensibleIntegerTestCase {
         i.setNumber(-1000000000);
 
         assertEquals("-1000000000", i.toStringForSort());
+    }
+
+    @Test
+    public void testAllowInsert() {
+
+        SensibleInteger i = new SensibleInteger();
+
+        assertTrue(i.allowInsert(0, "1"));
+        assertTrue(i.allowInsert(0, "0"));
+        assertTrue(i.allowInsert(0, "-"));
+        assertFalse(i.allowInsert(0, "a"));
+        assertFalse(i.allowInsert(0, " "));
+        assertTrue(i.allowInsert(0, "10"));
+        assertTrue(i.allowInsert(0, "01"));
+        assertTrue(i.allowInsert(0, "-1"));
+
+        i.setValue("0");
+
+        assertFalse(i.allowInsert(0, "0"));
+        assertFalse(i.allowInsert(1, "0"));
+        assertFalse(i.allowInsert(1, "-"));
+        assertFalse(i.allowInsert(1, "-1"));
+
+        i.setValue("1");
+
+        assertFalse(i.allowInsert(0, "0"));
+        assertTrue(i.allowInsert(1, "0"));
+
+        i.setValue("-");
+
+        assertFalse(i.allowInsert(0, "0"));
+        assertFalse(i.allowInsert(1, "0"));
+        assertFalse(i.allowInsert(1, "-"));
+
+        i.clear();
+        i.setMinValue(0);
+
+        assertFalse(i.allowInsert(0, "-"));
+
+        SensibleTextField stf = new SensibleTextField(i);
+
+        assertFalse(i.allowInsert(0, "-", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+    }
+
+    @Test
+    public void testAllowRemove() {
+
+        SensibleInteger i = new SensibleInteger("10");
+
+        assertTrue(i.allowRemove(0, 0));
+        assertTrue(i.allowRemove(0, 1));
+        assertTrue(i.allowRemove(1, 1));
+
+        SensibleTextField stf = new SensibleTextField(i);
+
+        assertFalse(i.allowRemove(0, 0, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+    }
+
+    @Test
+    public void testFirePropertyChangeEvents() {
+
+        SensibleInteger i = new SensibleInteger();
+        final List<String> props = new ArrayList<>();
+        i.addPropertyChangeListener(event -> {
+            props.add(event.getPropertyName());
+        });
+        i.setValue("0");
+        i.firePropertyChangeEvents();
+
+        assertTrue(props.contains("number"));
+        assertTrue(props.contains("minValue"));
+        assertTrue(props.contains("maxValue"));
     }
 }

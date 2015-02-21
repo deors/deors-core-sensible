@@ -10,11 +10,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import deors.core.sensible.SensibleContext;
-import deors.core.sensible.SensibleDate;
-import deors.core.sensible.SensibleDateTime;
-import deors.core.sensible.SensibleTime;
-
 public class SensibleDateTimeTestCase {
 
     @Rule
@@ -932,5 +927,39 @@ public class SensibleDateTimeTestCase {
         assertEquals("2008/02/29 12:25:02", dt.toStringYMDHMS());
         assertEquals("2008/02/29 12:25:02", dt.toStringForSort());
         assertEquals("'29/2/2008 12:25:02'", dt.toStringForSQL());
+    }
+
+    @Test
+    public void testAllowInsert() {
+
+        SensibleDateTime dt = new SensibleDateTime();
+
+        assertFalse(dt.allowInsert(0, "a"));
+        assertFalse(dt.allowInsert(0, "*"));
+        assertTrue(dt.allowInsert(0, "1"));
+        assertTrue(dt.allowInsert(0, "1/"));
+        assertTrue(dt.allowInsert(0, "1/1/2015 12:"));
+
+        dt.changeValue("1/");
+
+        assertTrue(dt.allowInsert(2, "1/"));
+
+        SensibleTextField stf = new SensibleTextField(dt);
+
+        assertFalse(dt.allowInsert(0, "", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+    }
+
+    @Test
+    public void testAllowRemove() {
+
+        SensibleDateTime dt = new SensibleDateTime();
+
+        dt.changeValue("1/1/2015");
+
+        assertTrue(dt.allowRemove(4, 4));
+
+        SensibleTextField stf = new SensibleTextField(dt);
+
+        assertFalse(dt.allowRemove(0, 0, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
     }
 }

@@ -12,18 +12,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import deors.core.sensible.SensibleBigDecimal;
-import deors.core.sensible.SensibleBoolean;
-import deors.core.sensible.SensibleDataType;
-import deors.core.sensible.SensibleDate;
-import deors.core.sensible.SensibleDateTime;
-import deors.core.sensible.SensibleInteger;
-import deors.core.sensible.SensibleLong;
-import deors.core.sensible.SensibleObject;
-import deors.core.sensible.SensibleString;
-import deors.core.sensible.SensibleTable;
-import deors.core.sensible.SensibleTime;
-
 public class SensibleTableTestCase {
 
     @Test

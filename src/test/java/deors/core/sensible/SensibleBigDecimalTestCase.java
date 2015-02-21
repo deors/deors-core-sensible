@@ -6,13 +6,12 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import deors.core.sensible.SensibleBigDecimal;
-import deors.core.sensible.SensibleContext;
 
 public class SensibleBigDecimalTestCase {
 
@@ -263,5 +262,185 @@ public class SensibleBigDecimalTestCase {
         bd1.setDecimalSeparator(',');
         bd1.setGroupSeparator('.');
         assertEquals("10.512,23", bd1.toString());
+    }
+
+    @Test
+    public void testToStringForSort() {
+
+        SensibleBigDecimal bd1 = new SensibleBigDecimal(-1, -1, "254");
+
+        assertEquals("254", bd1.toStringForSort());
+
+        SensibleBigDecimal bd2 = new SensibleBigDecimal(5, 2, "121,32");
+
+        assertEquals("   121,32", bd2.toStringForSort());
+
+        SensibleBigDecimal bd3 = new SensibleBigDecimal(5, 2, "121");
+
+        assertEquals("   121", bd3.toStringForSort());
+
+        SensibleBigDecimal bd4 = new SensibleBigDecimal(5, 2, false, "121,32");
+
+        assertEquals("  121,32", bd4.toStringForSort());
+
+        SensibleBigDecimal bd5 = new SensibleBigDecimal(5, 2, false, "121");
+
+        assertEquals("  121", bd5.toStringForSort());
+    }
+
+    @Test
+    public void testEqualsString() {
+
+        SensibleBigDecimal bd1 = new SensibleBigDecimal("254");
+        String sbd1 = "254";
+        String sbd2 = "255";
+
+        assertFalse(bd1.equals((String) null));
+        assertTrue(bd1.equals(sbd1));
+        assertFalse(bd1.equals(sbd2));
+    }
+
+    @Test
+    public void testEqualsBigDecimal() {
+
+        SensibleBigDecimal bd1 = new SensibleBigDecimal("254");
+        BigDecimal mbd1 = new BigDecimal("254");
+        BigDecimal mbd2 = new BigDecimal("255");
+
+        assertFalse(bd1.equals((BigDecimal) null));
+        assertTrue(bd1.equals(mbd1));
+        assertFalse(bd1.equals(mbd2));
+    }
+
+    @Test
+    public void testEqualsObject() {
+
+        SensibleBigDecimal bd1 = new SensibleBigDecimal("254");
+        SensibleBigDecimal bd2 = new SensibleBigDecimal("254");
+        SensibleBigDecimal bd3 = new SensibleBigDecimal("255");
+
+        assertFalse(bd1.equals((Object) null));
+        assertTrue(bd1.equals(bd1));
+        assertTrue(bd1.equals(bd2));
+        assertFalse(bd1.equals(bd3));
+    }
+
+    @Test
+    public void testFirePropertyChangeEvents() {
+
+        SensibleBigDecimal bd = new SensibleBigDecimal("254");
+        final List<String> props = new ArrayList<>();
+        bd.addPropertyChangeListener(event -> {
+            props.add(event.getPropertyName());
+        });
+        bd.setValue("123");
+        bd.firePropertyChangeEvents();
+
+        assertTrue(props.contains("number"));
+        assertTrue(props.contains("maxIntegerDigits"));
+        assertTrue(props.contains("maxFractionalDigits"));
+        assertTrue(props.contains("negativeValuesAllowed"));
+        assertTrue(props.contains("decimalSeparator"));
+        assertTrue(props.contains("groupSeparator"));
+    }
+
+    @Test
+    public void testCompareTo() {
+
+        SensibleBigDecimal bd1 = new SensibleBigDecimal("254");
+        SensibleBigDecimal bd2 = new SensibleBigDecimal("255");
+
+        BigDecimal mbd1 = new BigDecimal("254");
+        BigDecimal mbd2 = new BigDecimal("255");
+
+        String sbd1 = "254";
+        String sbd2 = "255";
+
+        assertTrue(bd1.compareTo(bd1) == 0);
+        assertTrue(bd1.compareTo(bd2) < 0);
+        assertTrue(bd2.compareTo(bd1) > 0);
+
+        assertTrue(bd1.compareTo(mbd1) == 0);
+        assertTrue(bd1.compareTo(mbd2) < 0);
+        assertTrue(bd2.compareTo(mbd1) > 0);
+
+        assertTrue(bd1.compareTo(sbd1) == 0);
+        assertTrue(bd1.compareTo(sbd2) < 0);
+        assertTrue(bd2.compareTo(sbd1) > 0);
+    }
+
+    @Test
+    public void testToStringForSQL() {
+
+        SensibleBigDecimal bd1 = new SensibleBigDecimal("254");
+        SensibleBigDecimal bd2 = new SensibleBigDecimal("-255");
+
+        assertEquals(bd1.toString(), bd1.toStringForSQL());
+        assertEquals(bd2.toString(), bd2.toStringForSQL());
+    }
+
+    @Test
+    public void testToStringFormatted() {
+
+        SensibleBigDecimal bd1 = new SensibleBigDecimal("254");
+        SensibleBigDecimal bd2 = new SensibleBigDecimal("-255");
+        SensibleBigDecimal bd3 = new SensibleBigDecimal("-1255,12");
+
+        assertEquals("254", bd1.toStringFormatted());
+        assertEquals("-255", bd2.toStringFormatted());
+        assertEquals("-1.255,12", bd3.toStringFormatted());
+    }
+
+    @Test
+    public void testBigDecimalValue() {
+
+        SensibleBigDecimal bd1 = new SensibleBigDecimal("254");
+
+        assertTrue(new BigDecimal("254").equals(bd1.bigDecimalValue()));
+    }
+
+    @Test
+    public void testHashCode() {
+
+        SensibleBigDecimal bd1 = new SensibleBigDecimal("254");
+        SensibleBigDecimal bd2 = new SensibleBigDecimal("254");
+
+        assertEquals(bd1.hashCode(), bd2.hashCode());
+    }
+
+    @Test
+    public void testAllowInsert() {
+
+        SensibleBigDecimal bd1 = new SensibleBigDecimal("123");
+        SensibleTextField stf = new SensibleTextField(bd1);
+
+        assertTrue(bd1.allowInsert(0, "1", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+        assertTrue(bd1.allowInsert(0, "-", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+        assertFalse(bd1.allowInsert(0, "a", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+        assertTrue(bd1.allowInsert(2, "1", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+        assertFalse(bd1.allowInsert(2, "-", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+        assertFalse(bd1.allowInsert(2, "a", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+
+        assertFalse(bd1.allowInsert(0, "1"));
+    }
+
+    @Test
+    public void testAllowRemove() {
+
+        SensibleBigDecimal bd1 = new SensibleBigDecimal("123");
+        SensibleTextField stf = new SensibleTextField(bd1);
+
+        assertTrue(bd1.allowRemove(0, 1, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+        assertTrue(bd1.allowRemove(0, 2, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+
+        assertFalse(bd1.allowRemove(0, 1));
+
+        bd1 = new SensibleBigDecimal("1234");
+        stf = new SensibleTextField(bd1);
+
+        assertTrue(bd1.allowRemove(0, 1, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+        assertTrue(bd1.allowRemove(0, 2, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+
+        assertFalse(bd1.allowRemove(0, 1));
     }
 }

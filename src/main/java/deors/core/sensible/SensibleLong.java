@@ -432,7 +432,7 @@ public final class SensibleLong
      * @see SensibleLong#setMinValue(long)
      * @see SensibleLong#setMaxValue(long)
      */
-    public Object clone()
+    public SensibleLong clone()
         throws CloneNotSupportedException {
 
         SensibleLong obj = (SensibleLong) super.clone();
@@ -441,6 +441,33 @@ public final class SensibleLong
         obj.setMaxValue(getMaxValue());
 
         return obj;
+    }
+
+    /**
+     * Compares this <code>SensibleLong</code> object with the given object and returns an integer
+     * value as established in the <code>Comparable</code> interface. The method compares the
+     * numeric values if the target object is a <code>Long</code> object or a
+     * <code>SensibleLong</code> object while other target objects are compared in the super
+     * class.
+     *
+     * @param target the target object
+     *
+     * @return a negative integer value if this object is less than the given object, zero if both
+     *         objects represent the same value, and a positive integer value if this object is
+     *         greater than the given object
+     *
+     * @see SensibleDataType#compareTo(Object)
+     */
+    public int compareTo(Object target) {
+
+        if (target instanceof Long) {
+            return Long.valueOf(number).compareTo((Long) target);
+        } else if (target instanceof SensibleLong) {
+            return Long.valueOf(number).compareTo(
+                Long.valueOf(((SensibleLong) target).number));
+        }
+
+        return super.compareTo(target);
     }
 
     /**

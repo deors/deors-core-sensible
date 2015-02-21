@@ -897,7 +897,7 @@ public final class SensibleBigDecimal
      * @see SensibleBigDecimal#setMaxIntegerDigits(int)
      * @see SensibleBigDecimal#setMaxFractionalDigits(int)
      */
-    public Object clone()
+    public SensibleBigDecimal clone()
         throws CloneNotSupportedException {
 
         SensibleBigDecimal obj = (SensibleBigDecimal) super.clone();
@@ -906,6 +906,32 @@ public final class SensibleBigDecimal
         obj.setGroupSeparator(getGroupSeparator());
 
         return obj;
+    }
+
+    /**
+     * Compares this <code>SensibleBigDecimal</code> object with the given object and returns an
+     * integer value as established in the <code>Comparable</code> interface. The method compares
+     * the numeric values if the target object is a <code>java.math.BigDecimal</code> object or a
+     * <code>SensibleBigDecimal</code> object while other target objects are compared in the super
+     * class.
+     *
+     * @param target the target object
+     *
+     * @return a negative integer value if this object is less than the given object, zero if both
+     *         objects represent the same value, and a positive integer value if this object is
+     *         greater than the given object
+     *
+     * @see SensibleDataType#compareTo(Object)
+     */
+    public int compareTo(Object target) {
+
+        if (target instanceof BigDecimal) {
+            return this.number.compareTo((BigDecimal) target);
+        } else if (target instanceof SensibleBigDecimal) {
+            return this.number.compareTo(((SensibleBigDecimal) target).number);
+        } else {
+            return super.compareTo(target);
+        }
     }
 
     /**

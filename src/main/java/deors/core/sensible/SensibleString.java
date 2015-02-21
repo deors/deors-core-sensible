@@ -228,7 +228,9 @@ public final class SensibleString
             SensibleString newValue = (SensibleString) this.clone();
             try {
                 int convertedValue = Integer.parseInt(getString());
-                if (convertedValue < Math.pow(BASE_TEN, getMaxLength()) - 1) {
+                if (getMaxLength() == -1) {
+                    newValue.setString(Integer.toString(convertedValue + augend));
+                } else if (convertedValue + augend < Math.pow(BASE_TEN, getMaxLength()) - 1) {
                     newValue.setString(Integer.toString(convertedValue + augend));
                 }
             } catch (NumberFormatException nfe) {
@@ -472,7 +474,7 @@ public final class SensibleString
      * @see SensibleDataType#clone()
      * @see SensibleString#setMaxLength(int)
      */
-    public Object clone()
+    public SensibleString clone()
         throws CloneNotSupportedException {
 
         SensibleString obj = (SensibleString) super.clone();
@@ -793,7 +795,7 @@ public final class SensibleString
             SensibleString newValue = (SensibleString) this.clone();
             try {
                 int convertedValue = Integer.parseInt(getString());
-                if (convertedValue > 0) {
+                if (convertedValue - subtraend > 0) {
                     newValue.setString(Integer.toString(convertedValue - subtraend));
                 }
             } catch (NumberFormatException nfe) {

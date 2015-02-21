@@ -5,8 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import deors.core.sensible.ConnectorOr;
-
 public class ConnectorOrTestCase {
 
     @Test
@@ -34,5 +32,14 @@ public class ConnectorOrTestCase {
 
         or.setIn2(false);
         assertFalse(or.isOut());
+
+        or.setIn1(true);
+        assertTrue(or.isOut());
+
+        or.setIn1(false);
+        assertFalse(or.isOut());
+
+        or.setIn2(true);
+        assertTrue(or.isOut());
     }
 }

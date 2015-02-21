@@ -7,13 +7,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import deors.core.sensible.SensibleBigDecimal;
-import deors.core.sensible.SensibleBoolean;
-import deors.core.sensible.SensibleInteger;
-import deors.core.sensible.SensibleLong;
-import deors.core.sensible.SensibleSpinner;
-import deors.core.sensible.SensibleString;
-
 
 public class SensibleSpinnerTestCase {
 

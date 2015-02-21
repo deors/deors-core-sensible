@@ -48,8 +48,8 @@ import deors.core.commons.INIFileManager;
  * @author deors
  * @version 1.0
  */
-public final class SensibleComboBox
-    extends javax.swing.JComboBox<String>
+public final class SensibleComboBox<T extends SensibleDataType>
+    extends javax.swing.JComboBox<T>
     implements java.beans.PropertyChangeListener {
 
     /**
@@ -64,7 +64,7 @@ public final class SensibleComboBox
      * @see SensibleComboBox#getData()
      * @see SensibleComboBox#setData(SensibleDataType)
      */
-    SensibleDataType data;
+    T data;
 
     /**
      * The name of the file that contains the history entries.
@@ -139,26 +139,25 @@ public final class SensibleComboBox
         /**
          * Default constructor.
          */
-        @SuppressWarnings("PMD.CallSuperInConstructor")
         public SensibleComboBoxEditor() {
 
+            super();
             editor = new SensibleTextField(data);
         }
 
         /**
-         * Returns the edited item. Actually it returns the <code>data</code> property value as a
-         * string.
+         * Returns the edited item. Actually it returns the <code>data</code> property value.
          *
          * @return the edited item
          */
         public Object getItem() {
 
-            return data.toString();
+            return data;
         }
 
         /**
-         * Set the item that should be edited. Actually it uses the string representation of the
-         * given object to change the value in the <code>data</code> property.
+         * Sets the item that should be edited. The object type should be the parameterized
+         * type <code>T</code>, otherwise, it is ignored and the method does nothing.
          *
          * @param o the object to be edited
          */
@@ -166,8 +165,8 @@ public final class SensibleComboBox
 
             if (o == null) {
                 data.clear();
-            } else {
-                data.setValue(o.toString());
+            } else if (o instanceof SensibleDataType) {
+                data.setValue(((SensibleDataType) o).getValue());
             }
         }
     }
@@ -200,44 +199,28 @@ public final class SensibleComboBox
      * @param mode the history mode
      * @param data the data type
      */
-    public SensibleComboBox(int mode, SensibleDataType data) {
+    public SensibleComboBox(int mode, T data) {
 
         this();
 
         setHistoryMode(mode);
         setData(data);
-    }
-
-    /**
-     * Constructor that sets the history mode and file name.
-     *
-     * @param mode the history mode
-     * @param fileName the history file name
-     */
-    public SensibleComboBox(int mode, String fileName) {
-
-        this();
-
-        setHistoryMode(mode);
-        setHistoryFileName(fileName);
-
-        loadValues();
     }
 
     /**
      * Constructor that sets the history mode, file name and data type.
      *
      * @param mode the history mode
-     * @param fileName the history file name
      * @param data the data type
+     * @param fileName the history file name
      */
-    public SensibleComboBox(int mode, String fileName, SensibleDataType data) {
+    public SensibleComboBox(int mode, T data, String fileName) {
 
         this();
 
         setHistoryMode(mode);
-        setHistoryFileName(fileName);
         setData(data);
+        setHistoryFileName(fileName);
 
         loadValues();
     }
@@ -247,39 +230,25 @@ public final class SensibleComboBox
      *
      * @param data the data type
      */
-    public SensibleComboBox(SensibleDataType data) {
+    public SensibleComboBox(T data) {
 
         this();
 
         setData(data);
-    }
-
-    /**
-     * Constructor that sets the history file name.
-     *
-     * @param fileName the history file name
-     */
-    public SensibleComboBox(String fileName) {
-
-        this();
-
-        setHistoryFileName(fileName);
-
-        loadValues();
     }
 
     /**
      * Constructor that sets the history file name and data type.
      *
-     * @param fileName the history file name
      * @param data the data type
+     * @param fileName the history file name
      */
-    public SensibleComboBox(String fileName, SensibleDataType data) {
+    public SensibleComboBox(T data, String fileName) {
 
         this();
 
-        setHistoryFileName(fileName);
         setData(data);
+        setHistoryFileName(fileName);
 
         loadValues();
     }
@@ -363,20 +332,25 @@ public final class SensibleComboBox
                 ini = new INIFileManager(historyFileName);
             }
 
-            int maxEntries = Integer.parseInt(ini.getValue(KEY_MAX_ENTRIES));
+            String maxEntriesValue = ini.getValue(KEY_MAX_ENTRIES);
+            int maxEntries = maxEntriesValue == null ?
+                DEFAULT_MAX_ENTRIES : Integer.parseInt(maxEntriesValue);
 
-            String entry;
             historyEntries = new ArrayList<String>();
 
             for (int i = 0; i < maxEntries; i++) {
-                entry = ini.getValue(Integer.toString(i));
+                String entry = ini.getValue(Integer.toString(i));
 
                 if (entry != null && entry.length() != 0) {
-                    addItem(entry);
+                    T clone = (T) data.clone();
+                    clone.setValue(entry);
+                    addItem(clone);
                     historyEntries.add(entry);
                 }
             }
 
+            // takes into account missing or blank entries
+            maxEntries = historyEntries.size();
             setMaximumRowCount(maxEntries);
 
             switch (historyMode) {
@@ -391,10 +365,12 @@ public final class SensibleComboBox
                     setEditable(false);
 
                     String lastSelected = ini.getValue(KEY_LAST_SELECTED);
-                    if (lastSelected == null) {
+                    if (lastSelected == null || lastSelected.length() == 0) {
                         setSelectedIndex(-1);
                     } else {
-                        setSelectedItem(lastSelected);
+                        T clone = (T) data.clone();
+                        clone.setValue(lastSelected);
+                        setSelectedItem(clone);
                     }
 
                     break;
@@ -412,13 +388,15 @@ public final class SensibleComboBox
             }
         } catch (IOException ioe) {
             throw new IllegalArgumentException(
-                SensibleContext.getMessage(
-                    "CMBOX_ERR_INVALID_HISTORY_FILE"), ioe); //$NON-NLS-1$
+                SensibleContext.getMessage("CMBOX_ERR_INVALID_HISTORY_FILE"), ioe); //$NON-NLS-1$
+        } catch (CloneNotSupportedException cnse) {
+            throw new IllegalArgumentException(
+                SensibleContext.getMessage("CMBOX_ERR_INVALID_HISTORY_FILE"), cnse); //$NON-NLS-1$
         }
     }
 
     /**
-     * This method monitorizes changes in the history properties values and loads the combo when
+     * This method monitors changes in the history properties values and loads the combo when
      * needed.
      *
      * @param event the event
@@ -444,7 +422,7 @@ public final class SensibleComboBox
      * @see SensibleComboBox#data
      * @see SensibleComboBox#getData()
      */
-    public void setData(SensibleDataType newValue) {
+    public void setData(T newValue) {
 
         SensibleDataType oldValue = data;
 
@@ -512,8 +490,8 @@ public final class SensibleComboBox
 
     /**
      * Updates the history file adding the current selected item in the combo. If the entry exists
-     * the method reorders the existing entries and positions the current selected item in the combo
-     * as the last (most recent) entry.<br>
+     * the method reorders the existing entries and positions the current selected item in the
+     * combo as the last (most recent) entry.<br>
      *
      * An <code>IllegalArgumentException</code> exception is thrown if the history file
      * could not be updated.
@@ -522,38 +500,38 @@ public final class SensibleComboBox
 
         String newValue = null;
 
-        if (getEditor().getItem() == null || ((String) getEditor().getItem()).length() == 0) {
-            if (getSelectedItem() == null || ((String) getSelectedItem()).length() == 0) {
+        if (getEditor().getItem() == null || ((T) getEditor().getItem()).getValue().length() == 0) {
+            if (getSelectedItem() == null || ((T) getSelectedItem()).getValue().length() == 0) {
                 return;
             } else {
-                newValue = (String) getSelectedItem();
+                newValue = getSelectedItem().toString();
             }
         } else {
-            newValue = (String) getEditor().getItem();
+            newValue = getEditor().getItem().toString();
         }
 
         try {
             INIFileManager ini = new INIFileManager(historyFileName);
 
             if (historyMode == FULL_HISTORY) {
-                int maxEntries = Integer.parseInt(ini.getValue(KEY_MAX_ENTRIES));
+                String maxEntriesValue = ini.getValue(KEY_MAX_ENTRIES);
+                int maxEntries = maxEntriesValue == null ?
+                    DEFAULT_MAX_ENTRIES : Integer.parseInt(maxEntriesValue);
 
                 if (ini.hasValue(newValue)) {
+
                     int whereToAdd = 0;
-
-                    String temp;
-
                     for (int i = 0; i < getItemCount(); i++) {
-                        temp = ini.getValue(Integer.toString(i));
-
+                        String temp = ini.getValue(Integer.toString(i));
                         if (!temp.equals(newValue)) {
                             ini.updateEntry(Integer.toString(whereToAdd), temp);
                             whereToAdd++;
                         }
                     }
-
                     ini.updateEntry(Integer.toString(getItemCount() - 1), newValue);
+
                 } else {
+
                     if (getItemCount() < maxEntries) {
                         ini.addEntry(Integer.toString(getItemCount()), newValue);
                     } else {
@@ -567,14 +545,15 @@ public final class SensibleComboBox
                 }
             } else if (historyMode == REMEMBER_AND_SELECT
                 && !ini.updateEntry(KEY_LAST_SELECTED, newValue)) {
+
                 ini.addEntry(KEY_LAST_SELECTED, newValue);
             }
 
             ini.updateFile();
+
         } catch (IOException ioe) {
             throw new IllegalArgumentException(
-                SensibleContext.getMessage(
-                    "CMBOX_ERR_CANNOT_UPDATE"), ioe); //$NON-NLS-1$
+                SensibleContext.getMessage("CMBOX_ERR_CANNOT_UPDATE"), ioe); //$NON-NLS-1$
         }
 
         loadValues();

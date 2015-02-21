@@ -5,8 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import deors.core.sensible.ConnectorNot;
-
 public class ConnectorNotTestCase {
 
     @Test

@@ -784,7 +784,7 @@ public abstract class SensibleObject
     }
 
     /**
-     * Returns the value of all fields separed by two slashes.
+     * Returns the value of all fields separated by two slashes.
      *
      * @return a string representation of this object
      */
@@ -802,7 +802,7 @@ public abstract class SensibleObject
 
     /**
      * Returns a string representation valid for sorting data. Actually it returns the object key
-     * field values separed by two slashes.
+     * field values separated by two slashes.
      *
      * @return a string representation valid for sorting data
      */

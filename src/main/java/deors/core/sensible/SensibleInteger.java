@@ -432,7 +432,7 @@ public final class SensibleInteger
      * @see SensibleInteger#setMinValue(int)
      * @see SensibleInteger#setMaxValue(int)
      */
-    public Object clone()
+    public SensibleInteger clone()
         throws CloneNotSupportedException {
 
         SensibleInteger obj = (SensibleInteger) super.clone();
@@ -441,6 +441,33 @@ public final class SensibleInteger
         obj.setMaxValue(getMaxValue());
 
         return obj;
+    }
+
+    /**
+     * Compares this <code>SensibleInteger</code> object with the given object and returns an
+     * integer value as established in the <code>Comparable</code> interface. The method compares
+     * the numeric values if the target object is an <code>Integer</code> object or a
+     * <code>SensibleInteger</code> object while other target objects are compared in the super
+     * class.
+     *
+     * @param target the target object
+     *
+     * @return a negative integer value if this object is less than the given object, zero if both
+     *         objects represent the same value, and a positive integer value if this object is
+     *         greater than the given object
+     *
+     * @see SensibleDataType#compareTo(Object)
+     */
+    public int compareTo(Object target) {
+
+        if (target instanceof Integer) {
+            return Integer.valueOf(number).compareTo((Integer) target);
+        } else if (target instanceof SensibleInteger) {
+            return Integer.valueOf(number).compareTo(
+                Integer.valueOf(((SensibleInteger) target).number));
+        }
+
+        return super.compareTo(target);
     }
 
     /**

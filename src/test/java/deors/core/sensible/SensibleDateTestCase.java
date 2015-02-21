@@ -11,9 +11,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import deors.core.sensible.SensibleContext;
-import deors.core.sensible.SensibleDate;
-
 public class SensibleDateTestCase {
 
     @Rule
@@ -585,5 +582,38 @@ public class SensibleDateTestCase {
         assertEquals("2009/01/15", d.toStringYMD());
         assertEquals("2009/01/15", d.toStringForSort());
         assertEquals("'15/1/2009'", d.toStringForSQL());
+    }
+
+    @Test
+    public void testAllowInsert() {
+
+        SensibleDate d = new SensibleDate();
+
+        assertFalse(d.allowInsert(0, "a"));
+        assertFalse(d.allowInsert(0, "*"));
+        assertTrue(d.allowInsert(0, "1"));
+        assertTrue(d.allowInsert(0, "1/"));
+
+        d.changeValue("1/");
+
+        assertTrue(d.allowInsert(2, "1/"));
+
+        SensibleTextField stf = new SensibleTextField(d);
+
+        assertFalse(d.allowInsert(0, "", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+    }
+
+    @Test
+    public void testAllowRemove() {
+
+        SensibleDate d = new SensibleDate();
+
+        d.changeValue("1/1/2015");
+
+        assertTrue(d.allowRemove(4, 4));
+
+        SensibleTextField stf = new SensibleTextField(d);
+
+        assertFalse(d.allowRemove(0, 0, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
     }
 }

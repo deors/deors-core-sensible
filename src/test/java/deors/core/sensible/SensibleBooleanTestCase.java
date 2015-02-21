@@ -4,13 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import deors.core.sensible.SensibleBoolean;
-import deors.core.sensible.SensibleContext;
-import deors.core.sensible.SensibleInteger;
 
 public class SensibleBooleanTestCase {
 
@@ -260,5 +259,82 @@ public class SensibleBooleanTestCase {
 
         assertEquals("true", bt.toStringForSQL());
         assertEquals("false", bf.toStringForSQL());
+    }
+
+    @Test
+    public void testAllowInsert() {
+
+        SensibleBoolean b = new SensibleBoolean(true);
+
+        assertFalse(b.allowInsert(0, ""));
+        assertFalse(b.allowInsert(0, " "));
+        assertFalse(b.allowInsert(0, "true"));
+        assertFalse(b.allowInsert(0, "false"));
+
+        SensibleTextField stf = new SensibleTextField(b);
+
+        assertFalse(b.allowInsert(0, "", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+    }
+
+    @Test
+    public void testAllowRemove() {
+
+        SensibleBoolean b = new SensibleBoolean(true);
+
+        assertFalse(b.allowRemove(0,  0));
+        assertFalse(b.allowRemove(0,  1));
+        assertFalse(b.allowRemove(0,  2));
+
+        SensibleTextField stf = new SensibleTextField(b);
+
+        assertFalse(b.allowRemove(0, 0, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+    }
+
+    @Test
+    public void testChangeValue() {
+
+        SensibleBoolean bt = new SensibleBoolean(true);
+        SensibleBoolean bf = new SensibleBoolean(false);
+
+        bt.changeValue("true");
+
+        assertTrue(bt.isFlag());
+
+        bt.changeValue("false");
+
+        assertFalse(bt.isFlag());
+
+        bf.changeValue("false");
+
+        assertFalse(bf.isFlag());
+
+        bf.changeValue("true");
+
+        assertTrue(bf.isFlag());
+    }
+
+    @Test
+    public void testChangeValueInvalidValue() {
+
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage(SensibleContext.getMessage("BOOL_ERR_INVALID_STRING"));
+
+        SensibleBoolean bt = new SensibleBoolean(true);
+
+        bt.changeValue("invalid");
+    }
+
+    @Test
+    public void testFirePropertyChangeEvents() {
+
+        SensibleBoolean b = new SensibleBoolean(true);
+        final List<String> props = new ArrayList<>();
+        b.addPropertyChangeListener(event -> {
+            props.add(event.getPropertyName());
+        });
+        b.setValue("false");
+        b.firePropertyChangeEvents();
+
+        assertTrue(props.contains("flag"));
     }
 }

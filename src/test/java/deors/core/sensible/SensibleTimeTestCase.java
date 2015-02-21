@@ -10,9 +10,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import deors.core.sensible.SensibleContext;
-import deors.core.sensible.SensibleTime;
-
 public class SensibleTimeTestCase {
 
     @Rule

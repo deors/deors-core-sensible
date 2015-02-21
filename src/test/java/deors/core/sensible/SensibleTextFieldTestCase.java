@@ -10,15 +10,6 @@ import java.math.BigDecimal;
 
 import org.junit.Test;
 
-import deors.core.sensible.SensibleBigDecimal;
-import deors.core.sensible.SensibleDate;
-import deors.core.sensible.SensibleDateTime;
-import deors.core.sensible.SensibleInteger;
-import deors.core.sensible.SensibleLong;
-import deors.core.sensible.SensibleString;
-import deors.core.sensible.SensibleTextField;
-import deors.core.sensible.SensibleTime;
-
 public class SensibleTextFieldTestCase {
 
     public SensibleTextFieldTestCase() {

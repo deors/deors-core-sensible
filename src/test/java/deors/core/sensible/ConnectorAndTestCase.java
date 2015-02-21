@@ -5,8 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import deors.core.sensible.ConnectorAnd;
-
 public class ConnectorAndTestCase {
 
     @Test
@@ -34,5 +32,20 @@ public class ConnectorAndTestCase {
 
         and.setIn2(false);
         assertFalse(and.isOut());
+
+        and.setIn1(true);
+        assertFalse(and.isOut());
+
+        and.setIn2(false);
+        assertFalse(and.isOut());
+
+        and.setIn1(false);
+        assertFalse(and.isOut());
+
+        and.setIn2(true);
+        assertFalse(and.isOut());
+
+        and.setIn1(true);
+        assertTrue(and.isOut());
     }
 }

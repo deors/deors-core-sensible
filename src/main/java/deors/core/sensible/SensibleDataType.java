@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 public abstract class SensibleDataType
     extends BasicPropertyChangeSupport
-    implements Cloneable, Comparable<SensibleDataType>, Serializable {
+    implements Cloneable, Comparable<Object>, Serializable {
 
     /**
      * Serialization ID.
@@ -235,7 +235,7 @@ public abstract class SensibleDataType
      * @see SensibleDataType#setRequired(boolean)
      */
     @SuppressWarnings("PMD.StringInstantiation")
-    public Object clone()
+    public SensibleDataType clone()
         throws CloneNotSupportedException {
 
         try {
@@ -248,7 +248,7 @@ public abstract class SensibleDataType
 
             return obj;
         } catch (CloneNotSupportedException cnse) {
-            return new InternalError();
+            return null;
         }
     }
 
@@ -266,9 +266,15 @@ public abstract class SensibleDataType
      * @see Comparable#compareTo(Object)
      * @see SensibleDataType#toStringForSort()
      */
-    public int compareTo(SensibleDataType target) {
+    public int compareTo(Object target) {
 
-        return toStringForSort().compareTo(target.toStringForSort());
+        if (target instanceof SensibleDataType) {
+            return toStringForSort().compareTo(((SensibleDataType) target).toStringForSort());
+        } else if (target instanceof String) {
+            return value.compareTo((String) target);
+        }
+
+        return 1;
     }
 
     /**

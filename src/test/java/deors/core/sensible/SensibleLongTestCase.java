@@ -4,13 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import deors.core.sensible.SensibleContext;
-import deors.core.sensible.SensibleLong;
-import deors.core.sensible.SensibleString;
 
 public class SensibleLongTestCase {
 
@@ -127,6 +126,15 @@ public class SensibleLongTestCase {
     }
 
     @Test
+    public void testOutOfRange1ChangeValue() {
+
+        SensibleLong l = new SensibleLong(0, 1000);
+        l.changeValue("1200");
+
+        assertFalse(l.isValid());
+    }
+
+    @Test
     public void testOutOfRange2() {
 
         thrown.expect(IllegalArgumentException.class);
@@ -137,6 +145,15 @@ public class SensibleLongTestCase {
     }
 
     @Test
+    public void testOutOfRange2ChangeValue() {
+
+        SensibleLong l = new SensibleLong(0, 1000);
+        l.changeValue("-100");
+
+        assertFalse(l.isValid());
+    }
+
+    @Test
     public void testInvalidRange1() {
 
         thrown.expect(IllegalArgumentException.class);
@@ -144,6 +161,49 @@ public class SensibleLongTestCase {
 
         SensibleLong l = new SensibleLong(0, 1000);
         l.setMinValue(1200);
+    }
+
+    @Test
+    public void testZeroOutOfRange() {
+
+        SensibleLong l = new SensibleLong(100, 1000);
+        l.changeValue("");
+
+        assertFalse(l.isValid());
+
+        l.changeValue("-");
+
+        assertFalse(l.isValid());
+
+        l.changeValue("100");
+
+        assertTrue(l.isValid());
+
+        l = new SensibleLong(-10, 10);
+        l.changeValue("");
+
+        assertTrue(l.isValid());
+
+        l.changeValue("-");
+
+        assertTrue(l.isValid());
+
+        l.changeValue("100");
+
+        assertFalse(l.isValid());
+
+        l = new SensibleLong(-1000, -10);
+        l.changeValue("");
+
+        assertFalse(l.isValid());
+
+        l.changeValue("-");
+
+        assertFalse(l.isValid());
+
+        l.changeValue("-100");
+
+        assertTrue(l.isValid());
     }
 
     @Test
@@ -237,6 +297,15 @@ public class SensibleLongTestCase {
     }
 
     @Test
+    public void testHashCode() {
+
+        SensibleLong l1 = new SensibleLong(5);
+        SensibleLong l2 = new SensibleLong(5);
+
+        assertEquals(l1.hashCode(), l2.hashCode());
+    }
+
+    @Test
     public void testToString() {
 
         SensibleLong l = new SensibleLong(123);
@@ -252,5 +321,77 @@ public class SensibleLongTestCase {
         l.setNumber(-1000000000000000000L);
 
         assertEquals("-1000000000000000000", l.toStringForSort());
+    }
+
+    @Test
+    public void testAllowInsert() {
+
+        SensibleLong l = new SensibleLong();
+
+        assertTrue(l.allowInsert(0, "1"));
+        assertTrue(l.allowInsert(0, "0"));
+        assertTrue(l.allowInsert(0, "-"));
+        assertFalse(l.allowInsert(0, "a"));
+        assertFalse(l.allowInsert(0, " "));
+        assertTrue(l.allowInsert(0, "10"));
+        assertTrue(l.allowInsert(0, "01"));
+        assertTrue(l.allowInsert(0, "-1"));
+
+        l.setValue("0");
+
+        assertFalse(l.allowInsert(0, "0"));
+        assertFalse(l.allowInsert(1, "0"));
+        assertFalse(l.allowInsert(1, "-"));
+        assertFalse(l.allowInsert(1, "-1"));
+
+        l.setValue("1");
+
+        assertFalse(l.allowInsert(0, "0"));
+        assertTrue(l.allowInsert(1, "0"));
+
+        l.setValue("-");
+
+        assertFalse(l.allowInsert(0, "0"));
+        assertFalse(l.allowInsert(1, "0"));
+        assertFalse(l.allowInsert(1, "-"));
+
+        l.clear();
+        l.setMinValue(0);
+
+        assertFalse(l.allowInsert(0, "-"));
+
+        SensibleTextField stf = new SensibleTextField(l);
+
+        assertFalse(l.allowInsert(0, "-", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+    }
+
+    @Test
+    public void testAllowRemove() {
+
+        SensibleLong l = new SensibleLong("10");
+
+        assertTrue(l.allowRemove(0, 0));
+        assertTrue(l.allowRemove(0, 1));
+        assertTrue(l.allowRemove(1, 1));
+
+        SensibleTextField stf = new SensibleTextField(l);
+
+        assertFalse(l.allowRemove(0, 0, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+    }
+
+    @Test
+    public void testFirePropertyChangeEvents() {
+
+        SensibleLong l = new SensibleLong();
+        final List<String> props = new ArrayList<>();
+        l.addPropertyChangeListener(event -> {
+            props.add(event.getPropertyName());
+        });
+        l.setValue("0");
+        l.firePropertyChangeEvents();
+
+        assertTrue(props.contains("number"));
+        assertTrue(props.contains("minValue"));
+        assertTrue(props.contains("maxValue"));
     }
 }

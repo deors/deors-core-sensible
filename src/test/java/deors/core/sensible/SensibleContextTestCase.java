@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import deors.core.commons.AbstractContext;
 import deors.core.commons.CommonsContext;
-import deors.core.sensible.SensibleContext;
 
 public class SensibleContextTestCase {
 

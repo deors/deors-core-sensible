@@ -7,9 +7,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import deors.core.sensible.SensibleBoolean;
-import deors.core.sensible.SensibleCheckBox;
-
 public class SensibleCheckBoxTestCase {
 
     @Test
