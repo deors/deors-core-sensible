@@ -290,7 +290,7 @@ public final class SensibleString
             }
         }
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         if (offset == 0) {
             sb.append(s);
@@ -303,13 +303,7 @@ public final class SensibleString
 
         String newValue = sb.toString();
 
-        if (casingMode.equals(TO_LOWER_CASE)) {
-            newValue = newValue.toLowerCase(Locale.getDefault());
-        } else if (casingMode.equals(TO_UPPER_CASE)) {
-            newValue = newValue.toUpperCase(Locale.getDefault());
-        } else if (casingMode.equals(CAPITALIZE)) {
-            newValue = StringToolkit.capitalize(newValue);
-        }
+        newValue = applyStringCase(newValue);
 
         try {
             document.removeFromParent(0, value.length());
@@ -329,6 +323,29 @@ public final class SensibleString
         textField.setCaretPosition(offset + s.length());
 
         return true;
+    }
+
+    /**
+     * Applies the configured casing mode to the given string, and returns
+     * the transformed value.
+     *
+     * @param value the string to be properly cased
+     *
+     * @return the transformed value
+     *
+     * @see SensibleString#casingMode
+     */
+    private String applyStringCase(String value) {
+
+        String newValue = value;
+        if (TO_LOWER_CASE.equals(casingMode)) {
+            newValue = value.toLowerCase(Locale.getDefault());
+        } else if (TO_UPPER_CASE.equals(casingMode)) {
+            newValue = value.toUpperCase(Locale.getDefault());
+        } else if (CAPITALIZE.equals(casingMode)) {
+            newValue = StringToolkit.capitalize(value);
+        }
+        return newValue;
     }
 
     /**
@@ -365,20 +382,14 @@ public final class SensibleString
     protected boolean allowRemove(int offset, int length, SensibleTextField textField,
                                   SensibleTextField.SensibleTextFieldDocument document) {
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         sb.append(value.substring(0, offset));
         sb.append(value.substring(offset + length));
 
         String newValue = sb.toString();
 
-        if (casingMode.equals(TO_LOWER_CASE)) {
-            newValue = newValue.toLowerCase(Locale.getDefault());
-        } else if (casingMode.equals(TO_UPPER_CASE)) {
-            newValue = newValue.toUpperCase(Locale.getDefault());
-        } else if (casingMode.equals(CAPITALIZE)) {
-            newValue = StringToolkit.capitalize(newValue);
-        }
+        newValue = applyStringCase(newValue);
 
         try {
             document.removeFromParent(0, value.length());
@@ -438,13 +449,7 @@ public final class SensibleString
             }
         }
 
-        if (casingMode.equals(TO_LOWER_CASE)) {
-            tempValue = tempValue.toLowerCase(Locale.getDefault());
-        } else if (casingMode.equals(TO_UPPER_CASE)) {
-            tempValue = tempValue.toUpperCase(Locale.getDefault());
-        } else if (casingMode.equals(CAPITALIZE)) {
-            tempValue = StringToolkit.capitalize(tempValue);
-        }
+        tempValue = applyStringCase(tempValue);
 
         value = tempValue;
 
@@ -670,10 +675,10 @@ public final class SensibleString
      */
     public void setCasingMode(String newValue) {
 
-        if (!newValue.equals(NO_CASING)
-            && !newValue.equals(TO_LOWER_CASE)
-            && !newValue.equals(TO_UPPER_CASE)
-            && !newValue.equals(CAPITALIZE)) {
+        if (!NO_CASING.equals(newValue)
+            && !TO_LOWER_CASE.equals(newValue)
+            && !TO_UPPER_CASE.equals(newValue)
+            && !CAPITALIZE.equals(newValue)) {
 
             throw new IllegalArgumentException(
                 SensibleContext.getMessage("STR_ERR_INVALID_CASING_MODE")); //$NON-NLS-1$

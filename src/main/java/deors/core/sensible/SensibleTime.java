@@ -421,8 +421,8 @@ public final class SensibleTime
 
         String oldValue = value;
 
-        if (!checkTime(newValue)
-            && valueChangingInSet) {
+        if (valueChangingInSet
+            && !checkTime(newValue)) {
             throw new IllegalArgumentException(
                 SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT")); //$NON-NLS-1$
         }
@@ -718,7 +718,7 @@ public final class SensibleTime
 
         final int tl = 2;
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         sb.append(StringToolkit.padLeft(Integer.toString(formatHour), tl, ZERO_CHAR));
         sb.append(timeSeparator);
@@ -1081,7 +1081,7 @@ public final class SensibleTime
 
         final int tl = 2;
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         sb.append(StringToolkit.padLeft(Integer.toString(hour), tl, ZERO_CHAR));
         sb.append(DEFAULT_TIME_SEPARATOR);

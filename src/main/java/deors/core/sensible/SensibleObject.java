@@ -790,7 +790,7 @@ public abstract class SensibleObject
      */
     public final String toString() {
 
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
 
         for (int i = 0, n = fields.length; i < n; i++) {
             buf.append(fields[i]);
@@ -808,7 +808,7 @@ public abstract class SensibleObject
      */
     public final String toStringForSort() {
 
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
 
         for (int i = 0, n = fields.length; i < n; i++) {
             if (fields[i].isKey()) {

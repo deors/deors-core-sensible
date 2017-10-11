@@ -272,12 +272,12 @@ public final class SensibleInteger
      */
     protected boolean allowInsert(int offset, String s) {
 
-        if (s.equals(PATTERN_ZERO) && value.length() == 0) {
+        if (s.equals(PATTERN_ZERO) && value.isEmpty()) {
             return true;
         }
 
         if (s.startsWith(PATTERN_ZERO)) {
-            if (offset == 0 && value.length() != 0) {
+            if (offset == 0 && !value.isEmpty()) {
                 return false;
             }
             if (offset == 1 && (value.startsWith(PATTERN_MINUS) || value.startsWith(PATTERN_ZERO))) {
@@ -285,11 +285,11 @@ public final class SensibleInteger
             }
         }
 
-        if (s.equals(PATTERN_MINUS) && minValue >= 0) {
+        if (minValue >= 0 && s.equals(PATTERN_MINUS)) {
             return false;
         }
 
-        if (s.equals(PATTERN_MINUS) && value.length() == 0) {
+        if (value.isEmpty() && s.equals(PATTERN_MINUS)) {
             return true;
         }
 
@@ -376,7 +376,7 @@ public final class SensibleInteger
         String oldValue = value;
         boolean newValid = valid;
 
-        if (newValue.length() == 0 || newValue.equals(PATTERN_MINUS)) {
+        if (newValue.isEmpty() || newValue.equals(PATTERN_MINUS)) {
             number = 0;
             value = newValue;
             newValid = 0 >= minValue && 0 <= maxValue;

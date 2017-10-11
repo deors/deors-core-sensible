@@ -505,7 +505,7 @@ public final class SensibleDate
         boolean parsedValid = true;
 
         // checks the string format
-        if (dateFormat.equals(DMY_DATE_FORMAT)) {
+        if (DMY_DATE_FORMAT.equals(dateFormat)) {
             if (parsedItem1.length() > dayItemSize
                 || parsedItem2.length() > monthItemSize
                 || parsedItem3.length() > yearItemSize) {
@@ -527,7 +527,7 @@ public final class SensibleDate
             } catch (NumberFormatException nfe) {
                 return false;
             }
-        } else if (dateFormat.equals(MDY_DATE_FORMAT)) {
+        } else if (MDY_DATE_FORMAT.equals(dateFormat)) {
             if (parsedItem1.length() > monthItemSize
                 || parsedItem2.length() > dayItemSize
                 || parsedItem3.length() > yearItemSize) {
@@ -549,7 +549,7 @@ public final class SensibleDate
             } catch (NumberFormatException nfe) {
                 return false;
             }
-        } else if (dateFormat.equals(YMD_DATE_FORMAT)) {
+        } else if (YMD_DATE_FORMAT.equals(dateFormat)) {
             if (parsedItem1.length() > yearItemSize
                 || parsedItem2.length() > monthItemSize
                 || parsedItem3.length() > dayItemSize) {
@@ -744,19 +744,19 @@ public final class SensibleDate
 
         StringBuilder sb = new StringBuilder();
 
-        if (dateFormat.equals(DMY_DATE_FORMAT)) {
+        if (DMY_DATE_FORMAT.equals(dateFormat)) {
             sb.append(formatDay);
             sb.append(dateSeparator);
             sb.append(formatMonth);
             sb.append(dateSeparator);
             sb.append(formatYear);
-        } else if (dateFormat.equals(MDY_DATE_FORMAT)) {
+        } else if (MDY_DATE_FORMAT.equals(dateFormat)) {
             sb.append(formatMonth);
             sb.append(dateSeparator);
             sb.append(formatDay);
             sb.append(dateSeparator);
             sb.append(formatYear);
-        } else if (dateFormat.equals(YMD_DATE_FORMAT)) {
+        } else if (YMD_DATE_FORMAT.equals(dateFormat)) {
             sb.append(formatYear);
             sb.append(dateSeparator);
             sb.append(formatMonth);
@@ -1040,8 +1040,9 @@ public final class SensibleDate
      */
     public void setDateFormat(String newValue) {
 
-        if (!newValue.equals(DMY_DATE_FORMAT) && !newValue.equals(MDY_DATE_FORMAT)
-            && !newValue.equals(YMD_DATE_FORMAT)) {
+        if (!DMY_DATE_FORMAT.equals(newValue)
+            && !MDY_DATE_FORMAT.equals(newValue)
+            && !YMD_DATE_FORMAT.equals(newValue)) {
             throw new IllegalArgumentException(
                 SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT")); //$NON-NLS-1$
         }

@@ -876,7 +876,7 @@ public final class SensibleBigDecimal
      */
     private boolean checkZero(String checkString) {
 
-        return checkString.length() == 0
+        return checkString.isEmpty()
                || checkString.equals(PATTERN_MINUS)
                || checkString.equals(PATTERN_MINUS_ZERO)
                || checkString.equals(String.valueOf(decimalSeparator))

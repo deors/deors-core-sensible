@@ -356,7 +356,7 @@ public class SensibleTextField
      */
     public List<String> getAutoCompletionEntries() {
 
-        return Collections.unmodifiableList(autoCompletionEntries);
+        return autoCompletionEntries == null ? null : Collections.unmodifiableList(autoCompletionEntries);
     }
 
     /**
