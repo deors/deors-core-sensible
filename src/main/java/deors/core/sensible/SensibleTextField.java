@@ -3,6 +3,8 @@ package deors.core.sensible;
 import static deors.core.sensible.SensibleContext.getConfigurationProperty;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import deors.core.commons.StringToolkit;
@@ -354,7 +356,7 @@ public class SensibleTextField
      */
     public List<String> getAutoCompletionEntries() {
 
-        return autoCompletionEntries;
+        return Collections.unmodifiableList(autoCompletionEntries);
     }
 
     /**
@@ -459,10 +461,9 @@ public class SensibleTextField
 
         List<String> oldValue = autoCompletionEntries;
 
-        autoCompletionEntries = newValue;
+        autoCompletionEntries = new ArrayList<>(newValue);
 
         firePropertyChange(JAVA_BEAN_PROPERTY_AUTO_COMPLETION_ENTRIES, oldValue, newValue);
-
     }
 
     /**

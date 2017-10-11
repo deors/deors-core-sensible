@@ -17,6 +17,7 @@ import java.text.DateFormatSymbols;
 import java.util.Calendar;
 import java.util.Locale;
 
+import javax.accessibility.Accessible;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -41,7 +42,7 @@ import javax.swing.border.EmptyBorder;
  */
 public final class SensibleCalendarPicker
     extends JComponent
-    implements ActionListener, PropertyChangeListener {
+    implements Accessible, ActionListener, PropertyChangeListener {
 
     /**
      * Serialization ID.
@@ -76,7 +77,7 @@ public final class SensibleCalendarPicker
     /**
      * ComboBox used to select the month.
      */
-    private SensibleComboBox comboCurrentMonth;
+    private SensibleComboBox<SensibleString> comboCurrentMonth;
 
     /**
      * Spinner used to select the year.
@@ -294,7 +295,7 @@ public final class SensibleCalendarPicker
 
         String[] monthNames = symbols.getMonths();
         for (int count = 0; count < MONTHS_PER_YEAR; count++) {
-            comboCurrentMonth.addItem(monthNames[count]);
+            comboCurrentMonth.addItem(new SensibleString(monthNames[count]));
         }
 
         buttonPrevMonth.addActionListener(this);
@@ -486,7 +487,7 @@ public final class SensibleCalendarPicker
                 int newDay = Integer.parseInt(event.getActionCommand());
                 setDay(newDay);
             } catch (NumberFormatException nfe) {
-                nfe = null;
+                return;
             }
         }
     }

@@ -64,7 +64,7 @@ public final class SensibleComboBox<T extends SensibleDataType>
      * @see SensibleComboBox#getData()
      * @see SensibleComboBox#setData(SensibleDataType)
      */
-    T data;
+    private T data;
 
     /**
      * The name of the file that contains the history entries.
@@ -386,12 +386,9 @@ public final class SensibleComboBox<T extends SensibleDataType>
                 ((SensibleTextField) getEditor().getEditorComponent())
                     .setAutoCompletionEntries(historyEntries);
             }
-        } catch (IOException ioe) {
+        } catch (IOException | CloneNotSupportedException ex) {
             throw new IllegalArgumentException(
-                SensibleContext.getMessage("CMBOX_ERR_INVALID_HISTORY_FILE"), ioe); //$NON-NLS-1$
-        } catch (CloneNotSupportedException cnse) {
-            throw new IllegalArgumentException(
-                SensibleContext.getMessage("CMBOX_ERR_INVALID_HISTORY_FILE"), cnse); //$NON-NLS-1$
+                SensibleContext.getMessage("CMBOX_ERR_INVALID_HISTORY_FILE"), ex); //$NON-NLS-1$
         }
     }
 

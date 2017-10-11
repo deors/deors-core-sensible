@@ -364,8 +364,9 @@ public final class SensibleDate
 
         String oldValue = value;
 
-        if (!checkDate(newValue)
-            && valueChangingInSet && newValue.length() != 0) {
+        if (valueChangingInSet
+            && newValue.length() != 0
+            && !checkDate(newValue)) {
             throw new IllegalArgumentException(
                 SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT")); //$NON-NLS-1$
         }
@@ -430,11 +431,11 @@ public final class SensibleDate
         }
 
         if (checkMonth == february) {
-            if (!isLeapYear(checkYear) && checkDay > DAYS_PER_MONTH[checkMonth - 1]) {
+            if (checkDay > DAYS_PER_MONTH[checkMonth - 1] && !isLeapYear(checkYear)) {
                 return false;
             }
 
-            if (isLeapYear(checkYear) && checkDay > DAYS_PER_MONTH[checkMonth - 1] + 1) {
+            if (checkDay > DAYS_PER_MONTH[checkMonth - 1] + 1 && isLeapYear(checkYear)) {
                 return false;
             }
         }
@@ -589,12 +590,13 @@ public final class SensibleDate
             }
 
             if (parsedMonth == february) {
-                if (parsedYear != 0 && !isLeapYear(parsedYear)
-                    && parsedDay > DAYS_PER_MONTH[parsedMonth - 1]) {
+                if (parsedDay > DAYS_PER_MONTH[parsedMonth - 1]
+                    && parsedYear != 0
+                    && !isLeapYear(parsedYear)) {
                     parsedValid = false;
                     // return false;
-                } else if ((parsedYear == 0 || isLeapYear(parsedYear))
-                    && parsedDay > DAYS_PER_MONTH[parsedMonth - 1] + 1) {
+                } else if (parsedDay > DAYS_PER_MONTH[parsedMonth - 1] + 1
+                    && (parsedYear == 0 || isLeapYear(parsedYear))) {
                     // parsedValid = false;
                     return false;
                 }
@@ -740,7 +742,7 @@ public final class SensibleDate
      */
     private String formatDate(int formatYear, int formatMonth, int formatDay) {
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         if (dateFormat.equals(DMY_DATE_FORMAT)) {
             sb.append(formatDay);
@@ -1182,7 +1184,7 @@ public final class SensibleDate
         final int tl = 2;
         final int yl = 4;
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         sb.append(StringToolkit.padLeft(Integer.toString(day), tl, ZERO_CHAR));
         sb.append(DEFAULT_DATE_SEPARATOR);
@@ -1203,7 +1205,7 @@ public final class SensibleDate
         final int tl = 2;
         final int yl = 4;
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         sb.append(StringToolkit.padLeft(Integer.toString(month), tl, ZERO_CHAR));
         sb.append(DEFAULT_DATE_SEPARATOR);
@@ -1224,7 +1226,7 @@ public final class SensibleDate
         final int tl = 2;
         final int yl = 4;
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         sb.append(StringToolkit.padLeft(Integer.toString(year), yl, ZERO_CHAR));
         sb.append(DEFAULT_DATE_SEPARATOR);

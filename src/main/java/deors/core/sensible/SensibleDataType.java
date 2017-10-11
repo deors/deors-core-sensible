@@ -84,7 +84,7 @@ public abstract class SensibleDataType
      * When <code>true</code> a text field insert/remove action calls the <code>allowInsert</code>/<code>allowRemove</code>
      * method with the document as a parameter.
      */
-    boolean controlsDocument;
+    protected boolean controlsDocument;
 
     /**
      * The "key" JavaBean property name.
@@ -359,7 +359,7 @@ public abstract class SensibleDataType
      */
     protected final void insertString(int offset, String s) {
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         if (offset == 0) {
             sb.append(s);
@@ -446,7 +446,7 @@ public abstract class SensibleDataType
      */
     protected final void remove(int offset, int length) {
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         sb.append(value.substring(0, offset));
         sb.append(value.substring(offset + length));

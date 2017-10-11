@@ -488,7 +488,7 @@ public final class SensibleBigDecimal
         }
 
         // removes group separator characters
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         sb.append(StringToolkit.removeAll(value.substring(0, offset), groupSeparator));
         sb.append(StringToolkit.removeAll(s, groupSeparator));
@@ -607,7 +607,7 @@ public final class SensibleBigDecimal
         }
 
         // removes group separator characters
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         String preRemove = StringToolkit.removeAll(value.substring(0, localOffset), groupSeparator);
         String postRemove =
@@ -846,7 +846,7 @@ public final class SensibleBigDecimal
      */
     private boolean checkPrecission(BigDecimal checkNumber) {
 
-        if (checkNumber.compareTo(BigDecimal.ZERO) < 0 && !negativeValuesAllowed) {
+        if (!negativeValuesAllowed && checkNumber.compareTo(BigDecimal.ZERO) < 0) {
             return false;
         }
 
@@ -1023,7 +1023,7 @@ public final class SensibleBigDecimal
      */
     private String formatNumber(BigDecimal n) {
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         if (n.toBigInteger().longValue() == 0 && n.signum() == -1) {
             sb.append('-');
@@ -1189,7 +1189,7 @@ public final class SensibleBigDecimal
      */
     private void preparePattern() {
 
-        StringBuffer regex = new StringBuffer();
+        StringBuilder regex = new StringBuilder();
 
         regex.append("-?(?:\\d{1,3}(?:(["); //$NON-NLS-1$
         regex.append(groupSeparator);
