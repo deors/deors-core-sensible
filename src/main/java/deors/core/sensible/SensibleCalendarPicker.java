@@ -52,7 +52,7 @@ public final class SensibleCalendarPicker
     /**
      * The locale used to configure the Calendar.
      */
-    private Locale locale;
+    private Locale calendarLocale;
 
     /**
      * <code>SensibleDate</code> object that represents the current selected date.
@@ -194,7 +194,7 @@ public final class SensibleCalendarPicker
 
         super();
         this.date = date;
-        this.locale = locale;
+        this.calendarLocale = locale;
         initCalendarLayout();
         initButtonDaysLayout();
     }
@@ -231,7 +231,7 @@ public final class SensibleCalendarPicker
         }
         add(buttonPrevMonth);
 
-        comboCurrentMonth = new SensibleComboBox();
+        comboCurrentMonth = new SensibleComboBox<>();
         comboCurrentMonth.setBounds(comboX, firstRowY, comboWidth, firstRowHeight);
         comboCurrentMonth.setFont(font);
         add(comboCurrentMonth);
@@ -254,7 +254,7 @@ public final class SensibleCalendarPicker
         }
         add(buttonNextMonth);
 
-        calendar = Calendar.getInstance(locale);
+        calendar = Calendar.getInstance(calendarLocale);
 
         if (date == null) {
             date = new SensibleDate(
@@ -276,7 +276,7 @@ public final class SensibleCalendarPicker
 
         int firstWeekDayOfCalendar = calendar.getFirstDayOfWeek();
 
-        DateFormatSymbols symbols = new DateFormatSymbols(locale);
+        DateFormatSymbols symbols = new DateFormatSymbols(calendarLocale);
         String[] shortWeekdays = symbols.getShortWeekdays();
         for (int count = 0; count < DAYS_PER_WEEK; count++) {
             shortWeekdays[count + 1] =
@@ -543,16 +543,6 @@ public final class SensibleCalendarPicker
          * The border dash phase.
          */
         private static final int DASH_PHASE = 0;
-
-//        /**
-//         * Default constructor. The color used to paint the border is black.
-//         *
-//         * @see Color#black
-//         */
-//        public SensibleCalendarPickerDashedBorder() {
-//
-//            this(Color.black);
-//        }
 
         /**
          * Constructor that sets the border color.
