@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import deors.core.commons.INIFileManager;
+import deors.core.commons.inifile.INIFileManager;
 
 /**
  * Definition for a combo box control with values loaded from a history file.<br>
