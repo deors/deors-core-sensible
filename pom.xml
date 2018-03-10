@@ -28,16 +28,22 @@
         <easymock.version>3.4</easymock.version>
         <powermock.version>1.7.1</powermock.version>
         <fest.version>1.2.1</fest.version>
-        <pitest.version>1.2.2</pitest.version>
+        <pitest.version>1.3.2</pitest.version>
 
-        <jacoco.version>0.7.9</jacoco.version>
+        <jacoco.version>0.8.0</jacoco.version>
         <jacoco.path>${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar</jacoco.path>
         <jacoco.utReport>${project.build.directory}/jacoco.exec</jacoco.utReport>
         <jacoco.itReport>${project.build.directory}/jacoco-it.exec</jacoco.itReport>
         <jacoco.utAgentConfig>-javaagent:${jacoco.path}=destfile=${jacoco.utReport}</jacoco.utAgentConfig>
         <jacoco.itAgentConfig>-javaagent:${jacoco.path}=destfile=${jacoco.itReport}</jacoco.itAgentConfig>
 
-        <jacoco-listeners.version>4.11.0.10660</jacoco-listeners.version>
+        <jacoco-listeners.version>5.1.0.13090</jacoco-listeners.version>
+
+        <compiler-plugin.version>3.7.0</compiler-plugin.version>
+        <surefire-plugin.version>2.20.1</surefire-plugin.version>
+        <failsafe-plugin.version>2.20.1</failsafe-plugin.version>
+        <source-plugin.version>3.0.1</source-plugin.version>
+        <javadoc-plugin.version>3.0.0</javadoc-plugin.version>
     </properties>
 
     <build>
@@ -45,7 +51,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.2</version>
+                <version>${compiler-plugin.version}</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -54,11 +60,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.20.1</version>
+                <version>${surefire-plugin.version}</version>
                 <configuration>
-                    <argLine>${jacoco.utAgentConfig}</argLine>
+                    <!-- noverify option needed to disable bytecode verifier -->
+                    <!-- PowerMock adds bytecodes before super() when mocking -->
+                    <!-- a constructor which is not permitted in modern JDK -->
+                    <argLine>${jacoco.utAgentConfig} -noverify</argLine>
                     <excludes>
-                        <exclude>**/it/*TestCase.java</exclude>
+                        <exclude>**/*IntegrationTestCase.java</exclude>
                     </excludes>
                     <properties>
                         <property>
@@ -71,25 +80,24 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.20.1</version>
+                <version>${failsafe-plugin.version}</version>
                 <configuration>
                     <argLine>${jacoco.itAgentConfig}</argLine>
                     <includes>
-                        <include>**/it/*TestCase.java</include>
+                        <include>**/*IntegrationTestCase.java</include>
                     </includes>
                     <excludes>
                         <!-- Fest-based integration tests need a desktop session for AWT Robot -->
                         <!-- as they will not run inside headless continuous integration processes -->
-                        <!-- will be excluded by default; set profile fest-enabled to include them -->
-                        <exclude>**/it/SensibleObjectIntegrationTestCase.java</exclude>
+                        <!-- will be excluded by default; set profile desktop-tests to include them -->
+                        <exclude>**/SensibleObjectIntegrationTestCase.java</exclude>
                     </excludes>
                 </configuration>
                 <executions>
                     <execution>
-                        <id>integration-test</id>
-                        <phase>integration-test</phase>
                         <goals>
                             <goal>integration-test</goal>
+                            <goal>verify</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -99,35 +107,27 @@
                 <artifactId>pitest-maven</artifactId>
                 <version>${pitest.version}</version>
                 <configuration>
-                    <targetClasses>
-                        <param>deors.core.sensible.*</param>
-                    </targetClasses>
-                    <excludedClasses>
-                        <param>deors.core.sensible.it.*</param>
-                    </excludedClasses>
+                    <excludedTests>
+                        <param>*IntegrationTestCase</param>
+                    </excludedTests>
                     <outputFormats>
                         <outputFormat>XML</outputFormat>
                     </outputFormats>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
-                <configuration>
-                    <outputDirectory>deliverables</outputDirectory>
-                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>mutationCoverage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.0.1</version>
-                <configuration>
-                    <outputDirectory>deliverables</outputDirectory>
-                </configuration>
+                <version>${source-plugin.version}</version>
                 <executions>
                     <execution>
-                        <id>attach-sources</id>
                         <goals>
                             <goal>jar</goal>
                         </goals>
@@ -137,13 +137,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.0</version>
-                <configuration>
-                    <jarOutputDirectory>deliverables</jarOutputDirectory>
-                </configuration>
+                <version>${javadoc-plugin.version}</version>
                 <executions>
                     <execution>
-                        <id>attach-javadocs</id>
                         <goals>
                             <goal>jar</goal>
                         </goals>
@@ -243,34 +239,33 @@
     </dependencies>
 
     <profiles>
-        <!-- Fest-based integration tests are included -->
-        <!-- allowing for verification in desktop sessions -->
+        <!-- executes all integration tests when -->
+        <!-- a desktop session is available -->
         <profile>
-            <id>fest-enabled</id>
+            <id>desktop-tests</id>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>2.20</version>
+                        <version>${failsafe-plugin.version}</version>
                         <configuration>
                             <argLine>${jacoco.itAgentConfig}</argLine>
                             <includes>
-                                <include>**/it/*TestCase.java</include>
+                                <include>**/*IntegrationTestCase.java</include>
                             </includes>
                             <excludes>
                                 <exclude>nothing</exclude>
                             </excludes>
                         </configuration>
-                        <executions>
-                            <execution>
-                                <id>integration-test</id>
-                                <phase>integration-test</phase>
-                                <goals>
-                                    <goal>integration-test</goal>
-                                </goals>
-                            </execution>
-                        </executions>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>integration-test</goal>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                     </plugin>
                 </plugins>
             </build>
