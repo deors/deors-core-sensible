@@ -342,6 +342,7 @@ public final class SensibleComboBox<T extends SensibleDataType>
                 String entry = ini.getValue(Integer.toString(i));
 
                 if (entry != null && entry.length() != 0) {
+                    @SuppressWarnings("unchecked")
                     T clone = (T) data.clone();
                     clone.setValue(entry);
                     addItem(clone);
@@ -368,6 +369,7 @@ public final class SensibleComboBox<T extends SensibleDataType>
                     if (lastSelected == null || lastSelected.length() == 0) {
                         setSelectedIndex(-1);
                     } else {
+                        @SuppressWarnings("unchecked")
                         T clone = (T) data.clone();
                         clone.setValue(lastSelected);
                         setSelectedItem(clone);
@@ -497,14 +499,19 @@ public final class SensibleComboBox<T extends SensibleDataType>
 
         String newValue = null;
 
-        if (getEditor().getItem() == null || ((T) getEditor().getItem()).getValue().length() == 0) {
-            if (getSelectedItem() == null || ((T) getSelectedItem()).getValue().length() == 0) {
+        @SuppressWarnings("unchecked")
+        T editorItem = (T) getEditor().getItem();
+        @SuppressWarnings("unchecked")
+        T selectedItem = (T) getSelectedItem();
+
+        if (editorItem == null || editorItem.getValue().length() == 0) {
+            if (selectedItem == null || selectedItem.getValue().length() == 0) {
                 return;
             } else {
-                newValue = getSelectedItem().toString();
+                newValue = selectedItem.toString();
             }
         } else {
-            newValue = getEditor().getItem().toString();
+            newValue = editorItem.toString();
         }
 
         try {
