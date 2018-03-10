@@ -26,7 +26,7 @@ public class SensibleComboBoxTestCase {
     @Test
     public void testDefaultConstructor() {
 
-        SensibleComboBox scb = new SensibleComboBox();
+        SensibleComboBox<SensibleString> scb = new SensibleComboBox<>();
 
         assertNull(scb.getData());
     }
@@ -43,7 +43,7 @@ public class SensibleComboBoxTestCase {
     @Test
     public void testConstructorFromMode() {
 
-        SensibleComboBox scb = new SensibleComboBox(SensibleComboBox.FULL_HISTORY);
+        SensibleComboBox<SensibleString> scb = new SensibleComboBox<>(SensibleComboBox.FULL_HISTORY);
 
         assertNull(scb.getData());
         assertEquals(SensibleComboBox.FULL_HISTORY, scb.getHistoryMode());

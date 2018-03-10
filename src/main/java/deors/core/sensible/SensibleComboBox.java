@@ -293,10 +293,10 @@ public final class SensibleComboBox<T extends SensibleDataType>
     }
 
     /**
-     * This method loads the combo with the values in the history file.<br>
+     * This method loads the combo with the values in the history file.
      *
-     * An <code>IllegalArgumentException</code> exception is thrown if the history file
-     * does not exist, could not be created, could not be read or it is not valid.
+     * @throws IllegalArgumentException the history file does not exist,
+     *         could not be created, could not be read or it is not valid
      */
     private void loadValues() {
 
@@ -309,22 +309,23 @@ public final class SensibleComboBox<T extends SensibleDataType>
         File f = new File(historyFileName);
         INIFileManager ini = null;
 
-        try {
-            if (!f.exists()) {
+        if (!f.exists()) {
+            try {
                 if (!f.createNewFile()) {
                     throw new IllegalArgumentException(
                         SensibleContext.getMessage(
-                            "CMBOX_ERR_NO_HISTORY_FILE", historyFileName)); //$NON-NLS-1$
+                            "CMBOX_ERR_CREATE_HISTORY_FILE", historyFileName)); //$NON-NLS-1$
                 }
 
                 ini = new INIFileManager(historyFileName);
                 ini.addEntry(KEY_MAX_ENTRIES, Integer.toString(DEFAULT_MAX_ENTRIES));
                 ini.updateFile();
+
+            } catch (IOException ioe) {
+                throw new IllegalArgumentException(
+                    SensibleContext.getMessage(
+                        "CMBOX_ERR_CREATE_HISTORY_FILE", historyFileName), ioe); //$NON-NLS-1$
             }
-        } catch (IOException ioe) {
-            throw new IllegalArgumentException(
-                SensibleContext.getMessage(
-                    "CMBOX_ERR_NO_HISTORY_FILE", historyFileName), ioe); //$NON-NLS-1$
         }
 
         try {
@@ -336,7 +337,7 @@ public final class SensibleComboBox<T extends SensibleDataType>
             int maxEntries = maxEntriesValue == null ?
                 DEFAULT_MAX_ENTRIES : Integer.parseInt(maxEntriesValue);
 
-            historyEntries = new ArrayList<String>();
+            historyEntries = new ArrayList<>();
 
             for (int i = 0; i < maxEntries; i++) {
                 String entry = ini.getValue(Integer.toString(i));
@@ -490,10 +491,9 @@ public final class SensibleComboBox<T extends SensibleDataType>
     /**
      * Updates the history file adding the current selected item in the combo. If the entry exists
      * the method reorders the existing entries and positions the current selected item in the
-     * combo as the last (most recent) entry.<br>
+     * combo as the last (most recent) entry.
      *
-     * An <code>IllegalArgumentException</code> exception is thrown if the history file
-     * could not be updated.
+     * @throws IllegalArgumentException the history file could not be updated
      */
     public void updateHistory() {
 
