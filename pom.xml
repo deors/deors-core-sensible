@@ -11,7 +11,7 @@
     <packaging>jar</packaging>
 
     <name>deors-core-sensible</name>
-    <description>deors' core sensible library</description>
+    <description>core-sensible is a highly productive framework for desktop UIs built on top of Java Swing</description>
 
     <properties>
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
