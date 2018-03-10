@@ -7,6 +7,8 @@ import static org.junit.Assert.assertTrue;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.fest.swing.edt.GuiActionRunner;
+import org.fest.swing.edt.GuiTask;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -598,9 +600,13 @@ public class SensibleDateTestCase {
 
         assertTrue(d.allowInsert(2, "1/"));
 
-        SensibleTextField stf = new SensibleTextField(d);
+        GuiActionRunner.execute(new GuiTask() {
+            protected void executeInEDT() throws Throwable {
+                SensibleTextField stf = new SensibleTextField(d);
 
-        assertFalse(d.allowInsert(0, "", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertFalse(d.allowInsert(0, "", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+            }
+        });
     }
 
     @Test
@@ -612,8 +618,12 @@ public class SensibleDateTestCase {
 
         assertTrue(d.allowRemove(4, 4));
 
-        SensibleTextField stf = new SensibleTextField(d);
+        GuiActionRunner.execute(new GuiTask() {
+            protected void executeInEDT() throws Throwable {
+                SensibleTextField stf = new SensibleTextField(d);
 
-        assertFalse(d.allowRemove(0, 0, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertFalse(d.allowRemove(0, 0, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+            }
+        });
     }
 }

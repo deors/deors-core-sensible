@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.fest.swing.edt.GuiActionRunner;
+import org.fest.swing.edt.GuiTask;
 import org.junit.Test;
 
 public class SensibleStringTestCase {
@@ -53,172 +55,220 @@ public class SensibleStringTestCase {
     @Test
     public void testAllowInsert() {
 
-        SensibleString ss = new SensibleString("abc");
-        SensibleTextField stf = new SensibleTextField(ss);
+        GuiActionRunner.execute(new GuiTask() {
+            protected void executeInEDT() throws Throwable {
+                SensibleString ss = new SensibleString("abc");
+                SensibleTextField stf = new SensibleTextField(ss);
 
-        assertTrue(ss.allowInsert(0, "de", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertTrue(ss.allowInsert(2, "de", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertTrue(ss.allowInsert(0, "de", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertTrue(ss.allowInsert(2, "de", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
 
-        assertFalse(ss.allowInsert(0, ""));
+                assertFalse(ss.allowInsert(0, ""));
+            }
+        });
     }
 
     @Test
     public void testAllowInsertWithMaxLength() {
 
-        SensibleString ss = new SensibleString(5, "abc");
-        SensibleTextField stf = new SensibleTextField(ss);
+        GuiActionRunner.execute(new GuiTask() {
+            protected void executeInEDT() throws Throwable {
+                SensibleString ss = new SensibleString(5, "abc");
+                SensibleTextField stf = new SensibleTextField(ss);
 
-        assertTrue(ss.allowInsert(0, "de", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertFalse(ss.allowInsert(2, "de", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertTrue(ss.allowInsert(0, "de", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertFalse(ss.allowInsert(2, "de", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
 
-        ss.setString("abc");
+                ss.setString("abc");
 
-        assertTrue(ss.allowInsert(2, "de", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertTrue(ss.allowInsert(2, "de", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
 
-        ss.setString("abcde");
+                ss.setString("abcde");
 
-        assertFalse(ss.allowInsert(0, "de", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertFalse(ss.allowInsert(2, "de", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertFalse(ss.allowInsert(0, "de", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertFalse(ss.allowInsert(2, "de", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+            }
+        });
     }
 
     @Test
     public void testAllowInsertWithAllowedCharacters() {
 
-        SensibleString ss = new SensibleString("abc");
-        SensibleTextField stf = new SensibleTextField(ss);
-        ss.setAllowedCharacters("abcdefgh");
+        GuiActionRunner.execute(new GuiTask() {
+            protected void executeInEDT() throws Throwable {
+                SensibleString ss = new SensibleString("abc");
+                SensibleTextField stf = new SensibleTextField(ss);
+                ss.setAllowedCharacters("abcdefgh");
 
-        assertEquals("abcdefgh", ss.getAllowedCharacters());
-        assertTrue(ss.allowInsert(0, "de", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertTrue(ss.allowInsert(2, "gh", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertFalse(ss.allowInsert(0, "ablm", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertEquals("abcdefgh", ss.getAllowedCharacters());
+                assertTrue(ss.allowInsert(0, "de", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertTrue(ss.allowInsert(2, "gh", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertFalse(ss.allowInsert(0, "ablm", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+            }
+        });
     }
 
     @Test
     public void testAllowInsertWithUpperCase() {
 
-        SensibleString ss = new SensibleString();
-        SensibleTextField stf = new SensibleTextField(ss);
-        ss.setCasingMode(SensibleString.TO_UPPER_CASE);
+        GuiActionRunner.execute(new GuiTask() {
+            protected void executeInEDT() throws Throwable {
+                SensibleString ss = new SensibleString();
+                SensibleTextField stf = new SensibleTextField(ss);
+                ss.setCasingMode(SensibleString.TO_UPPER_CASE);
 
-        assertTrue(ss.allowInsert(0, "abc", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertEquals("ABC", ss.getString());
-        assertTrue(ss.allowInsert(2, "gh", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertEquals("ABGHC", ss.getString());
-        assertTrue(ss.allowInsert(0, "ablm", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertEquals("ABLMABGHC", ss.getString());
+                assertTrue(ss.allowInsert(0, "abc", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertEquals("ABC", ss.getString());
+                assertTrue(ss.allowInsert(2, "gh", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertEquals("ABGHC", ss.getString());
+                assertTrue(ss.allowInsert(0, "ablm", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertEquals("ABLMABGHC", ss.getString());
+            }
+        });
     }
 
     @Test
     public void testAllowInsertWithLowerCase() {
 
-        SensibleString ss = new SensibleString();
-        SensibleTextField stf = new SensibleTextField(ss);
-        ss.setCasingMode(SensibleString.TO_LOWER_CASE);
+        GuiActionRunner.execute(new GuiTask() {
+            protected void executeInEDT() throws Throwable {
+                SensibleString ss = new SensibleString();
+                SensibleTextField stf = new SensibleTextField(ss);
+                ss.setCasingMode(SensibleString.TO_LOWER_CASE);
 
-        assertTrue(ss.allowInsert(0, "ABC", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertEquals("abc", ss.getString());
-        assertTrue(ss.allowInsert(2, "GH", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertEquals("abghc", ss.getString());
-        assertTrue(ss.allowInsert(0, "ABLM", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertEquals("ablmabghc", ss.getString());
+                assertTrue(ss.allowInsert(0, "ABC", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertEquals("abc", ss.getString());
+                assertTrue(ss.allowInsert(2, "GH", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertEquals("abghc", ss.getString());
+                assertTrue(ss.allowInsert(0, "ABLM", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertEquals("ablmabghc", ss.getString());
+            }
+        });
     }
 
     @Test
     public void testAllowInsertWithCapitalization() {
 
-        SensibleString ss = new SensibleString();
-        SensibleTextField stf = new SensibleTextField(ss);
-        ss.setCasingMode(SensibleString.CAPITALIZE);
+        GuiActionRunner.execute(new GuiTask() {
+            protected void executeInEDT() throws Throwable {
+                SensibleString ss = new SensibleString();
+                SensibleTextField stf = new SensibleTextField(ss);
+                ss.setCasingMode(SensibleString.CAPITALIZE);
 
-        assertTrue(ss.allowInsert(0, "abc", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertEquals("Abc", ss.getString());
-        assertTrue(ss.allowInsert(3, " gh", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertEquals("Abc Gh", ss.getString());
-        assertTrue(ss.allowInsert(0, "ABLM ", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertEquals("Ablm Abc Gh", ss.getString());
+                assertTrue(ss.allowInsert(0, "abc", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertEquals("Abc", ss.getString());
+                assertTrue(ss.allowInsert(3, " gh", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertEquals("Abc Gh", ss.getString());
+                assertTrue(ss.allowInsert(0, "ABLM ", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertEquals("Ablm Abc Gh", ss.getString());
+            }
+        });
     }
 
     @Test
     public void testAllowInsertWithPassword() {
 
-        SensibleString ss = new SensibleString();
-        SensibleTextField stf = new SensibleTextField(ss);
-        stf.setPasswordField(true);
-        stf.setEchoCharacter('-');
+        GuiActionRunner.execute(new GuiTask() {
+            protected void executeInEDT() throws Throwable {
+                SensibleString ss = new SensibleString();
+                SensibleTextField stf = new SensibleTextField(ss);
+                stf.setPasswordField(true);
+                stf.setEchoCharacter('-');
 
-        assertTrue(ss.allowInsert(0, "abc", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertEquals("---", stf.getText());
-        assertEquals("abc", ss.getString());
-        assertTrue(ss.allowInsert(2, "gh", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertEquals("-----", stf.getText());
-        assertEquals("abghc", ss.getString());
-        assertTrue(ss.allowInsert(0, "ablm", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertEquals("---------", stf.getText());
-        assertEquals("ablmabghc", ss.getString());
+                assertTrue(ss.allowInsert(0, "abc", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertEquals("---", stf.getText());
+                assertEquals("abc", ss.getString());
+                assertTrue(ss.allowInsert(2, "gh", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertEquals("-----", stf.getText());
+                assertEquals("abghc", ss.getString());
+                assertTrue(ss.allowInsert(0, "ablm", stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertEquals("---------", stf.getText());
+                assertEquals("ablmabghc", ss.getString());
+            }
+        });
     }
 
     @Test
     public void testAllowRemove() {
 
-        SensibleString ss = new SensibleString("abcdefgh");
-        SensibleTextField stf = new SensibleTextField(ss);
+        GuiActionRunner.execute(new GuiTask() {
+            protected void executeInEDT() throws Throwable {
+                SensibleString ss = new SensibleString("abcdefgh");
+                SensibleTextField stf = new SensibleTextField(ss);
 
-        assertTrue(ss.allowRemove(0, 2, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertTrue(ss.allowRemove(2, 4, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertTrue(ss.allowRemove(0, 2, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertTrue(ss.allowRemove(2, 4, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
 
-        assertFalse(ss.allowRemove(0,  0));
+                assertFalse(ss.allowRemove(0,  0));
+            }
+        });
     }
 
     @Test
     public void testAllowRemoveWithUpperCase() {
 
-        SensibleString ss = new SensibleString("ABCDEFGH");
-        SensibleTextField stf = new SensibleTextField(ss);
-        ss.setCasingMode(SensibleString.TO_UPPER_CASE);
+        GuiActionRunner.execute(new GuiTask() {
+            protected void executeInEDT() throws Throwable {
+                SensibleString ss = new SensibleString("ABCDEFGH");
+                SensibleTextField stf = new SensibleTextField(ss);
+                ss.setCasingMode(SensibleString.TO_UPPER_CASE);
 
-        assertTrue(ss.allowRemove(0, 3, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertEquals("DEFGH", ss.getString());
+                assertTrue(ss.allowRemove(0, 3, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertEquals("DEFGH", ss.getString());
+            }
+        });
     }
 
     @Test
     public void testAllowRemoveWithCapitalization() {
 
-        SensibleString ss = new SensibleString("Abc De Fgh");
-        SensibleTextField stf = new SensibleTextField(ss);
-        ss.setCasingMode(SensibleString.CAPITALIZE);
+        GuiActionRunner.execute(new GuiTask() {
+            protected void executeInEDT() throws Throwable {
+                SensibleString ss = new SensibleString("Abc De Fgh");
+                SensibleTextField stf = new SensibleTextField(ss);
+                ss.setCasingMode(SensibleString.CAPITALIZE);
 
-        assertTrue(ss.allowRemove(4, 4, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertEquals("Abc Gh", ss.getString());
+                assertTrue(ss.allowRemove(4, 4, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertEquals("Abc Gh", ss.getString());
+            }
+        });
     }
 
     @Test
     public void testAllowRemoveWithLowerCase() {
 
-        SensibleString ss = new SensibleString("abcdefgh");
-        SensibleTextField stf = new SensibleTextField(ss);
-        ss.setCasingMode(SensibleString.TO_LOWER_CASE);
+        GuiActionRunner.execute(new GuiTask() {
+            protected void executeInEDT() throws Throwable {
+                SensibleString ss = new SensibleString("abcdefgh");
+                SensibleTextField stf = new SensibleTextField(ss);
+                ss.setCasingMode(SensibleString.TO_LOWER_CASE);
 
-        assertTrue(ss.allowRemove(2, 3, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertEquals("abfgh", ss.getString());
+                assertTrue(ss.allowRemove(2, 3, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertEquals("abfgh", ss.getString());
+            }
+        });
     }
 
     @Test
     public void testAllowRemoveWithPassword() {
 
-        SensibleString ss = new SensibleString();
-        SensibleTextField stf = new SensibleTextField(ss);
-        stf.setPasswordField(true);
-        stf.setEchoCharacter('-');
+        GuiActionRunner.execute(new GuiTask() {
+            protected void executeInEDT() throws Throwable {
+                SensibleString ss = new SensibleString();
+                SensibleTextField stf = new SensibleTextField(ss);
+                stf.setPasswordField(true);
+                stf.setEchoCharacter('-');
 
-        ss.setString("abcdefgh");
+                ss.setString("abcdefgh");
 
-        assertTrue(ss.allowRemove(0, 2, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertEquals("------", stf.getText());
-        assertEquals("cdefgh", ss.getString());
-        assertTrue(ss.allowRemove(2, 2, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
-        assertEquals("----", stf.getText());
-        assertEquals("cdgh", ss.getString());
+                assertTrue(ss.allowRemove(0, 2, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertEquals("------", stf.getText());
+                assertEquals("cdefgh", ss.getString());
+                assertTrue(ss.allowRemove(2, 2, stf, (SensibleTextField.SensibleTextFieldDocument) stf.getDocument()));
+                assertEquals("----", stf.getText());
+                assertEquals("cdgh", ss.getString());
+            }
+        });
     }
 
     @Test
