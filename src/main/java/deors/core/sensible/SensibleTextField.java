@@ -416,7 +416,7 @@ public class SensibleTextField
             try {
                 ((SensibleTextFieldDocument) getDocument()).repaint(data.value);
             } catch (javax.swing.text.BadLocationException e) {
-                e = null;
+                return;
             }
 
             checkValid();
@@ -430,7 +430,7 @@ public class SensibleTextField
                         doc.remove(0, doc.getLength());
                         doc.insertString(0, data.value, null);
                     } catch (javax.swing.text.BadLocationException e) {
-                        e = null;
+                        return;
                     }
                 }
 
