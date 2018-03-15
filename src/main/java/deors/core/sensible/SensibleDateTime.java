@@ -851,7 +851,7 @@ public final class SensibleDateTime
         return (whatMonth == february && isLeapYear(whatYear) && whatDay <= DAYS_PER_MONTH[whatMonth - 1] + 1)
             || (whatMonth == february && !isLeapYear(whatYear) && whatDay <= DAYS_PER_MONTH[whatMonth - 1])
             || (whatMonth != february && whatDay <= DAYS_PER_MONTH[whatMonth - 1]);
-     }
+    }
 
     /**
      * Checks that the given string represents a valid date/time. When this method is invoked due to
