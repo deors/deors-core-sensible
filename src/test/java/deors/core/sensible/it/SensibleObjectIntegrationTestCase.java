@@ -45,7 +45,7 @@ public class SensibleObjectIntegrationTestCase {
     }
 
     @Test
-    public void test() {
+    public void testWindowAndObject() {
 
         frame.setSize(410, 465);
 
