@@ -386,8 +386,8 @@ public final class SensibleComboBox<T extends SensibleDataType>
             // the history entries are used for the auto-completion
             // feature in the text field used as editor
             if (data != null) {
-                ((SensibleTextField) getEditor().getEditorComponent())
-                    .setAutoCompletionEntries(historyEntries);
+                ((SensibleTextField) getEditor().getEditorComponent()).
+                    setAutoCompletionEntries(historyEntries);
             }
         } catch (IOException | CloneNotSupportedException ex) {
             throw new IllegalArgumentException(
@@ -438,8 +438,8 @@ public final class SensibleComboBox<T extends SensibleDataType>
         // the history entries are used for the auto-completion
         // feature in the text field used as editor
         if (historyEntries != null) {
-            ((SensibleTextField) getEditor().getEditorComponent())
-                .setAutoCompletionEntries(historyEntries);
+            ((SensibleTextField) getEditor().getEditorComponent()).
+                setAutoCompletionEntries(historyEntries);
         }
     }
 
