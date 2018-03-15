@@ -443,29 +443,22 @@ public final class SensibleTime
     /**
      * Checks that the given integer values represent a valid time.
      *
-     * @param checkHour the time hour to be checked
-     * @param checkMinute the time minute to be checked
-     * @param checkSecond the time second to be checked
+     * @param whatHour the time hour to be checked
+     * @param whatMinute the time minute to be checked
+     * @param whatSecond the time second to be checked
      *
      * @return whether the given integer values represent a valid time
      *
      * @see SensibleTime#timeWithSeconds
      */
-    private boolean checkTime(int checkHour, int checkMinute, int checkSecond) {
+    private boolean checkTime(int whatHour, int whatMinute, int whatSecond) {
 
         final int lastHour = 23;
         final int lastMinute = 59;
         final int lastSecond = 59;
 
-        if (checkHour < 0 || checkMinute < 0 || checkSecond < 0) {
-            return false;
-        }
-
-        if (checkHour > lastHour || checkMinute > lastMinute || checkSecond > lastSecond) {
-            return false;
-        }
-
-        return true;
+        return whatHour >= 0 && whatMinute >= 0 && whatSecond >= 0
+            && whatHour <= lastHour && whatMinute <= lastMinute && whatSecond <= lastSecond;
     }
 
     /**

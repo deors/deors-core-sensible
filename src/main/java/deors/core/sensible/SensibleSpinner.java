@@ -17,9 +17,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
- * Definition for a datatype-dependent behaviour spinner text field.<br>
+ * Definition for a datatype-dependent behavior spinner text field.<br>
  *
- * The behaviour of the field depends on the <code>SensibleDataType</code> object attached to the
+ * The behavior of the field depends on the <code>SensibleDataType</code> object attached to the
  * <code>data</code> property. Only <code>SensibleBigDecimal</code>, <code>SensibleInteger</code>,
  * <code>SensibleLong</code> and <code>SensibleString</code> objects are allowed.<br>
  *
@@ -37,7 +37,7 @@ public final class SensibleSpinner
     private static final long serialVersionUID = 6903749400963248665L;
 
     /**
-     * The <code>SensibleDataType</code> object that defines the field behaviour and is also used
+     * The <code>SensibleDataType</code> object that defines the field behavior and is also used
      * to store the information.
      *
      * @see SensibleSpinner#getData()
@@ -151,9 +151,9 @@ public final class SensibleSpinner
         }
 
         /**
-         * Returns the spinner text field baseline resize behaviour.
+         * Returns the spinner text field baseline resize behavior.
          *
-         * @return the spinner text field baseline resize behaviour
+         * @return the spinner text field baseline resize behavior
          */
         public BaselineResizeBehavior getBaselineResizeBehavior() {
 

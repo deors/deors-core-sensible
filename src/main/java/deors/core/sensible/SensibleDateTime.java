@@ -772,59 +772,86 @@ public final class SensibleDateTime
     /**
      * Checks that the given integer values represent a valid date/time.
      *
-     * @param checkYear the date/time year to be checked
-     * @param checkMonth the date/time month to be checked
-     * @param checkDay the date/time day to be checked
-     * @param checkHour the date/time hour to be checked
-     * @param checkMinute the date/time minute to be checked
-     * @param checkSecond the date/time second to be checked
+     * @param whatYear the date/time year to be checked
+     * @param whatMonth the date/time month to be checked
+     * @param whatDay the date/time day to be checked
+     * @param whatHour the date/time hour to be checked
+     * @param whatMinute the date/time minute to be checked
+     * @param whatSecond the date/time second to be checked
      *
      * @return whether the given integer values represent a valid date/time
      *
      * @see SensibleDateTime#timeWithSeconds
      */
-    private boolean checkDateTime(int checkYear, int checkMonth, int checkDay, int checkHour,
-                                  int checkMinute, int checkSecond) {
+    private boolean checkDateTime(int whatYear, int whatMonth, int whatDay,
+                                  int whatHour, int whatMinute, int whatSecond) {
+
+
+        return checkMinimumValues(whatYear, whatMonth, whatDay, whatHour, whatMinute, whatSecond)
+            && checkMaximumValues(whatMonth, whatDay, whatHour, whatMinute, whatSecond)
+            && checkMonthDay(whatYear, whatMonth, whatDay);
+    }
+
+    /**
+     * Checks that the given integer values are not below the minimum values.
+     *
+     * @param whatYear the date/time year to be checked
+     * @param whatMonth the date/time month to be checked
+     * @param whatDay the date/time day to be checked
+     * @param whatHour the date/time hour to be checked
+     * @param whatMinute the date/time minute to be checked
+     * @param whatSecond the date/time second to be checked
+     *
+     * @return whether the given integer values are not below the minimum values
+     */
+    private boolean checkMinimumValues(int whatYear, int whatMonth, int whatDay,
+                                       int whatHour, int whatMinute, int whatSecond) {
+
+        return whatYear > 0 && whatMonth > 0 && whatDay > 0
+            && whatHour >= 0 && whatMinute >= 0 && whatSecond >= 0;
+    }
+
+    /**
+     * Checks that the given integer values are not above the maximum values.
+     *
+     * @param whatMonth the date/time month to be checked
+     * @param whatDay the date/time day to be checked
+     * @param whatHour the date/time hour to be checked
+     * @param whatMinute the date/time minute to be checked
+     * @param whatSecond the date/time second to be checked
+     *
+     * @return whether the given integer values are not above the maximum values
+     */
+    private boolean checkMaximumValues(int whatMonth, int whatDay,
+                                       int whatHour, int whatMinute, int whatSecond) {
 
         final int lastMonth = 12;
         final int lastDay = 31;
-        final int february = 2;
         final int lastHour = 23;
         final int lastMinute = 59;
         final int lastSecond = 59;
 
-        if (checkYear <= 0 || checkMonth <= 0 || checkDay <= 0) {
-            return false;
-        }
-
-        if (checkMonth > lastMonth || checkDay > lastDay) {
-            return false;
-        }
-
-        if (checkMonth != february && checkDay > DAYS_PER_MONTH[checkMonth - 1]) {
-            return false;
-        }
-
-        if (checkMonth == february) {
-            if (!isLeapYear(checkYear) && checkDay > DAYS_PER_MONTH[checkMonth - 1]) {
-                return false;
-            }
-
-            if (isLeapYear(checkYear) && checkDay > DAYS_PER_MONTH[checkMonth - 1] + 1) {
-                return false;
-            }
-        }
-
-        if (checkHour < 0 || checkMinute < 0 || checkSecond < 0) {
-            return false;
-        }
-
-        if (checkHour > lastHour || checkMinute > lastMinute || checkSecond > lastSecond) {
-            return false;
-        }
-
-        return true;
+        return whatMonth <= lastMonth && whatDay <= lastDay
+            && whatHour <= lastHour && whatMinute <= lastMinute && whatSecond <= lastSecond;
     }
+
+    /**
+     * Checks that the given day and month values are ok under gregorian calendar.
+     *
+     * @param whatYear the date/time year to be checked
+     * @param whatMonth the date/time month to be checked
+     * @param whatDay the date/time day to be checked
+     *
+     * @return whether the given given day and month values are ok under the gregorian calendar
+     */
+    private boolean checkMonthDay(int whatYear, int whatMonth, int whatDay) {
+
+        final int february = 2;
+
+        return (whatMonth == february && isLeapYear(whatYear) && whatDay <= DAYS_PER_MONTH[whatMonth - 1] + 1)
+            || (whatMonth == february && !isLeapYear(whatYear) && whatDay <= DAYS_PER_MONTH[whatMonth - 1])
+            || (whatMonth != february && whatDay <= DAYS_PER_MONTH[whatMonth - 1]);
+     }
 
     /**
      * Checks that the given string represents a valid date/time. When this method is invoked due to

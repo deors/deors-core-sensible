@@ -39,7 +39,7 @@ public class SensibleTextField
     private static final long serialVersionUID = -4083652945679588176L;
 
     /**
-     * The <code>SensibleDataType</code> object that defines the field behaviour and is also used
+     * The <code>SensibleDataType</code> object that defines the field behavior and is also used
      * to store the information.
      *
      * @see SensibleTextField#getData()

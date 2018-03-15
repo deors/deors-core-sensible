@@ -859,16 +859,12 @@ public final class SensibleBigDecimal
             }
         }
 
-        if (maxFractionalDigits != -1
-            && checkNumber.scale() > maxFractionalDigits) {
-            return false;
-        }
-
-        return true;
+        return maxFractionalDigits == -1
+            || checkNumber.scale() <= maxFractionalDigits;
     }
 
     /**
-     * Checks whether the given string is equivalent to zero but needs a different behaviour.
+     * Checks whether the given string is equivalent to zero but needs a different behavior.
      *
      * @return whether the given string is equivalent to zero
      *
