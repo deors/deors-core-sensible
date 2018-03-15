@@ -292,7 +292,7 @@ public abstract class SensibleObject
      * @see SensibleObject#returnCopy()
      * @see SensibleDataType#clone()
      */
-    public final Object clone()
+    public final SensibleObject clone()
         throws CloneNotSupportedException {
 
         SensibleObject obj = (SensibleObject) super.clone();
