@@ -234,7 +234,7 @@ public final class SensibleString
                     newValue.setString(Integer.toString(convertedValue + augend));
                 }
             } catch (NumberFormatException nfe) {
-                nfe = null;
+                return newValue;
             }
             return newValue;
         } catch (CloneNotSupportedException cnse) {
@@ -804,7 +804,7 @@ public final class SensibleString
                     newValue.setString(Integer.toString(convertedValue - subtraend));
                 }
             } catch (NumberFormatException nfe) {
-                nfe = null;
+                return newValue;
             }
             return newValue;
         } catch (CloneNotSupportedException cnse) {
