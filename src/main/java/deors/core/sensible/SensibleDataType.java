@@ -479,12 +479,8 @@ public abstract class SensibleDataType
     public final SensibleDataType returnNew() {
 
         try {
-            SensibleDataType obj = getClass().newInstance();
-
-            return obj;
-        } catch (InstantiationException ie) {
-            return null;
-        } catch (IllegalAccessException iae) {
+            return getClass().newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
             return null;
         }
     }

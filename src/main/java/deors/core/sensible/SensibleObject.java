@@ -634,12 +634,8 @@ public abstract class SensibleObject
     public final SensibleObject returnNew() {
 
         try {
-            SensibleObject obj = getClass().newInstance();
-
-            return obj;
-        } catch (InstantiationException ie) {
-            return null;
-        } catch (IllegalAccessException iae) {
+            return getClass().newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
             return null;
         }
     }
