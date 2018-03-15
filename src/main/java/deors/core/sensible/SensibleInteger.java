@@ -461,10 +461,9 @@ public final class SensibleInteger
     public int compareTo(Object target) {
 
         if (target instanceof Integer) {
-            return Integer.valueOf(number).compareTo((Integer) target);
+            return Integer.compare(number, ((Integer) target).intValue());
         } else if (target instanceof SensibleInteger) {
-            return Integer.valueOf(number).compareTo(
-                Integer.valueOf(((SensibleInteger) target).number));
+            return Integer.compare(number, ((SensibleInteger) target).number);
         }
 
         return super.compareTo(target);

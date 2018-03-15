@@ -461,10 +461,9 @@ public final class SensibleLong
     public int compareTo(Object target) {
 
         if (target instanceof Long) {
-            return Long.valueOf(number).compareTo((Long) target);
+            return Long.compare(number, ((Long) target).longValue());
         } else if (target instanceof SensibleLong) {
-            return Long.valueOf(number).compareTo(
-                Long.valueOf(((SensibleLong) target).number));
+            return Long.compare(number, ((SensibleLong) target).number);
         }
 
         return super.compareTo(target);
