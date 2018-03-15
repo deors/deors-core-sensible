@@ -286,6 +286,8 @@ public class SensibleTable<R extends SensibleObject>
      * <code>SensibleTextField</code> and <code>SensibleCheckBox</code> objects as renderers and
      * editors.<br>
      *
+     * @param <R> a SensibleObject type that models the table behavior and data
+     *
      * @author deors
      * @version 1.0
      */

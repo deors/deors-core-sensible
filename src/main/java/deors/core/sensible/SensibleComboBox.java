@@ -45,6 +45,8 @@ import deors.core.commons.inifile.INIFileManager;
  * editable.</li>
  * </ol>
  *
+ * @param <T> the <code>SensibleDataType</code> type that will be held in the combo box
+ *
  * @author deors
  * @version 1.0
  */
