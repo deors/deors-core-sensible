@@ -224,8 +224,6 @@ public abstract class SensibleDataType
      *
      * @return a clone of this object
      *
-     * @throws CloneNotSupportedException if the clone could not be done
-     *
      * @see java.lang.Cloneable
      * @see java.lang.Object#clone()
      * @see SensibleDataType#changeValue(String)
@@ -235,8 +233,7 @@ public abstract class SensibleDataType
      * @see SensibleDataType#setRequired(boolean)
      */
     @SuppressWarnings("PMD.StringInstantiation")
-    public SensibleDataType clone()
-        throws CloneNotSupportedException {
+    public SensibleDataType clone() {
 
         try {
             SensibleDataType obj = (SensibleDataType) super.clone();
@@ -463,11 +460,7 @@ public abstract class SensibleDataType
      */
     public final SensibleDataType returnCopy() {
 
-        try {
-            return (SensibleDataType) this.clone();
-        } catch (CloneNotSupportedException cnse) {
-            return null;
-        }
+        return (SensibleDataType) this.clone();
     }
 
     /**

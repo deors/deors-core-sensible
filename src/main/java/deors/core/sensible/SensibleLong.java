@@ -240,19 +240,15 @@ public final class SensibleLong
      */
     public SensibleDataType add(int augend) {
 
-        try {
-            SensibleLong newValue = (SensibleLong) this.clone();
-            if (getNumber() >= getMaxValue()) {
-                newValue.setNumber(getMaxValue());
-            } else if (getNumber() < getMinValue()) {
-                newValue.setNumber(getMinValue());
-            } else {
-                newValue.setNumber(getNumber() + augend);
-            }
-            return newValue;
-        } catch (CloneNotSupportedException cnse) {
-            return null;
+        SensibleLong newValue = (SensibleLong) this.clone();
+        if (getNumber() >= getMaxValue()) {
+            newValue.setNumber(getMaxValue());
+        } else if (getNumber() < getMinValue()) {
+            newValue.setNumber(getMinValue());
+        } else {
+            newValue.setNumber(getNumber() + augend);
         }
+        return newValue;
     }
 
     /**
@@ -426,14 +422,11 @@ public final class SensibleLong
      *
      * @return a clone of this object
      *
-     * @throws CloneNotSupportedException if the clone could not be done
-     *
      * @see SensibleDataType#clone()
      * @see SensibleLong#setMinValue(long)
      * @see SensibleLong#setMaxValue(long)
      */
-    public SensibleLong clone()
-        throws CloneNotSupportedException {
+    public SensibleLong clone() {
 
         SensibleLong obj = (SensibleLong) super.clone();
 
@@ -823,19 +816,15 @@ public final class SensibleLong
      */
     public SensibleDataType subtract(int subtraend) {
 
-        try {
-            SensibleLong newValue = (SensibleLong) this.clone();
-            if (getNumber() > getMaxValue()) {
-                newValue.setNumber(getMaxValue());
-            } else if (getNumber() <= getMinValue()) {
-                newValue.setNumber(getMinValue());
-            } else {
-                newValue.setNumber(getNumber() - subtraend);
-            }
-            return newValue;
-        } catch (CloneNotSupportedException cnse) {
-            return null;
+        SensibleLong newValue = (SensibleLong) this.clone();
+        if (getNumber() > getMaxValue()) {
+            newValue.setNumber(getMaxValue());
+        } else if (getNumber() <= getMinValue()) {
+            newValue.setNumber(getMinValue());
+        } else {
+            newValue.setNumber(getNumber() - subtraend);
         }
+        return newValue;
     }
 
     /**

@@ -425,13 +425,9 @@ public final class SensibleBigDecimal
      */
     public SensibleDataType add(int augend) {
 
-        try {
-            SensibleBigDecimal newValue = (SensibleBigDecimal) this.clone();
-            newValue.setNumber(getNumber().add(new BigDecimal(augend)));
-            return newValue;
-        } catch (CloneNotSupportedException cnse) {
-            return null;
-        }
+        SensibleBigDecimal newValue = (SensibleBigDecimal) this.clone();
+        newValue.setNumber(getNumber().add(new BigDecimal(augend)));
+        return newValue;
     }
 
     /**
@@ -887,14 +883,11 @@ public final class SensibleBigDecimal
      *
      * @return a clone of this object
      *
-     * @throws CloneNotSupportedException if the clone could not be done
-     *
      * @see SensibleDataType#clone()
      * @see SensibleBigDecimal#setMaxIntegerDigits(int)
      * @see SensibleBigDecimal#setMaxFractionalDigits(int)
      */
-    public SensibleBigDecimal clone()
-        throws CloneNotSupportedException {
+    public SensibleBigDecimal clone() {
 
         SensibleBigDecimal obj = (SensibleBigDecimal) super.clone();
 
@@ -1415,13 +1408,9 @@ public final class SensibleBigDecimal
      */
     public SensibleDataType subtract(int subtraend) {
 
-        try {
-            SensibleBigDecimal newValue = (SensibleBigDecimal) this.clone();
-            newValue.setNumber(getNumber().subtract(new BigDecimal(subtraend)));
-            return newValue;
-        } catch (CloneNotSupportedException cnse) {
-            return null;
-        }
+        SensibleBigDecimal newValue = (SensibleBigDecimal) this.clone();
+        newValue.setNumber(getNumber().subtract(new BigDecimal(subtraend)));
+        return newValue;
     }
 
     /**

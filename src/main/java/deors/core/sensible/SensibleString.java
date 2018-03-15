@@ -224,22 +224,18 @@ public final class SensibleString
      */
     public SensibleDataType add(int augend) {
 
+        SensibleString newValue = (SensibleString) this.clone();
         try {
-            SensibleString newValue = (SensibleString) this.clone();
-            try {
-                int convertedValue = Integer.parseInt(getString());
-                if (getMaxLength() == -1) {
-                    newValue.setString(Integer.toString(convertedValue + augend));
-                } else if (convertedValue + augend < Math.pow(BASE_TEN, getMaxLength()) - 1) {
-                    newValue.setString(Integer.toString(convertedValue + augend));
-                }
-            } catch (NumberFormatException nfe) {
-                return newValue;
+            int convertedValue = Integer.parseInt(getString());
+            if (getMaxLength() == -1) {
+                newValue.setString(Integer.toString(convertedValue + augend));
+            } else if (convertedValue + augend < Math.pow(BASE_TEN, getMaxLength()) - 1) {
+                newValue.setString(Integer.toString(convertedValue + augend));
             }
+        } catch (NumberFormatException nfe) {
             return newValue;
-        } catch (CloneNotSupportedException cnse) {
-            return null;
         }
+        return newValue;
     }
 
     /**
@@ -474,13 +470,10 @@ public final class SensibleString
      *
      * @return a clone of this object
      *
-     * @throws CloneNotSupportedException if the clone could not be done
-     *
      * @see SensibleDataType#clone()
      * @see SensibleString#setMaxLength(int)
      */
-    public SensibleString clone()
-        throws CloneNotSupportedException {
+    public SensibleString clone() {
 
         SensibleString obj = (SensibleString) super.clone();
 
@@ -796,20 +789,16 @@ public final class SensibleString
      */
     public SensibleDataType subtract(int subtraend) {
 
+        SensibleString newValue = (SensibleString) this.clone();
         try {
-            SensibleString newValue = (SensibleString) this.clone();
-            try {
-                int convertedValue = Integer.parseInt(getString());
-                if (convertedValue - subtraend > 0) {
-                    newValue.setString(Integer.toString(convertedValue - subtraend));
-                }
-            } catch (NumberFormatException nfe) {
-                return newValue;
+            int convertedValue = Integer.parseInt(getString());
+            if (convertedValue - subtraend > 0) {
+                newValue.setString(Integer.toString(convertedValue - subtraend));
             }
+        } catch (NumberFormatException nfe) {
             return newValue;
-        } catch (CloneNotSupportedException cnse) {
-            return null;
         }
+        return newValue;
     }
 
     /**

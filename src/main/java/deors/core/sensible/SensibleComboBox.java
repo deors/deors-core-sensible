@@ -391,9 +391,9 @@ public final class SensibleComboBox<T extends SensibleDataType>
                 ((SensibleTextField) getEditor().getEditorComponent()).
                     setAutoCompletionEntries(historyEntries);
             }
-        } catch (IOException | CloneNotSupportedException ex) {
+        } catch (IOException ioe) {
             throw new IllegalArgumentException(
-                SensibleContext.getMessage("CMBOX_ERR_INVALID_HISTORY_FILE"), ex); //$NON-NLS-1$
+                SensibleContext.getMessage("CMBOX_ERR_INVALID_HISTORY_FILE"), ioe); //$NON-NLS-1$
         }
     }
 

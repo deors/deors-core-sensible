@@ -240,19 +240,15 @@ public final class SensibleInteger
      */
     public SensibleDataType add(int augend) {
 
-        try {
-            SensibleInteger newValue = (SensibleInteger) this.clone();
-            if (getNumber() >= getMaxValue()) {
-                newValue.setNumber(getMaxValue());
-            } else if (getNumber() < getMinValue()) {
-                newValue.setNumber(getMinValue());
-            } else {
-                newValue.setNumber(getNumber() + augend);
-            }
-            return newValue;
-        } catch (CloneNotSupportedException cnse) {
-            return null;
+        SensibleInteger newValue = (SensibleInteger) this.clone();
+        if (getNumber() >= getMaxValue()) {
+            newValue.setNumber(getMaxValue());
+        } else if (getNumber() < getMinValue()) {
+            newValue.setNumber(getMinValue());
+        } else {
+            newValue.setNumber(getNumber() + augend);
         }
+        return newValue;
     }
 
     /**
@@ -426,14 +422,11 @@ public final class SensibleInteger
      *
      * @return a clone of this object
      *
-     * @throws CloneNotSupportedException if the clone could not be done
-     *
      * @see SensibleDataType#clone()
      * @see SensibleInteger#setMinValue(int)
      * @see SensibleInteger#setMaxValue(int)
      */
-    public SensibleInteger clone()
-        throws CloneNotSupportedException {
+    public SensibleInteger clone() {
 
         SensibleInteger obj = (SensibleInteger) super.clone();
 
@@ -842,19 +835,15 @@ public final class SensibleInteger
      */
     public SensibleDataType subtract(int subtraend) {
 
-        try {
-            SensibleInteger newValue = (SensibleInteger) this.clone();
-            if (getNumber() > getMaxValue()) {
-                newValue.setNumber(getMaxValue());
-            } else if (getNumber() <= getMinValue()) {
-                newValue.setNumber(getMinValue());
-            } else {
-                newValue.setNumber(getNumber() - subtraend);
-            }
-            return newValue;
-        } catch (CloneNotSupportedException cnse) {
-            return null;
+        SensibleInteger newValue = (SensibleInteger) this.clone();
+        if (getNumber() > getMaxValue()) {
+            newValue.setNumber(getMaxValue());
+        } else if (getNumber() <= getMinValue()) {
+            newValue.setNumber(getMinValue());
+        } else {
+            newValue.setNumber(getNumber() - subtraend);
         }
+        return newValue;
     }
 
     /**
