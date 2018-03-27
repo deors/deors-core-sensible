@@ -80,7 +80,7 @@ public class SensibleLongTestCase {
     }
 
     @Test
-    public void testConstructorInvalid1() {
+    public void testConstructorValueNotInRange() {
 
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage(SensibleContext.getMessage("LONG_ERR_VALUE_NOT_IN_RANGE"));
@@ -95,11 +95,20 @@ public class SensibleLongTestCase {
         assertEquals(new SensibleLong(87), new SensibleLong(4).add(83));
 
         SensibleLong l = new SensibleLong(0, 1000, 900);
-        l.setRange(0, 500);
-        assertEquals(new SensibleLong(500), l.add(100));
+        assertEquals(new SensibleLong(1000), l.add(100));
 
-        l.setRange(1200, 1500);
-        assertEquals(new SensibleLong(1200), l.add(100));
+        l.setRange(0, 1200);
+        assertEquals(new SensibleLong(1200), l.add(300));
+    }
+
+    @Test
+    public void testAddValueNotInRange() {
+
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage(SensibleContext.getMessage("LONG_ERR_VALUE_NOT_IN_RANGE"));
+
+        SensibleLong l = new SensibleLong(0, 1000, 900);
+        l.add(500);
     }
 
     @Test
@@ -107,12 +116,21 @@ public class SensibleLongTestCase {
 
         assertEquals(new SensibleLong(63), new SensibleLong(87).subtract(24));
 
-        SensibleLong l = new SensibleLong(0, 1000, 600);
-        l.setRange(0, 500);
-        assertEquals(new SensibleLong(500), l.subtract(10));
+        SensibleLong l = new SensibleLong(500, 1000, 600);
+        assertEquals(new SensibleLong(590), l.subtract(10));
 
-        l.setRange(1200, 1500);
-        assertEquals(new SensibleLong(1200), l.subtract(10));
+        l.setRange(400, 1000);
+        assertEquals(new SensibleLong(490), l.subtract(110));
+    }
+
+    @Test
+    public void testSubtractValueNotInRange() {
+
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage(SensibleContext.getMessage("INT_ERR_VALUE_NOT_IN_RANGE"));
+
+        SensibleLong l = new SensibleLong(500, 1000, 600);
+        l.subtract(200);
     }
 
     @Test

@@ -2,6 +2,7 @@ package deors.core.sensible;
 
 import java.io.Serializable;
 
+
 /**
  * Definition for an abstract data type.<br>
  *
@@ -14,7 +15,7 @@ import java.io.Serializable;
  */
 public abstract class SensibleDataType
     extends BasicPropertyChangeSupport
-    implements Cloneable, Comparable<Object>, Serializable {
+    implements Comparable<Object>, Serializable {
 
     /**
      * Serialization ID.
@@ -215,38 +216,6 @@ public abstract class SensibleDataType
     public void clear() {
 
         setValue(SensibleContext.BLANK);
-    }
-
-    /**
-     * Returns a clone of this object.<br>
-     *
-     * A <code>java.lang.InternalError</code> error is thrown if cloning is not supported.
-     *
-     * @return a clone of this object
-     *
-     * @see java.lang.Cloneable
-     * @see java.lang.Object#clone()
-     * @see SensibleDataType#changeValue(String)
-     * @see SensibleDataType#returnCopy()
-     * @see SensibleDataType#setKey(boolean)
-     * @see SensibleDataType#setReadOnly(boolean)
-     * @see SensibleDataType#setRequired(boolean)
-     */
-    @SuppressWarnings("PMD.StringInstantiation")
-    public SensibleDataType clone() {
-
-        try {
-            SensibleDataType obj = (SensibleDataType) super.clone();
-
-            obj.setKey(isKey());
-            obj.setReadOnly(isReadOnly());
-            obj.setRequired(isRequired());
-            obj.changeValue(new String(value));
-
-            return obj;
-        } catch (CloneNotSupportedException cnse) {
-            return null;
-        }
     }
 
     /**
@@ -452,24 +421,32 @@ public abstract class SensibleDataType
     }
 
     /**
-     * Returns a clone of this object.
+     * Returns a copy of this object.
      *
-     * @return a clone of this object
-     *
-     * @see SensibleDataType#clone()
+     * @return a copy of this object or <code>null</code> if the copy could not be created
      */
-    public final SensibleDataType returnCopy() {
+    public SensibleDataType returnCopy() {
 
-        return (SensibleDataType) this.clone();
+        SensibleDataType obj = returnNew();
+
+        if (obj != null) {
+
+            obj.setKey(isKey());
+            obj.setReadOnly(isReadOnly());
+            obj.setRequired(isRequired());
+            obj.changeValue(new String(value));
+        }
+
+        return obj;
     }
 
     /**
      * Returns a new object of this class or <code>null</code> if an exception is thrown while
      * creating the new instance.
      *
-     * @return a new instance of this object class or <code>null</code> if an exception is thrown
+     * @return a new instance of this object class or <code>null</code> if the new instance could not be created
      */
-    public final SensibleDataType returnNew() {
+    public SensibleDataType returnNew() {
 
         try {
             return getClass().newInstance();

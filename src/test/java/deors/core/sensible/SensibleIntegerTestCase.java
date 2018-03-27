@@ -80,7 +80,7 @@ public class SensibleIntegerTestCase {
     }
 
     @Test
-    public void testConstructorInvalid1() {
+    public void testConstructorValueNotInRange() {
 
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage(SensibleContext.getMessage("INT_ERR_VALUE_NOT_IN_RANGE"));
@@ -95,11 +95,20 @@ public class SensibleIntegerTestCase {
         assertEquals(new SensibleInteger(87), new SensibleInteger(4).add(83));
 
         SensibleInteger i = new SensibleInteger(0, 1000, 900);
-        i.setRange(0, 500);
-        assertEquals(new SensibleInteger(500), i.add(100));
+        assertEquals(new SensibleInteger(1000), i.add(100));
 
-        i.setRange(1200, 1500);
-        assertEquals(new SensibleInteger(1200), i.add(100));
+        i.setRange(0, 1200);
+        assertEquals(new SensibleInteger(1200), i.add(300));
+    }
+
+    @Test
+    public void testAddValueNotInRange() {
+
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage(SensibleContext.getMessage("INT_ERR_VALUE_NOT_IN_RANGE"));
+
+        SensibleInteger i = new SensibleInteger(0, 1000, 900);
+        i.add(500);
     }
 
     @Test
@@ -107,12 +116,21 @@ public class SensibleIntegerTestCase {
 
         assertEquals(new SensibleInteger(63), new SensibleInteger(87).subtract(24));
 
-        SensibleInteger i = new SensibleInteger(0, 1000, 600);
-        i.setRange(0, 500);
-        assertEquals(new SensibleInteger(500), i.subtract(10));
+        SensibleInteger i = new SensibleInteger(500, 1000, 600);
+        assertEquals(new SensibleInteger(590), i.subtract(10));
 
-        i.setRange(1200, 1500);
-        assertEquals(new SensibleInteger(1200), i.subtract(10));
+        i.setRange(400, 1000);
+        assertEquals(new SensibleInteger(490), i.subtract(110));
+    }
+
+    @Test
+    public void testSubtractValueNotInRange() {
+
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage(SensibleContext.getMessage("INT_ERR_VALUE_NOT_IN_RANGE"));
+
+        SensibleInteger i = new SensibleInteger(500, 1000, 600);
+        i.subtract(200);
     }
 
     @Test

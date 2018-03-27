@@ -110,9 +110,21 @@ public class SensibleBigDecimalTestCase {
     }
 
     @Test
+    public void testAddBigDecimal() {
+
+        assertEquals(new SensibleBigDecimal("87"), new SensibleBigDecimal("4").add(new SensibleBigDecimal("83")));
+    }
+
+    @Test
     public void testSubtract() {
 
         assertEquals(new SensibleBigDecimal("63"), new SensibleBigDecimal("87").subtract(24));
+    }
+
+    @Test
+    public void testSubtractBigDecimal() {
+
+        assertEquals(new SensibleBigDecimal("63"), new SensibleBigDecimal("87").subtract(new SensibleBigDecimal("24")));
     }
 
     @Test

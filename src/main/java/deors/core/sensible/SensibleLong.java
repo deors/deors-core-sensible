@@ -8,7 +8,6 @@ package deors.core.sensible;
  * @author deors
  * @version 1.0
  */
-@SuppressWarnings("PMD.CloneMethodMustImplementCloneable")
 public final class SensibleLong
     extends SensibleDataType {
 
@@ -231,16 +230,16 @@ public final class SensibleLong
     }
 
     /**
-     * Returns a new <code>SensibleLong</code> object cloned from this
-     * object which value is this object value plus the given value.
+     * Returns a new <code>SensibleLong</code> object which value
+     * is this object value plus the given value.
      *
      * @param augend the value to be added
      *
      * @return the <code>SensibleLong</code> object with the new value
      */
-    public SensibleDataType add(int augend) {
+    public SensibleLong add(int augend) {
 
-        SensibleLong newValue = (SensibleLong) this.clone();
+        SensibleLong newValue = returnCopy();
         if (getNumber() >= getMaxValue()) {
             newValue.setNumber(getMaxValue());
         } else if (getNumber() < getMinValue()) {
@@ -413,27 +412,6 @@ public final class SensibleLong
         if (!newValue.equals(value)) {
             valueChangingInSet = false;
         }
-    }
-
-    /**
-     * Returns a clone of this object.<br>
-     *
-     * A <code>java.lang.InternalError</code> error is thrown if cloning is not supported.
-     *
-     * @return a clone of this object
-     *
-     * @see SensibleDataType#clone()
-     * @see SensibleLong#setMinValue(long)
-     * @see SensibleLong#setMaxValue(long)
-     */
-    public SensibleLong clone() {
-
-        SensibleLong obj = (SensibleLong) super.clone();
-
-        obj.setMinValue(getMinValue());
-        obj.setMaxValue(getMaxValue());
-
-        return obj;
     }
 
     /**
@@ -632,6 +610,20 @@ public final class SensibleLong
     }
 
     /**
+     * Returns a copy of this SensibleLong object.
+     *
+     * @return a copy of this object
+     */
+    @Override
+    public SensibleLong returnCopy() {
+
+        return new SensibleLong(
+            getMinValue(),
+            getMaxValue(),
+            getNumber());
+    }
+
+    /**
      * Changes the <code>minValue</code> property value and fires the property change event. It
      * checks if the number is in range and sets the valid property.<br>
      *
@@ -807,16 +799,16 @@ public final class SensibleLong
     }
 
     /**
-     * Returns a new <code>SensibleLong</code> object cloned from this
-     * object which value is this object value minus the given value.
+     * Returns a new <code>SensibleLong</code> object which value
+     * is this object value minus the given value.
      *
      * @param subtraend the value to be subtracted
      *
      * @return the <code>SensibleLong</code> object with the new value
      */
-    public SensibleDataType subtract(int subtraend) {
+    public SensibleLong subtract(int subtraend) {
 
-        SensibleLong newValue = (SensibleLong) this.clone();
+        SensibleLong newValue = returnCopy();
         if (getNumber() > getMaxValue()) {
             newValue.setNumber(getMaxValue());
         } else if (getNumber() <= getMinValue()) {

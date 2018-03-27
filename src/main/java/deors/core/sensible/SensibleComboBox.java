@@ -346,7 +346,7 @@ public final class SensibleComboBox<T extends SensibleDataType>
 
                 if (entry != null && entry.length() != 0) {
                     @SuppressWarnings("unchecked")
-                    T clone = (T) data.clone();
+                    T clone = (T) data.returnCopy();
                     clone.setValue(entry);
                     addItem(clone);
                     historyEntries.add(entry);
@@ -373,7 +373,7 @@ public final class SensibleComboBox<T extends SensibleDataType>
                         setSelectedIndex(-1);
                     } else {
                         @SuppressWarnings("unchecked")
-                        T clone = (T) data.clone();
+                        T clone = (T) data.returnCopy();
                         clone.setValue(lastSelected);
                         setSelectedItem(clone);
                     }

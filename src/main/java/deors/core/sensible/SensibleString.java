@@ -214,17 +214,17 @@ public final class SensibleString
     }
 
     /**
-     * Returns a new <code>SensibleString</code> object cloned from this
-     * object which value is this object value plus the given value only
+     * Returns a new <code>SensibleString</code> object which value
+     * is this object value plus the given value only
      * if the string value can be converted into an integer value.
      *
      * @param augend the value to be added
      *
      * @return the <code>SensibleString</code> object with the new integer value
      */
-    public SensibleDataType add(int augend) {
+    public SensibleString add(int augend) {
 
-        SensibleString newValue = (SensibleString) this.clone();
+        SensibleString newValue = returnCopy();
         try {
             int convertedValue = Integer.parseInt(getString());
             if (getMaxLength() == -1) {
@@ -464,26 +464,6 @@ public final class SensibleString
     }
 
     /**
-     * Returns a clone of this object.<br>
-     *
-     * A <code>java.lang.InternalError</code> error is thrown if cloning is not supported.
-     *
-     * @return a clone of this object
-     *
-     * @see SensibleDataType#clone()
-     * @see SensibleString#setMaxLength(int)
-     */
-    public SensibleString clone() {
-
-        SensibleString obj = (SensibleString) super.clone();
-
-        obj.setMaxLength(getMaxLength());
-        obj.setCasingMode(getCasingMode());
-
-        return obj;
-    }
-
-    /**
      * Compares this <code>SensibleString</code> object with the given <code>String</code>
      * object and returns whether both objects represent the same string value.
      *
@@ -635,6 +615,19 @@ public final class SensibleString
     }
 
     /**
+     * Returns a copy of this SensibleString object.
+     *
+     * @return a copy of this object
+     */
+    @Override
+    public SensibleString returnCopy() {
+
+        return new SensibleString(
+            getMaxLength(),
+            getValue());
+    }
+
+    /**
      * Changes the <code>allowedCharacters</code> property value and fires the property change event.
      *
      * @param newValue the property new value
@@ -779,17 +772,17 @@ public final class SensibleString
     }
 
     /**
-     * Returns a new <code>SensibleString</code> object cloned from this
-     * object which value is this object value minus the given value only
+     * Returns a new <code>SensibleString</code> object which value
+     * is this object value minus the given value only
      * if the string value can be converted into an integer value.
      *
      * @param subtraend the value to be subtracted
      *
      * @return the <code>SensibleString</code> object with the new integer value
      */
-    public SensibleDataType subtract(int subtraend) {
+    public SensibleString subtract(int subtraend) {
 
-        SensibleString newValue = (SensibleString) this.clone();
+        SensibleString newValue = returnCopy();
         try {
             int convertedValue = Integer.parseInt(getString());
             if (convertedValue - subtraend > 0) {

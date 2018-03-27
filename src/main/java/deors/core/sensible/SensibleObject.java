@@ -281,34 +281,6 @@ public abstract class SensibleObject
     }
 
     /**
-     * Returns a clone of this object.
-     *
-     * @return a clone of this object
-     *
-     * @throws CloneNotSupportedException if the clone could not be done
-     *
-     * @see java.lang.Cloneable
-     * @see java.lang.Object#clone()
-     * @see SensibleObject#returnCopy()
-     * @see SensibleDataType#clone()
-     */
-    public final SensibleObject clone()
-        throws CloneNotSupportedException {
-
-        SensibleObject obj = (SensibleObject) super.clone();
-
-        obj.fields = new SensibleDataType[fields.length];
-        obj.fieldNames = new String[fieldNames.length];
-
-        for (int i = 0, n = fields.length; i < n; i++) {
-            obj.fields[i] = (SensibleDataType) fields[i].clone();
-            obj.fieldNames[i] = fieldNames[i];
-        }
-
-        return obj;
-    }
-
-    /**
      * Compares this <code>SensibleObject</code> object with the given object and returns an
      * integer value as established in the <code>Comparable</code> interface. The method compares
      * the <code>toStringForSort()</code> string representation for both objects if the target
@@ -610,28 +582,35 @@ public abstract class SensibleObject
     }
 
     /**
-     * Returns a clone of this object.
+     * Returns a copy of this object.
      *
-     * @return a clone of this object
-     *
-     * @see SensibleObject#clone()
+     * @return a copy of this object or <code>null</code> if the copy could not be created
      */
-    public final SensibleObject returnCopy() {
+    public SensibleObject returnCopy() {
 
-        try {
-            return (SensibleObject) this.clone();
-        } catch (CloneNotSupportedException cnse) {
-            return null;
+        SensibleObject obj = returnNew();
+
+        if (obj != null) {
+
+            obj.fields = new SensibleDataType[fields.length];
+            obj.fieldNames = new String[fieldNames.length];
+
+            for (int i = 0, n = fields.length; i < n; i++) {
+                obj.fields[i] = (SensibleDataType) fields[i].returnCopy();
+                obj.fieldNames[i] = fieldNames[i];
+            }
         }
+
+        return obj;
     }
 
     /**
      * Returns a new object of this class or <code>null</code> if an exception is thrown while
      * creating the new instance.
      *
-     * @return a new instance of this object class or <code>null</code> if an exception is thrown
+     * @return a new instance of this object class or <code>null</code> if the new instance could not be created
      */
-    public final SensibleObject returnNew() {
+    public SensibleObject returnNew() {
 
         try {
             return getClass().newInstance();

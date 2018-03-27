@@ -16,12 +16,11 @@ import deors.core.commons.StringToolkit;
 /**
  * Definition for a big decimal data type.<br>
  *
- * The class manages numbers with defined or infinite precission.<br>
+ * The class manages numbers with defined or infinite precision.<br>
  *
  * @author deors
  * @version 1.0
  */
-@SuppressWarnings("PMD.CloneMethodMustImplementCloneable")
 public final class SensibleBigDecimal
     extends SensibleDataType {
 
@@ -416,17 +415,33 @@ public final class SensibleBigDecimal
     }
 
     /**
-     * Returns a new <code>SensibleBigDecimal</code> object cloned from this
-     * object which value is this object value plus the given value.
+     * Returns a new <code>SensibleBigDecimal</code> object which value
+     * is this object value plus the given value.
      *
      * @param augend the value to be added
      *
      * @return the <code>SensibleBigDecimal</code> object with the new value
      */
-    public SensibleDataType add(int augend) {
+    @Override
+    public SensibleBigDecimal add(int augend) {
 
-        SensibleBigDecimal newValue = (SensibleBigDecimal) this.clone();
+        SensibleBigDecimal newValue = returnCopy();
         newValue.setNumber(getNumber().add(new BigDecimal(augend)));
+        return newValue;
+    }
+
+    /**
+     * Returns a new <code>SensibleBigDecimal</code> object which value
+     * is this object value plus the given value.
+     *
+     * @param augend the value to be added
+     *
+     * @return the <code>SensibleBigDecimal</code> object with the new value
+     */
+    public SensibleBigDecimal add(SensibleBigDecimal augend) {
+
+        SensibleBigDecimal newValue = returnCopy();
+        newValue.setNumber(getNumber().add(augend.getNumber()));
         return newValue;
     }
 
@@ -877,27 +892,6 @@ public final class SensibleBigDecimal
     }
 
     /**
-     * Returns a clone of this object.<br>
-     *
-     * A <code>java.lang.InternalError</code> error is thrown if cloning is not supported.
-     *
-     * @return a clone of this object
-     *
-     * @see SensibleDataType#clone()
-     * @see SensibleBigDecimal#setMaxIntegerDigits(int)
-     * @see SensibleBigDecimal#setMaxFractionalDigits(int)
-     */
-    public SensibleBigDecimal clone() {
-
-        SensibleBigDecimal obj = (SensibleBigDecimal) super.clone();
-
-        obj.setDecimalSeparator(getDecimalSeparator());
-        obj.setGroupSeparator(getGroupSeparator());
-
-        return obj;
-    }
-
-    /**
      * Compares this <code>SensibleBigDecimal</code> object with the given object and returns an
      * integer value as established in the <code>Comparable</code> interface. The method compares
      * the numeric values if the target object is a <code>java.math.BigDecimal</code> object or a
@@ -1190,6 +1184,21 @@ public final class SensibleBigDecimal
     }
 
     /**
+     * Returns a copy of this SensibleBigDecimal object.
+     *
+     * @return a copy of this object
+     */
+    @Override
+    public SensibleBigDecimal returnCopy() {
+
+        return new SensibleBigDecimal(
+            getMaxIntegerDigits(),
+            getMaxFractionalDigits(),
+            isNegativeValuesAllowed(),
+            getNumber());
+    }
+
+    /**
      * Changes the <code>decimalSeparator</code> property value and fires the property change
      * event.
      *
@@ -1399,17 +1408,33 @@ public final class SensibleBigDecimal
     }
 
     /**
-     * Returns a new <code>SensibleBigDecimal</code> object cloned from this
-     * object which value is this object value minus the given value.
+     * Returns a new <code>SensibleBigDecimal</code> object which value
+     * is this object value minus the given value.
      *
      * @param subtraend the value to be subtracted
      *
      * @return the <code>SensibleBigDecimal</code> object with the new value
      */
-    public SensibleDataType subtract(int subtraend) {
+    @Override
+    public SensibleBigDecimal subtract(int subtraend) {
 
-        SensibleBigDecimal newValue = (SensibleBigDecimal) this.clone();
+        SensibleBigDecimal newValue = returnCopy();
         newValue.setNumber(getNumber().subtract(new BigDecimal(subtraend)));
+        return newValue;
+    }
+
+    /**
+     * Returns a new <code>SensibleBigDecimal</code> object which value
+     * is this object value minus the given value.
+     *
+     * @param subtraend the value to be subtracted
+     *
+     * @return the <code>SensibleBigDecimal</code> object with the new value
+     */
+    public SensibleBigDecimal subtract(SensibleBigDecimal subtraend) {
+
+        SensibleBigDecimal newValue = returnCopy();
+        newValue.setNumber(getNumber().subtract(subtraend.getNumber()));
         return newValue;
     }
 
