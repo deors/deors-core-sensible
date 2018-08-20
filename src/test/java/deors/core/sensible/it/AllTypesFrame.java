@@ -1,6 +1,6 @@
 package deors.core.sensible.it;
 
-import java.awt.Rectangle;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -202,7 +202,7 @@ public class AllTypesFrame
             button3 = new JButton();
             button3.setName("JButton3");
             button3.setText("object complete");
-            button3.setBounds(250, 385, 130, 25);
+            button3.setBounds(300, 385, 130, 25);
             button3.addActionListener(this);
         }
         return button3;
@@ -213,7 +213,7 @@ public class AllTypesFrame
             checkBox1 = new JCheckBox();
             checkBox1.setName("JCheckBox1");
             checkBox1.setText("valid value");
-            checkBox1.setBounds(282, 14, 97, 22);
+            checkBox1.setBounds(312, 14, 127, 22);
             checkBox1.setEnabled(false);
         }
         return checkBox1;
@@ -224,7 +224,7 @@ public class AllTypesFrame
             checkBox2 = new JCheckBox();
             checkBox2.setName("JCheckBox2");
             checkBox2.setText("valid value");
-            checkBox2.setBounds(282, 44, 97, 22);
+            checkBox2.setBounds(312, 44, 127, 22);
             checkBox2.setEnabled(false);
         }
         return checkBox2;
@@ -235,7 +235,7 @@ public class AllTypesFrame
             checkBox3 = new JCheckBox();
             checkBox3.setName("JCheckBox3");
             checkBox3.setText("valid value");
-            checkBox3.setBounds(282, 74, 97, 22);
+            checkBox3.setBounds(312, 74, 127, 22);
             checkBox3.setEnabled(false);
         }
         return checkBox3;
@@ -246,7 +246,7 @@ public class AllTypesFrame
             checkBox4 = new JCheckBox();
             checkBox4.setName("JCheckBox4");
             checkBox4.setText("valid value");
-            checkBox4.setBounds(282, 104, 97, 22);
+            checkBox4.setBounds(312, 104, 127, 22);
             checkBox4.setEnabled(false);
         }
         return checkBox4;
@@ -257,7 +257,7 @@ public class AllTypesFrame
             checkBox5 = new JCheckBox();
             checkBox5.setName("JCheckBox5");
             checkBox5.setText("valid value");
-            checkBox5.setBounds(282, 134, 97, 22);
+            checkBox5.setBounds(312, 134, 127, 22);
             checkBox5.setEnabled(false);
         }
         return checkBox5;
@@ -268,7 +268,7 @@ public class AllTypesFrame
             checkBox6 = new JCheckBox();
             checkBox6.setName("JCheckBox6");
             checkBox6.setText("valid value");
-            checkBox6.setBounds(282, 164, 97, 22);
+            checkBox6.setBounds(312, 164, 127, 22);
             checkBox6.setEnabled(false);
         }
         return checkBox6;
@@ -279,7 +279,7 @@ public class AllTypesFrame
             checkBox7 = new JCheckBox();
             checkBox7.setName("JCheckBox7");
             checkBox7.setText("valid value");
-            checkBox7.setBounds(282, 194, 97, 22);
+            checkBox7.setBounds(312, 194, 127, 22);
             checkBox7.setEnabled(false);
         }
         return checkBox7;
@@ -290,7 +290,7 @@ public class AllTypesFrame
             checkBox8 = new JCheckBox();
             checkBox8.setName("JCheckBox8");
             checkBox8.setText("valid value");
-            checkBox8.setBounds(282, 224, 97, 22);
+            checkBox8.setBounds(312, 224, 127, 22);
             checkBox8.setEnabled(false);
         }
         return checkBox8;
@@ -299,9 +299,9 @@ public class AllTypesFrame
     private JCheckBox getCheckBox9() {
         if (checkBox9 == null) {
             checkBox9 = new JCheckBox();
-            checkBox9.setBounds(new java.awt.Rectangle(282, 254, 97, 22));
             checkBox9.setName("JCheckBox9");
             checkBox9.setText("valid value");
+            checkBox9.setBounds(312, 254, 127, 22);
             checkBox9.setEnabled(false);
         }
         return checkBox9;
@@ -310,9 +310,9 @@ public class AllTypesFrame
     private JCheckBox getCheckBox10() {
         if (checkBox10 == null) {
             checkBox10 = new JCheckBox();
-            checkBox10.setBounds(new java.awt.Rectangle(282, 284, 97, 22));
             checkBox10.setName("JCheckBox10");
             checkBox10.setText("valid value");
+            checkBox10.setBounds(312, 284, 127, 22);
             checkBox10.setEnabled(false);
         }
         return checkBox10;
@@ -321,9 +321,9 @@ public class AllTypesFrame
     private JCheckBox getCheckBox11() {
         if (checkBox11 == null) {
             checkBox11 = new JCheckBox();
-            checkBox11.setBounds(new Rectangle(282, 314, 97, 22));
             checkBox11.setName("JCheckBox11");
             checkBox11.setText("valid value");
+            checkBox11.setBounds(312, 314, 127, 22);
             checkBox11.setEnabled(false);
         }
         return checkBox11;
@@ -333,8 +333,8 @@ public class AllTypesFrame
         if (label1 == null) {
             label1 = new JLabel();
             label1.setName("JLabel1");
-            label1.setText("int");
-            label1.setBounds(15, 48, 100, 16);
+            label1.setText("string");
+            label1.setBounds(15, 18, 130, 16);
         }
         return label1;
     }
@@ -343,8 +343,8 @@ public class AllTypesFrame
         if (label2 == null) {
             label2 = new JLabel();
             label2.setName("JLabel2");
-            label2.setText("long");
-            label2.setBounds(15, 78, 100, 16);
+            label2.setText("int");
+            label2.setBounds(15, 48, 130, 16);
         }
         return label2;
     }
@@ -353,8 +353,8 @@ public class AllTypesFrame
         if (label3 == null) {
             label3 = new JLabel();
             label3.setName("JLabel3");
-            label3.setText("bigdecimal");
-            label3.setBounds(15, 138, 100, 16);
+            label3.setText("long");
+            label3.setBounds(15, 78, 130, 16);
         }
         return label3;
     }
@@ -363,8 +363,8 @@ public class AllTypesFrame
         if (label4 == null) {
             label4 = new JLabel();
             label4.setName("JLabel4");
-            label4.setText("string");
-            label4.setBounds(15, 18, 100, 16);
+            label4.setText("boolean");
+            label4.setBounds(15, 108, 130, 16);
         }
         return label4;
     }
@@ -373,8 +373,8 @@ public class AllTypesFrame
         if (label5 == null) {
             label5 = new JLabel();
             label5.setName("JLabel5");
-            label5.setText("boolean");
-            label5.setBounds(15, 108, 100, 16);
+            label5.setText("bigdecimal");
+            label5.setBounds(15, 138, 130, 16);
         }
         return label5;
     }
@@ -384,7 +384,7 @@ public class AllTypesFrame
             label6 = new JLabel();
             label6.setName("JLabel6");
             label6.setText("date");
-            label6.setBounds(15, 168, 100, 16);
+            label6.setBounds(15, 168, 130, 16);
         }
         return label6;
     }
@@ -394,7 +394,7 @@ public class AllTypesFrame
             label7 = new JLabel();
             label7.setName("JLabel7");
             label7.setText("time (HMS)");
-            label7.setBounds(15, 198, 100, 16);
+            label7.setBounds(15, 198, 130, 16);
         }
         return label7;
     }
@@ -404,7 +404,7 @@ public class AllTypesFrame
             label8 = new JLabel();
             label8.setName("JLabel8");
             label8.setText("time (HM)");
-            label8.setBounds(15, 228, 100, 16);
+            label8.setBounds(15, 228, 130, 16);
         }
         return label8;
     }
@@ -414,7 +414,7 @@ public class AllTypesFrame
             label9 = new JLabel();
             label9.setName("JLabel9");
             label9.setText("date/time (HMS)");
-            label9.setBounds(15, 258, 100, 16);
+            label9.setBounds(15, 258, 130, 16);
         }
         return label9;
     }
@@ -424,7 +424,7 @@ public class AllTypesFrame
             label10 = new JLabel();
             label10.setName("JLabel10");
             label10.setText("date/time (HM)");
-            label10.setBounds(15, 288, 100, 16);
+            label10.setBounds(15, 288, 130, 16);
         }
         return label10;
     }
@@ -432,9 +432,9 @@ public class AllTypesFrame
     private JLabel getLabel11() {
         if (label11 == null) {
             label11 = new JLabel();
-            label11.setBounds(new Rectangle(15, 318, 100, 16));
-            label11.setText("password");
             label11.setName("JLabel11");
+            label11.setText("password");
+            label11.setBounds(15, 318, 130, 16);
         }
         return label11;
     }
@@ -444,42 +444,42 @@ public class AllTypesFrame
             mainContentPane = new JPanel();
             mainContentPane.setName("MainContentPane");
             mainContentPane.setLayout(null);
-            mainContentPane.add(getSensibleTextField1(), getSensibleTextField1().getName());
-            mainContentPane.add(getSensibleTextField2(), getSensibleTextField2().getName());
-            mainContentPane.add(getCheckBox1(), getCheckBox1().getName());
-            mainContentPane.add(getCheckBox2(), getCheckBox2().getName());
-            mainContentPane.add(getButton1(), getButton1().getName());
-            mainContentPane.add(getButton2(), getButton2().getName());
             mainContentPane.add(getLabel1(), getLabel1().getName());
+            mainContentPane.add(getSensibleTextField1(), getSensibleTextField1().getName());
+            mainContentPane.add(getCheckBox1(), getCheckBox1().getName());
             mainContentPane.add(getLabel2(), getLabel2().getName());
+            mainContentPane.add(getSensibleTextField2(), getSensibleTextField2().getName());
+            mainContentPane.add(getCheckBox2(), getCheckBox2().getName());
             mainContentPane.add(getLabel3(), getLabel3().getName());
-            mainContentPane.add(getLabel4(), getLabel4().getName());
             mainContentPane.add(getSensibleTextField3(), getSensibleTextField3().getName());
             mainContentPane.add(getCheckBox3(), getCheckBox3().getName());
-            mainContentPane.add(getCheckBox4(), getCheckBox4().getName());
-            mainContentPane.add(getSensibleTextField5(), getSensibleTextField5().getName());
-            mainContentPane.add(getSensibleTextField6(), getSensibleTextField6().getName());
-            mainContentPane.add(getCheckBox5(), getCheckBox5().getName());
-            mainContentPane.add(getCheckBox6(), getCheckBox6().getName());
+            mainContentPane.add(getLabel4(), getLabel4().getName());
             mainContentPane.add(getSensibleCheckBox1(), getSensibleCheckBox1().getName());
+            mainContentPane.add(getCheckBox4(), getCheckBox4().getName());
             mainContentPane.add(getLabel5(), getLabel5().getName());
+            mainContentPane.add(getSensibleTextField5(), getSensibleTextField5().getName());
+            mainContentPane.add(getCheckBox5(), getCheckBox5().getName());
             mainContentPane.add(getLabel6(), getLabel6().getName());
-            mainContentPane.add(getButton3(), getButton3().getName());
+            mainContentPane.add(getSensibleTextField6(), getSensibleTextField6().getName());
+            mainContentPane.add(getCheckBox6(), getCheckBox6().getName());
             mainContentPane.add(getLabel7(), getLabel7().getName());
             mainContentPane.add(getSensibleTextField7(), getSensibleTextField7().getName());
+            mainContentPane.add(getCheckBox7(), getCheckBox7().getName());
             mainContentPane.add(getLabel8(), getLabel8().getName());
             mainContentPane.add(getSensibleTextField8(), getSensibleTextField8().getName());
-            mainContentPane.add(getCheckBox7(), getCheckBox7().getName());
             mainContentPane.add(getCheckBox8(), getCheckBox8().getName());
             mainContentPane.add(getLabel9(), getLabel9().getName());
-            mainContentPane.add(getLabel10(), getLabel10().getName());
             mainContentPane.add(getSensibleTextField9(), getSensibleTextField9().getName());
-            mainContentPane.add(getSensibleTextField10(), getSensibleTextField10().getName());
             mainContentPane.add(getCheckBox9(), getCheckBox9().getName());
+            mainContentPane.add(getLabel10(), getLabel10().getName());
+            mainContentPane.add(getSensibleTextField10(), getSensibleTextField10().getName());
             mainContentPane.add(getCheckBox10(), getCheckBox10().getName());
-            mainContentPane.add(getSensibleTextField11(), getSensibleTextField11().getName());
             mainContentPane.add(getLabel11(), getLabel11().getName());
+            mainContentPane.add(getSensibleTextField11(), getSensibleTextField11().getName());
             mainContentPane.add(getCheckBox11(), getCheckBox11().getName());
+            mainContentPane.add(getButton1(), getButton1().getName());
+            mainContentPane.add(getButton2(), getButton2().getName());
+            mainContentPane.add(getButton3(), getButton3().getName());
         }
         return mainContentPane;
     }
@@ -489,7 +489,7 @@ public class AllTypesFrame
             sensibleCheckBox1 = new SensibleCheckBox();
             sensibleCheckBox1.setName("SensibleCheckBox1");
             sensibleCheckBox1.setText("");
-            sensibleCheckBox1.setBounds(115, 104, 28, 22);
+            sensibleCheckBox1.setBounds(145, 104, 28, 22);
             sensibleCheckBox1.setData(getAllTypesObject1().getSboolean());
         }
         return sensibleCheckBox1;
@@ -499,7 +499,7 @@ public class AllTypesFrame
         if (sensibleTextField1 == null) {
             sensibleTextField1 = new SensibleTextField();
             sensibleTextField1.setName("SensibleTextField1");
-            sensibleTextField1.setBounds(115, 15, 150, 22);
+            sensibleTextField1.setBounds(145, 15, 150, 22);
             sensibleTextField1.setData(getAllTypesObject1().getSstring());
         }
         return sensibleTextField1;
@@ -509,7 +509,7 @@ public class AllTypesFrame
         if (sensibleTextField2 == null) {
             sensibleTextField2 = new SensibleTextField();
             sensibleTextField2.setName("SensibleTextField2");
-            sensibleTextField2.setBounds(115, 45, 150, 22);
+            sensibleTextField2.setBounds(145, 45, 150, 22);
             sensibleTextField2.setData(getAllTypesObject1().getSinteger());
         }
         return sensibleTextField2;
@@ -519,7 +519,7 @@ public class AllTypesFrame
         if (sensibleTextField3 == null) {
             sensibleTextField3 = new SensibleTextField();
             sensibleTextField3.setName("SensibleTextField3");
-            sensibleTextField3.setBounds(115, 75, 150, 22);
+            sensibleTextField3.setBounds(145, 75, 150, 22);
             sensibleTextField3.setData(getAllTypesObject1().getSlong());
         }
         return sensibleTextField3;
@@ -529,7 +529,7 @@ public class AllTypesFrame
         if (sensibleTextField5 == null) {
             sensibleTextField5 = new SensibleTextField();
             sensibleTextField5.setName("SensibleTextField5");
-            sensibleTextField5.setBounds(115, 135, 150, 22);
+            sensibleTextField5.setBounds(145, 135, 150, 22);
             sensibleTextField5.setData(getAllTypesObject1().getSbigdecimal());
         }
         return sensibleTextField5;
@@ -539,7 +539,7 @@ public class AllTypesFrame
         if (sensibleTextField6 == null) {
             sensibleTextField6 = new SensibleTextField();
             sensibleTextField6.setName("SensibleTextField6");
-            sensibleTextField6.setBounds(115, 165, 150, 22);
+            sensibleTextField6.setBounds(145, 165, 150, 22);
             sensibleTextField6.setData(getAllTypesObject1().getSdate());
         }
         return sensibleTextField6;
@@ -549,7 +549,7 @@ public class AllTypesFrame
         if (sensibleTextField7 == null) {
             sensibleTextField7 = new SensibleTextField();
             sensibleTextField7.setName("SensibleTextField7");
-            sensibleTextField7.setBounds(115, 195, 150, 22);
+            sensibleTextField7.setBounds(145, 195, 150, 22);
             sensibleTextField7.setData(getAllTypesObject1().getStime1());
         }
         return sensibleTextField7;
@@ -559,7 +559,7 @@ public class AllTypesFrame
         if (sensibleTextField8 == null) {
             sensibleTextField8 = new SensibleTextField();
             sensibleTextField8.setName("SensibleTextField8");
-            sensibleTextField8.setBounds(115, 225, 150, 22);
+            sensibleTextField8.setBounds(145, 225, 150, 22);
             sensibleTextField8.setData(getAllTypesObject1().getStime2());
         }
         return sensibleTextField8;
@@ -568,7 +568,7 @@ public class AllTypesFrame
     private SensibleTextField getSensibleTextField9() {
         if (sensibleTextField9 == null) {
             sensibleTextField9 = new SensibleTextField();
-            sensibleTextField9.setBounds(new Rectangle(115, 255, 150, 22));
+            sensibleTextField9.setBounds(145, 255, 150, 22);
             sensibleTextField9.setName("SensibleTextField9");
             sensibleTextField9.setData(getAllTypesObject1().getSdatetime1());
         }
@@ -579,7 +579,7 @@ public class AllTypesFrame
         if (sensibleTextField10 == null) {
             sensibleTextField10 = new SensibleTextField();
             sensibleTextField10.setName("SensibleTextField10");
-            sensibleTextField10.setBounds(new Rectangle(115, 285, 150, 22));
+            sensibleTextField10.setBounds(145, 285, 150, 22);
             sensibleTextField10.setData(getAllTypesObject1().getSdatetime2());
         }
         return sensibleTextField10;
@@ -589,7 +589,7 @@ public class AllTypesFrame
         if (sensibleTextField11 == null) {
             sensibleTextField11 = new SensibleTextField();
             sensibleTextField11.setName("SensibleTextField11");
-            sensibleTextField11.setBounds(new Rectangle(115, 315, 150, 22));
+            sensibleTextField11.setBounds(145, 315, 150, 22);
             sensibleTextField11.setPasswordField(true);
             sensibleTextField11.setData(getAllTypesObject1().getSpassword());
         }
@@ -600,7 +600,7 @@ public class AllTypesFrame
         setName("SensibleDataType & SensibleObject Test");
         setTitle("SensibleDataType & SensibleObject Test");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(405, 450);
+        setPreferredSize(new Dimension(450, 450));
         setContentPane(getMainContentPane());
     }
 }
