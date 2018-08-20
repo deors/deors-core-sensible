@@ -1,6 +1,7 @@
 package deors.core.sensible;
 
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
 /**
@@ -612,8 +613,9 @@ public abstract class SensibleObject
     public SensibleObject returnNew() {
 
         try {
-            return getClass().newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
+            return getClass().getConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException
+                 | InvocationTargetException | NoSuchMethodException e) {
             return null;
         }
     }

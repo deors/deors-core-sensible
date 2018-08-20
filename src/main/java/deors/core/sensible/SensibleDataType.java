@@ -1,7 +1,7 @@
 package deors.core.sensible;
 
 import java.io.Serializable;
-
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Definition for an abstract data type.<br>
@@ -448,8 +448,9 @@ public abstract class SensibleDataType
     public SensibleDataType returnNew() {
 
         try {
-            return getClass().newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
+            return getClass().getConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException
+                 | InvocationTargetException | NoSuchMethodException e) {
             return null;
         }
     }
