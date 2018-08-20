@@ -16,7 +16,6 @@ import deors.core.commons.StringToolkit;
  * @author deors
  * @version 1.0
  */
-@SuppressWarnings("PMD.CloneMethodMustImplementCloneable")
 public final class SensibleString
     extends SensibleDataType {
 
@@ -124,7 +123,6 @@ public final class SensibleString
     /**
      * Default constructor.
      */
-    @SuppressWarnings("PMD.StringInstantiation")
     public SensibleString() {
 
         super();

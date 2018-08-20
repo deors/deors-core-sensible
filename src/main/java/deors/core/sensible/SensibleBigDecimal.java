@@ -35,7 +35,6 @@ public final class SensibleBigDecimal
      * @see SensibleBigDecimal#getNumber()
      * @see SensibleBigDecimal#setNumber(java.math.BigDecimal)
      */
-    @SuppressWarnings("PMD.BigIntegerInstantiation")
     private BigDecimal number = new BigDecimal(0);
 
     /**

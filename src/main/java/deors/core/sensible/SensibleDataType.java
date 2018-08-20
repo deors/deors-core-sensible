@@ -32,7 +32,6 @@ public abstract class SensibleDataType
      * @see SensibleDataType#getValue()
      * @see SensibleDataType#setValue(String)
      */
-    @SuppressWarnings("PMD.StringInstantiation")
     protected String value = new String();
 
     /**

@@ -236,7 +236,6 @@ public final class SensibleSpinner
          *
          * @param event the change event
          */
-        @SuppressWarnings("PMD.CompareObjectsWithEquals")
         public void stateChanged(ChangeEvent event) {
 
             Object source = event.getSource();
@@ -351,7 +350,6 @@ public final class SensibleSpinner
      * Default constructor. The constructor does nothing, delegating initialization in the
      * <code>data</code> property setter.
      */
-    @SuppressWarnings("PMD.CallSuperInConstructor")
     public SensibleSpinner() {
         // we can not call constructor in JSpinner because
         // we override the text field with the Sensible component

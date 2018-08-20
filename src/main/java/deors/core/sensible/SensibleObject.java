@@ -122,7 +122,6 @@ public abstract class SensibleObject
      * @param index the field index
      * @param newValue the new value
      */
-    @SuppressWarnings("PMD.StringInstantiation")
     protected final void changeField(int index, String newValue) {
 
         SensibleDataType field = null;
@@ -644,7 +643,6 @@ public abstract class SensibleObject
      * @param index the field index
      * @param newValue the new value
      */
-    @SuppressWarnings("PMD.StringInstantiation")
     public final void setField(int index, String newValue) {
 
         SensibleDataType field = null;
