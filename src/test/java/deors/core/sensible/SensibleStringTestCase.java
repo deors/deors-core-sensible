@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.fest.swing.edt.GuiActionRunner;
-import org.fest.swing.edt.GuiTask;
+import org.assertj.swing.edt.GuiActionRunner;
+import org.assertj.swing.edt.GuiTask;
 import org.junit.Test;
 
 public class SensibleStringTestCase {

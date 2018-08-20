@@ -7,8 +7,8 @@ import static org.junit.Assert.assertTrue;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.fest.swing.edt.GuiActionRunner;
-import org.fest.swing.edt.GuiTask;
+import org.assertj.swing.edt.GuiActionRunner;
+import org.assertj.swing.edt.GuiTask;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
