@@ -28,7 +28,10 @@ jobs:
         restore-keys: ${{ runner.os }}-m2-
 
     - name: Run Maven compile and unit test
-      run: mvn test
+      run: mvn -s $GITHUB_WORKSPACE/.github/workflows/ci-maven-settings.xml test
+      env:
+        GH_READ_PKG_USERNAME: ${{ secrets.GH_READ_PKG_USERNAME }}
+        GH_READ_PKG_TOKEN: ${{ secrets.GH_READ_PKG_TOKEN }}
 
     - name: Run JaCoCo code coverage report
       run: mvn org.jacoco:jacoco-maven-plugin:report
