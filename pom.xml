@@ -256,7 +256,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/deors/deors-core-commons</url>
+            <url>https://maven.pkg.github.com/deors/deors-core-sensible</url>
         </repository>
     </distributionManagement>
 
