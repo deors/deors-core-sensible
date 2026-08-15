@@ -1,19 +1,15 @@
 package deors.core.sensible;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Calendar;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 public class SensibleTimeTestCase {
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     public SensibleTimeTestCase() {
 
@@ -108,191 +104,210 @@ public class SensibleTimeTestCase {
     @Test
     public void testTimeFormatInvalid1() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleTime t = new SensibleTime();
+            t.setTime("12");
 
-        SensibleTime t = new SensibleTime();
-        t.setTime("12");
+        });
+        assertEquals(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testTimeFormatInvalid2() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleTime t = new SensibleTime();
+            t.setTime("12:");
 
-        SensibleTime t = new SensibleTime();
-        t.setTime("12:");
+        });
+        assertEquals(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testTimeFormatInvalid3() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleTime t = new SensibleTime();
+            t.setTime("12:25");
 
-        SensibleTime t = new SensibleTime();
-        t.setTime("12:25");
+        });
+        assertEquals(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testTimeFormatInvalid4() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleTime t = new SensibleTime();
+            t.setTime("12:25:");
 
-        SensibleTime t = new SensibleTime();
-        t.setTime("12:25:");
+        });
+        assertEquals(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testTimeFormatInvalid5() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleTime t = new SensibleTime();
+            t.setTime("12:25:52:");
 
-        SensibleTime t = new SensibleTime();
-        t.setTime("12:25:52:");
+        });
+        assertEquals(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testTimeFormatInvalid6() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleTime t = new SensibleTime(false);
+            t.setTime("12:25:52");
 
-        SensibleTime t = new SensibleTime(false);
-        t.setTime("12:25:52");
+        });
+        assertEquals(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testTimeFormatInvalid7() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleTime t = new SensibleTime();
+            t.setTime("121:25:52");
 
-        SensibleTime t = new SensibleTime();
-        t.setTime("121:25:52");
+        });
+        assertEquals(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testTimeFormatInvalid8() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleTime t = new SensibleTime();
+            t.setTime("12:251:52");
 
-        SensibleTime t = new SensibleTime();
-        t.setTime("12:251:52");
+        });
+        assertEquals(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testTimeFormatInvalid9() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleTime t = new SensibleTime();
+            t.setTime("12:25:521");
 
-        SensibleTime t = new SensibleTime();
-        t.setTime("12:25:521");
+        });
+        assertEquals(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testTimeFormatInvalid10() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleTime t = new SensibleTime();
+            t.setTime("A:25:52");
 
-        SensibleTime t = new SensibleTime();
-        t.setTime("A:25:52");
+        });
+        assertEquals(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testTimeFormatInvalid11() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleTime t = new SensibleTime();
+            t.setTime("24:25:52");
 
-        SensibleTime t = new SensibleTime();
-        t.setTime("24:25:52");
+        });
+        assertEquals(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testTimeFormatInvalid12() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleTime t = new SensibleTime();
+            t.setTime("12:60:52");
 
-        SensibleTime t = new SensibleTime();
-        t.setTime("12:60:52");
+        });
+        assertEquals(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testTimeFormatInvalid13() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleTime t = new SensibleTime();
+            t.setTime("12:25:60");
 
-        SensibleTime t = new SensibleTime();
-        t.setTime("12:25:60");
+        });
+        assertEquals(SensibleContext.getMessage("TIME_ERR_INVALID_TIME_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testTimeInvalid1() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("TIME_ERR_INVALID_TIME"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleTime t = new SensibleTime();
+            t.setTime(-1, 25, 35);
 
-        SensibleTime t = new SensibleTime();
-        t.setTime(-1, 25, 35);
+        });
+        assertEquals(SensibleContext.getMessage("TIME_ERR_INVALID_TIME"), ex.getMessage());
     }
 
     @Test
     public void testTimeInvalid2() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("TIME_ERR_INVALID_TIME"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleTime t = new SensibleTime();
+            t.setTime(12, -1, 35);
 
-        SensibleTime t = new SensibleTime();
-        t.setTime(12, -1, 35);
+        });
+        assertEquals(SensibleContext.getMessage("TIME_ERR_INVALID_TIME"), ex.getMessage());
     }
 
     @Test
     public void testTimeInvalid3() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("TIME_ERR_INVALID_TIME"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleTime t = new SensibleTime();
+            t.setTime(12, 25, -1);
 
-        SensibleTime t = new SensibleTime();
-        t.setTime(12, 25, -1);
+        });
+        assertEquals(SensibleContext.getMessage("TIME_ERR_INVALID_TIME"), ex.getMessage());
     }
 
     @Test
     public void testTimeInvalid4() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("TIME_ERR_INVALID_TIME"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleTime t = new SensibleTime();
+            t.setTime(24, 25, 35);
 
-        SensibleTime t = new SensibleTime();
-        t.setTime(24, 25, 35);
+        });
+        assertEquals(SensibleContext.getMessage("TIME_ERR_INVALID_TIME"), ex.getMessage());
     }
 
     @Test
     public void testTimeInvalid5() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("TIME_ERR_INVALID_TIME"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleTime t = new SensibleTime();
+            t.setTime(12, 60, 35);
 
-        SensibleTime t = new SensibleTime();
-        t.setTime(12, 60, 35);
+        });
+        assertEquals(SensibleContext.getMessage("TIME_ERR_INVALID_TIME"), ex.getMessage());
     }
 
     @Test
     public void testTimeInvalid6() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("TIME_ERR_INVALID_TIME"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleTime t = new SensibleTime();
+            t.setTime(12, 25, 60);
 
-        SensibleTime t = new SensibleTime();
-        t.setTime(12, 25, 60);
+        });
+        assertEquals(SensibleContext.getMessage("TIME_ERR_INVALID_TIME"), ex.getMessage());
     }
 
     @Test

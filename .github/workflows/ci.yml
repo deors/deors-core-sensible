@@ -28,13 +28,13 @@ jobs:
         restore-keys: ${{ runner.os }}-m2-
 
     - name: Run Maven compile and unit test
-      # SensibleToolkitTestCase needs a window manager (AWT/Swing) and is kept
-      # for local or desktop runs. Re-state *IntegrationTestCase so this
-      # property does not replace the Surefire excludes already in the POM.
-      run: mvn -s $GITHUB_WORKSPACE/.github/workflows/ci-maven-settings.xml test -Dsurefire.excludes=**/*IntegrationTestCase.java,**/SensibleToolkitTestCase.java
+      run: mvn -s $GITHUB_WORKSPACE/.github/workflows/ci-maven-settings.xml test
       env:
         GH_READ_PKG_USERNAME: ${{ secrets.GH_READ_PKG_USERNAME }}
         GH_READ_PKG_TOKEN: ${{ secrets.GH_READ_PKG_TOKEN }}
+
+    - name: Run mutation tests
+      run: mvn pitest:mutationCoverage
 
     - name: Run JaCoCo code coverage report
       run: mvn org.jacoco:jacoco-maven-plugin:report

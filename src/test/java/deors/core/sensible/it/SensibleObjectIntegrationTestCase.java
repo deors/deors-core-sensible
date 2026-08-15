@@ -1,8 +1,8 @@
 package deors.core.sensible.it;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.event.KeyEvent;
 
@@ -10,23 +10,23 @@ import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.edt.GuiQuery;
 import org.assertj.swing.fixture.FrameFixture;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class SensibleObjectIntegrationTestCase {
 
     private FrameFixture testFrame;
     private AllTypesFrame frame;
 
-    @BeforeClass
+    @BeforeAll
     public static void setUpOnce() {
 
         FailOnThreadViolationRepaintManager.install();
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
 
         frame = GuiActionRunner.execute(new GuiQuery<AllTypesFrame>() {
@@ -38,7 +38,7 @@ public class SensibleObjectIntegrationTestCase {
         testFrame.show();
     }
 
-    @After
+    @AfterEach
     public void tearDown () {
 
         testFrame.cleanUp();

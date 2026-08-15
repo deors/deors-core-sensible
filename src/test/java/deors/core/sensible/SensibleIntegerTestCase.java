@@ -1,20 +1,16 @@
 package deors.core.sensible;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 public class SensibleIntegerTestCase {
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     public SensibleIntegerTestCase() {
 
@@ -82,11 +78,12 @@ public class SensibleIntegerTestCase {
     @Test
     public void testConstructorValueNotInRange() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("INT_ERR_VALUE_NOT_IN_RANGE"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleInteger i = new SensibleInteger(0, 300);
+            i.setNumber(301);
 
-        SensibleInteger i = new SensibleInteger(0, 300);
-        i.setNumber(301);
+        });
+        assertEquals(SensibleContext.getMessage("INT_ERR_VALUE_NOT_IN_RANGE"), ex.getMessage());
     }
 
     @Test
@@ -104,11 +101,12 @@ public class SensibleIntegerTestCase {
     @Test
     public void testAddValueNotInRange() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("INT_ERR_VALUE_NOT_IN_RANGE"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleInteger i = new SensibleInteger(0, 1000, 900);
+            i.add(500);
 
-        SensibleInteger i = new SensibleInteger(0, 1000, 900);
-        i.add(500);
+        });
+        assertEquals(SensibleContext.getMessage("INT_ERR_VALUE_NOT_IN_RANGE"), ex.getMessage());
     }
 
     @Test
@@ -126,21 +124,23 @@ public class SensibleIntegerTestCase {
     @Test
     public void testSubtractValueNotInRange() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("INT_ERR_VALUE_NOT_IN_RANGE"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleInteger i = new SensibleInteger(500, 1000, 600);
+            i.subtract(200);
 
-        SensibleInteger i = new SensibleInteger(500, 1000, 600);
-        i.subtract(200);
+        });
+        assertEquals(SensibleContext.getMessage("INT_ERR_VALUE_NOT_IN_RANGE"), ex.getMessage());
     }
 
     @Test
     public void testOutOfRange1() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("INT_ERR_VALUE_NOT_IN_RANGE"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleInteger i = new SensibleInteger(0, 1000);
+            i.setNumber("1200");
 
-        SensibleInteger i = new SensibleInteger(0, 1000);
-        i.setNumber("1200");
+        });
+        assertEquals(SensibleContext.getMessage("INT_ERR_VALUE_NOT_IN_RANGE"), ex.getMessage());
     }
 
     @Test
@@ -155,11 +155,12 @@ public class SensibleIntegerTestCase {
     @Test
     public void testOutOfRange2() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("INT_ERR_VALUE_NOT_IN_RANGE"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleInteger i = new SensibleInteger(0, 1000);
+            i.setNumber("-100");
 
-        SensibleInteger i = new SensibleInteger(0, 1000);
-        i.setNumber("-100");
+        });
+        assertEquals(SensibleContext.getMessage("INT_ERR_VALUE_NOT_IN_RANGE"), ex.getMessage());
     }
 
     @Test
@@ -217,40 +218,44 @@ public class SensibleIntegerTestCase {
     @Test
     public void testInvalidRange1() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("INT_ERR_INVALID_LIMIT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleInteger i = new SensibleInteger(0, 1000);
+            i.setMinValue(1200);
 
-        SensibleInteger i = new SensibleInteger(0, 1000);
-        i.setMinValue(1200);
+        });
+        assertEquals(SensibleContext.getMessage("INT_ERR_INVALID_LIMIT"), ex.getMessage());
     }
 
     @Test
     public void testInvalidRange2() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("INT_ERR_INVALID_LIMIT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleInteger i = new SensibleInteger(0, 1000);
+            i.setMaxValue(-100);
 
-        SensibleInteger i = new SensibleInteger(0, 1000);
-        i.setMaxValue(-100);
+        });
+        assertEquals(SensibleContext.getMessage("INT_ERR_INVALID_LIMIT"), ex.getMessage());
     }
 
     @Test
     public void testInvalidRange3() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("INT_ERR_INVALID_LIMIT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            new SensibleInteger(100, 0);
 
-        new SensibleInteger(100, 0);
+        });
+        assertEquals(SensibleContext.getMessage("INT_ERR_INVALID_LIMIT"), ex.getMessage());
     }
 
     @Test
     public void testInvalidString() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("INT_ERR_INVALID_STRING"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleInteger i = new SensibleInteger(0, 1000);
+            i.setNumber("A");
 
-        SensibleInteger i = new SensibleInteger(0, 1000);
-        i.setNumber("A");
+        });
+        assertEquals(SensibleContext.getMessage("INT_ERR_INVALID_STRING"), ex.getMessage());
     }
 
     @Test

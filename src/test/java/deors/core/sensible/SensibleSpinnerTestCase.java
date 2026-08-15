@@ -1,17 +1,13 @@
 package deors.core.sensible;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 
 public class SensibleSpinnerTestCase {
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void testConstructorDefault() {
@@ -60,10 +56,11 @@ public class SensibleSpinnerTestCase {
     @Test
     public void testConstructorDataInvalid() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("the spinner data is not valid; only SensibleBigDecimal, SensibleInteger, SensibleLong and SensibleString objects are allowed");
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            new SensibleSpinner(new SensibleBoolean());
 
-        new SensibleSpinner(new SensibleBoolean());
+        });
+        assertEquals("the spinner data is not valid; only SensibleBigDecimal, SensibleInteger, SensibleLong and SensibleString objects are allowed", ex.getMessage());
     }
 
     @Test
@@ -87,45 +84,49 @@ public class SensibleSpinnerTestCase {
     @Test
     public void testEditorNoData() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("the spinner editor can not be set if data bean has not been set yet");
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleSpinner ss = new SensibleSpinner();
 
-        SensibleSpinner ss = new SensibleSpinner();
+            ss.setEditor(null);
 
-        ss.setEditor(null);
+        });
+        assertEquals("the spinner editor can not be set if data bean has not been set yet", ex.getMessage());
     }
 
     @Test
     public void testModelNoData() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("the spinner model can not be set if data bean has not been set yet");
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleSpinner ss = new SensibleSpinner();
 
-        SensibleSpinner ss = new SensibleSpinner();
+            ss.setModel(null);
 
-        ss.setModel(null);
+        });
+        assertEquals("the spinner model can not be set if data bean has not been set yet", ex.getMessage());
     }
 
     @Test
     public void testEditorAgain() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("the spinner editor can not be set once it is initialized");
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleSpinner ss = new SensibleSpinner(new SensibleString("5"));
 
-        SensibleSpinner ss = new SensibleSpinner(new SensibleString("5"));
+            ss.setEditor(null);
 
-        ss.setEditor(null);
+        });
+        assertEquals("the spinner editor can not be set once it is initialized", ex.getMessage());
     }
 
     @Test
     public void testModelAgain() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("the spinner model can not be set once it is initialized");
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleSpinner ss = new SensibleSpinner(new SensibleString("5"));
 
-        SensibleSpinner ss = new SensibleSpinner(new SensibleString("5"));
+            ss.setModel(null);
 
-        ss.setModel(null);
+        });
+        assertEquals("the spinner model can not be set once it is initialized", ex.getMessage());
     }
 
     @Test

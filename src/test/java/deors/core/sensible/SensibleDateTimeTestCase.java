@@ -1,19 +1,15 @@
 package deors.core.sensible;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Calendar;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 public class SensibleDateTimeTestCase {
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     public SensibleDateTimeTestCase() {
 
@@ -183,550 +179,604 @@ public class SensibleDateTimeTestCase {
     @Test
     public void testDateTimeFormatInvalid1() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateFormat("invalid");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateFormat("invalid");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid2() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateFormat(SensibleDateTime.MDY_DATE_FORMAT);
+            dt.setDateTime("15/1/2009 12:25:35");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateFormat(SensibleDateTime.MDY_DATE_FORMAT);
-        dt.setDateTime("15/1/2009 12:25:35");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid3() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateFormat(SensibleDateTime.MDY_DATE_FORMAT);
+            dt.setDateTime("151/1/2009 12:25:35");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateFormat(SensibleDateTime.MDY_DATE_FORMAT);
-        dt.setDateTime("151/1/2009 12:25:35");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid4() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateFormat(SensibleDateTime.MDY_DATE_FORMAT);
+            dt.setDateTime("15/151/2009 12:25:35");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateFormat(SensibleDateTime.MDY_DATE_FORMAT);
-        dt.setDateTime("15/151/2009 12:25:35");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid5() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateFormat(SensibleDateTime.MDY_DATE_FORMAT);
+            dt.setDateTime("15/1/20091 12:25:35");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateFormat(SensibleDateTime.MDY_DATE_FORMAT);
-        dt.setDateTime("15/1/20091 12:25:35");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid6() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("151/1/2009 12:25:35");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("151/1/2009 12:25:35");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid7() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("1/151/2009 12:25:35");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("1/151/2009 12:25:35");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid8() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("1/1/20091 12:25:35");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("1/1/20091 12:25:35");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid9() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateFormat(SensibleDateTime.YMD_DATE_FORMAT);
+            dt.setDateTime("20091/1/1 12:25:35");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateFormat(SensibleDateTime.YMD_DATE_FORMAT);
-        dt.setDateTime("20091/1/1 12:25:35");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid10() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateFormat(SensibleDateTime.YMD_DATE_FORMAT);
+            dt.setDateTime("2009/151/1 12:25:35");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateFormat(SensibleDateTime.YMD_DATE_FORMAT);
-        dt.setDateTime("2009/151/1 12:25:35");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid11() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateFormat(SensibleDateTime.YMD_DATE_FORMAT);
+            dt.setDateTime("2009/1/151 12:25:35");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateFormat(SensibleDateTime.YMD_DATE_FORMAT);
-        dt.setDateTime("2009/1/151 12:25:35");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid12() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("1/1/2009 121:25:35");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("1/1/2009 121:25:35");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid13() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("1/1/2009 12:251:35");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("1/1/2009 12:251:35");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid14() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("1/1/2009 12:25:351");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("1/1/2009 12:25:351");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid15() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("1/1/2009 :25:35");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("1/1/2009 :25:35");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid16() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("1/1/2009 12::35");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("1/1/2009 12::35");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid17() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("1/1/2009 12:25:");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("1/1/2009 12:25:");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid18() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime(false);
+            dt.setDateTime("1/1/2009 12:25:15");
 
-        SensibleDateTime dt = new SensibleDateTime(false);
-        dt.setDateTime("1/1/2009 12:25:15");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid19() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("0/1/2009 12:25:15");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("0/1/2009 12:25:15");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid20() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("1/0/2009 12:25:15");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("1/0/2009 12:25:15");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid21() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("31/4/2009 12:25:15");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("31/4/2009 12:25:15");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid22() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("29/2/2009 12:25:15");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("29/2/2009 12:25:15");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid23() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("30/2/2008 12:25:15");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("30/2/2008 12:25:15");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid24() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("30/1/2008 24:25:15");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("30/1/2008 24:25:15");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid25() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("30/1/2008 12:60:15");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("30/1/2008 12:60:15");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid26() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("30/1/2008 12:25:60");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("30/1/2008 12:25:60");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid27() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("30");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("30");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid28() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("30/1");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("30/1");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid29() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("30/1/2008 12");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("30/1/2008 12");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid30() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("30/1/2008 12:25");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("30/1/2008 12:25");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid31() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("30/1/2008 :");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("30/1/2008 :");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid32() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("/:");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("/:");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid33() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime(":");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime(":");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid34() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("/");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("/");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid35() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("30/1/2008/10");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("30/1/2008/10");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid36() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("12:15:24:12");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("12:15:24:12");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid37() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("A/1/2001 12:12:12");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("A/1/2001 12:12:12");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid38() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateFormat(SensibleDateTime.MDY_DATE_FORMAT);
+            dt.setDateTime("A/1/2001 12:12:12");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateFormat(SensibleDateTime.MDY_DATE_FORMAT);
-        dt.setDateTime("A/1/2001 12:12:12");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid39() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateFormat(SensibleDateTime.YMD_DATE_FORMAT);
+            dt.setDateTime("A/15/1 12:12:12");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateFormat(SensibleDateTime.YMD_DATE_FORMAT);
-        dt.setDateTime("A/15/1 12:12:12");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeFormatInvalid40() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime("1/15/2001 A:12:12");
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime("1/15/2001 A:12:12");
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeInvalid1() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime(-1, 1, 15, 12, 25, 35);
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime(-1, 1, 15, 12, 25, 35);
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeInvalid2() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime(2009, -1, 15, 12, 25, 35);
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime(2009, -1, 15, 12, 25, 35);
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeInvalid3() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime(2009, 1, -1, 12, 25, 35);
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime(2009, 1, -1, 12, 25, 35);
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeInvalid4() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime(2009, 1, 15, -1, 25, 35);
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime(2009, 1, 15, -1, 25, 35);
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeInvalid5() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime(2009, 1, 15, 12, -1, 35);
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime(2009, 1, 15, 12, -1, 35);
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeInvalid6() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime(2009, 1, 15, 12, 25, -1);
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime(2009, 1, 15, 12, 25, -1);
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeInvalid7() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime(2009, 2, 29, 12, 25, 35);
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime(2009, 2, 29, 12, 25, 35);
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeInvalid8() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime(2009, 13, 15, 12, 25, 35);
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime(2009, 13, 15, 12, 25, 35);
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeInvalid9() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime(2009, 1, 32, 12, 25, 35);
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime(2009, 1, 32, 12, 25, 35);
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeInvalid10() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime(2009, 1, 15, 24, 25, 35);
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime(2009, 1, 15, 24, 25, 35);
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeInvalid11() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime(2009, 1, 15, 12, 60, 35);
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime(2009, 1, 15, 12, 60, 35);
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeInvalid12() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime(2009, 1, 15, 12, 25, 60);
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime(2009, 1, 15, 12, 25, 60);
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeInvalid13() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime(2009, 4, 31, 12, 25, 59);
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime(2009, 4, 31, 12, 25, 59);
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"), ex.getMessage());
     }
 
     @Test
     public void testDateTimeInvalid14() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDateTime dt = new SensibleDateTime();
+            dt.setDateTime(2008, 2, 30, 12, 25, 59);
 
-        SensibleDateTime dt = new SensibleDateTime();
-        dt.setDateTime(2008, 2, 30, 12, 25, 59);
+        });
+        assertEquals(SensibleContext.getMessage("DTTM_ERR_INVALID_DTTM"), ex.getMessage());
     }
 
     @Test

@@ -1,23 +1,19 @@
 package deors.core.sensible;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 import deors.core.commons.StringToolkit;
 
 public class SensibleObjectTestCase implements PropertyChangeListener {
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     public SensibleObjectTestCase() {
 
@@ -125,53 +121,57 @@ public class SensibleObjectTestCase implements PropertyChangeListener {
     @Test
     public void testChangeFieldInvalidType() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTYPE_ERR_INVALID_OBJECT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            NamePhoneObject o2 = new NamePhoneObject(
+                new SensibleInteger(192), new SensibleString("name2"),
+                new SensibleString("phone2"), new SensibleString("email2"));
 
-        NamePhoneObject o2 = new NamePhoneObject(
-            new SensibleInteger(192), new SensibleString("name2"),
-            new SensibleString("phone2"), new SensibleString("email2"));
+            o2.changeField("id", new SensibleString("invalid"));
 
-        o2.changeField("id", new SensibleString("invalid"));
+        });
+        assertEquals(SensibleContext.getMessage("DTYPE_ERR_INVALID_OBJECT"), ex.getMessage());
     }
 
     @Test
     public void testChangeFieldOutOfBounds() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTYPE_ERR_FIELD_NOT_DEFINED", "10"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            NamePhoneObject o2 = new NamePhoneObject(
+                new SensibleInteger(192), new SensibleString("name2"),
+                new SensibleString("phone2"), new SensibleString("email2"));
 
-        NamePhoneObject o2 = new NamePhoneObject(
-            new SensibleInteger(192), new SensibleString("name2"),
-            new SensibleString("phone2"), new SensibleString("email2"));
+            o2.changeField(10, new SensibleInteger(100));
 
-        o2.changeField(10, new SensibleInteger(100));
+        });
+        assertEquals(SensibleContext.getMessage("DTYPE_ERR_FIELD_NOT_DEFINED", "10"), ex.getMessage());
     }
 
     @Test
     public void testChangeFieldOutOfBoundsFromString() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTYPE_ERR_FIELD_NOT_DEFINED", "10"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            NamePhoneObject o2 = new NamePhoneObject(
+                new SensibleInteger(192), new SensibleString("name2"),
+                new SensibleString("phone2"), new SensibleString("email2"));
 
-        NamePhoneObject o2 = new NamePhoneObject(
-            new SensibleInteger(192), new SensibleString("name2"),
-            new SensibleString("phone2"), new SensibleString("email2"));
+            o2.changeField(10, "160");
 
-        o2.changeField(10, "160");
+        });
+        assertEquals(SensibleContext.getMessage("DTYPE_ERR_FIELD_NOT_DEFINED", "10"), ex.getMessage());
     }
 
     @Test
     public void testChangeFieldInvalid() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTYPE_ERR_FIELD_NOT_DEFINED", "invalid"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            NamePhoneObject o2 = new NamePhoneObject(
+                new SensibleInteger(192), new SensibleString("name2"),
+                new SensibleString("phone2"), new SensibleString("email2"));
 
-        NamePhoneObject o2 = new NamePhoneObject(
-            new SensibleInteger(192), new SensibleString("name2"),
-            new SensibleString("phone2"), new SensibleString("email2"));
+            o2.changeField("invalid", "160");
 
-        o2.changeField("invalid", "160");
+        });
+        assertEquals(SensibleContext.getMessage("DTYPE_ERR_FIELD_NOT_DEFINED", "invalid"), ex.getMessage());
     }
 
     @Test
@@ -275,53 +275,57 @@ public class SensibleObjectTestCase implements PropertyChangeListener {
     @Test
     public void testSetFieldInvalidType() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTYPE_ERR_INVALID_OBJECT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            NamePhoneObject o2 = new NamePhoneObject(
+                new SensibleInteger(192), new SensibleString("name2"),
+                new SensibleString("phone2"), new SensibleString("email2"));
 
-        NamePhoneObject o2 = new NamePhoneObject(
-            new SensibleInteger(192), new SensibleString("name2"),
-            new SensibleString("phone2"), new SensibleString("email2"));
+            o2.setField("id", new SensibleString("invalid"));
 
-        o2.setField("id", new SensibleString("invalid"));
+        });
+        assertEquals(SensibleContext.getMessage("DTYPE_ERR_INVALID_OBJECT"), ex.getMessage());
     }
 
     @Test
     public void testSetFieldOutOfBounds() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTYPE_ERR_FIELD_NOT_DEFINED", "10"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            NamePhoneObject o2 = new NamePhoneObject(
+                new SensibleInteger(192), new SensibleString("name2"),
+                new SensibleString("phone2"), new SensibleString("email2"));
 
-        NamePhoneObject o2 = new NamePhoneObject(
-            new SensibleInteger(192), new SensibleString("name2"),
-            new SensibleString("phone2"), new SensibleString("email2"));
+            o2.setField(10, new SensibleInteger(100));
 
-        o2.setField(10, new SensibleInteger(100));
+        });
+        assertEquals(SensibleContext.getMessage("DTYPE_ERR_FIELD_NOT_DEFINED", "10"), ex.getMessage());
     }
 
     @Test
     public void testSetFieldOutOfBoundsFromString() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTYPE_ERR_FIELD_NOT_DEFINED", "10"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            NamePhoneObject o2 = new NamePhoneObject(
+                new SensibleInteger(192), new SensibleString("name2"),
+                new SensibleString("phone2"), new SensibleString("email2"));
 
-        NamePhoneObject o2 = new NamePhoneObject(
-            new SensibleInteger(192), new SensibleString("name2"),
-            new SensibleString("phone2"), new SensibleString("email2"));
+            o2.setField(10, "160");
 
-        o2.setField(10, "160");
+        });
+        assertEquals(SensibleContext.getMessage("DTYPE_ERR_FIELD_NOT_DEFINED", "10"), ex.getMessage());
     }
 
     @Test
     public void testSetFieldInvalid() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTYPE_ERR_FIELD_NOT_DEFINED", "invalid"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            NamePhoneObject o2 = new NamePhoneObject(
+                new SensibleInteger(192), new SensibleString("name2"),
+                new SensibleString("phone2"), new SensibleString("email2"));
 
-        NamePhoneObject o2 = new NamePhoneObject(
-            new SensibleInteger(192), new SensibleString("name2"),
-            new SensibleString("phone2"), new SensibleString("email2"));
+            o2.setField("invalid", "160");
 
-        o2.setField("invalid", "160");
+        });
+        assertEquals(SensibleContext.getMessage("DTYPE_ERR_FIELD_NOT_DEFINED", "invalid"), ex.getMessage());
     }
 
     @Test
@@ -353,27 +357,29 @@ public class SensibleObjectTestCase implements PropertyChangeListener {
     @Test
     public void testGetFieldOutOfBounds() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTYPE_ERR_FIELD_NOT_DEFINED", "10"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            NamePhoneObject o2 = new NamePhoneObject(
+                new SensibleInteger(192), new SensibleString("name2"),
+                new SensibleString("phone2"), new SensibleString("email2"));
 
-        NamePhoneObject o2 = new NamePhoneObject(
-            new SensibleInteger(192), new SensibleString("name2"),
-            new SensibleString("phone2"), new SensibleString("email2"));
+            o2.getField(10);
 
-        o2.getField(10);
+        });
+        assertEquals(SensibleContext.getMessage("DTYPE_ERR_FIELD_NOT_DEFINED", "10"), ex.getMessage());
     }
 
     @Test
     public void testGetFieldInvalid() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTYPE_ERR_FIELD_NOT_DEFINED", "invalid"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            NamePhoneObject o2 = new NamePhoneObject(
+                new SensibleInteger(192), new SensibleString("name2"),
+                new SensibleString("phone2"), new SensibleString("email2"));
 
-        NamePhoneObject o2 = new NamePhoneObject(
-            new SensibleInteger(192), new SensibleString("name2"),
-            new SensibleString("phone2"), new SensibleString("email2"));
+            o2.getField("invalid");
 
-        o2.getField("invalid");
+        });
+        assertEquals(SensibleContext.getMessage("DTYPE_ERR_FIELD_NOT_DEFINED", "invalid"), ex.getMessage());
     }
 
     @Test
@@ -416,14 +422,15 @@ public class SensibleObjectTestCase implements PropertyChangeListener {
     @Test
     public void testGetFieldNameOutOfBounds() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTYPE_ERR_FIELD_NOT_DEFINED", "10"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            NamePhoneObject o2 = new NamePhoneObject(
+                new SensibleInteger(192), new SensibleString("name2"),
+                new SensibleString("phone2"), new SensibleString("email2"));
 
-        NamePhoneObject o2 = new NamePhoneObject(
-            new SensibleInteger(192), new SensibleString("name2"),
-            new SensibleString("phone2"), new SensibleString("email2"));
+            assertEquals("notexists", o2.getFieldName(10));
 
-        assertEquals("notexists", o2.getFieldName(10));
+        });
+        assertEquals(SensibleContext.getMessage("DTYPE_ERR_FIELD_NOT_DEFINED", "10"), ex.getMessage());
     }
 
     @Test
@@ -528,7 +535,7 @@ public class SensibleObjectTestCase implements PropertyChangeListener {
         o1.setField(3, new SensibleString("email1"));
         NamePhoneObject o2 = (NamePhoneObject) o1.returnCopy();
 
-        assertNotNull("the object copy should not be null", o2);
+        assertNotNull(o2, "the object copy should not be null");
         assertFalse(o1 == o2);
         assertEquals(100, o1.getId().integerValue());
         assertEquals(100, o2.getId().integerValue());
@@ -562,7 +569,7 @@ public class SensibleObjectTestCase implements PropertyChangeListener {
         o1.setField(3, new SensibleString("email1"));
 
         NamePhoneObject o2 = (NamePhoneObject) o1.returnNew();
-        assertNotNull("the object new should not be null", o2);
+        assertNotNull(o2, "the object new should not be null");
         assertFalse(o1 == o2);
         assertTrue(o2.isClear());
         assertEquals(100, o1.getId().integerValue());
@@ -688,18 +695,19 @@ public class SensibleObjectTestCase implements PropertyChangeListener {
     @Test
     public void testChangeValueObjectInvalid() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTYPE_ERR_INVALID_OBJECT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            NamePhoneObject o1 = new NamePhoneObject();
+            o1.setId(new SensibleInteger(100));
+            o1.setName(new SensibleString("name1"));
+            o1.setPhone(new SensibleString("phone1"));
+            o1.setEmail(new SensibleString("email1"));
 
-        NamePhoneObject o1 = new NamePhoneObject();
-        o1.setId(new SensibleInteger(100));
-        o1.setName(new SensibleString("name1"));
-        o1.setPhone(new SensibleString("phone1"));
-        o1.setEmail(new SensibleString("email1"));
+            IdNameObject o2 = new IdNameObject();
 
-        IdNameObject o2 = new IdNameObject();
+            o1.changeValue(o2);
 
-        o1.changeValue(o2);
+        });
+        assertEquals(SensibleContext.getMessage("DTYPE_ERR_INVALID_OBJECT"), ex.getMessage());
     }
 
     @Test
@@ -728,18 +736,19 @@ public class SensibleObjectTestCase implements PropertyChangeListener {
     @Test
     public void testSetValueObjectInvalid() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DTYPE_ERR_INVALID_OBJECT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            NamePhoneObject o1 = new NamePhoneObject();
+            o1.setId(new SensibleInteger(100));
+            o1.setName(new SensibleString("name1"));
+            o1.setPhone(new SensibleString("phone1"));
+            o1.setEmail(new SensibleString("email1"));
 
-        NamePhoneObject o1 = new NamePhoneObject();
-        o1.setId(new SensibleInteger(100));
-        o1.setName(new SensibleString("name1"));
-        o1.setPhone(new SensibleString("phone1"));
-        o1.setEmail(new SensibleString("email1"));
+            IdNameObject o2 = new IdNameObject();
 
-        IdNameObject o2 = new IdNameObject();
+            o1.setValue(o2);
 
-        o1.setValue(o2);
+        });
+        assertEquals(SensibleContext.getMessage("DTYPE_ERR_INVALID_OBJECT"), ex.getMessage());
     }
 
     @Test

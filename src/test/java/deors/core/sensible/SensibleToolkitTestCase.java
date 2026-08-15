@@ -1,7 +1,7 @@
 package deors.core.sensible;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -9,7 +9,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JWindow;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class SensibleToolkitTestCase {
 

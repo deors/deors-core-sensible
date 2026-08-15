@@ -1,22 +1,18 @@
 package deors.core.sensible;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 public class SensibleBigDecimalTestCase {
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     public SensibleBigDecimalTestCase() {
 
@@ -76,31 +72,34 @@ public class SensibleBigDecimalTestCase {
     @Test
     public void testConstructorInvalid1() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("BIGD_ERR_INVALID_STRING"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleBigDecimal bd = new SensibleBigDecimal(5, 2);
+            bd.setNumber("123456");
 
-        SensibleBigDecimal bd = new SensibleBigDecimal(5, 2);
-        bd.setNumber("123456");
+        });
+        assertEquals(SensibleContext.getMessage("BIGD_ERR_INVALID_STRING"), ex.getMessage());
     }
 
     @Test
     public void testConstructorInvalid2() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("BIGD_ERR_INVALID_STRING"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleBigDecimal bd = new SensibleBigDecimal(5, 2);
+            bd.setNumber("12345,678");
 
-        SensibleBigDecimal bd = new SensibleBigDecimal(5, 2);
-        bd.setNumber("12345,678");
+        });
+        assertEquals(SensibleContext.getMessage("BIGD_ERR_INVALID_STRING"), ex.getMessage());
     }
 
     @Test
     public void testConstructorInvalid3() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("BIGD_ERR_INVALID_STRING"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleBigDecimal bd = new SensibleBigDecimal(5, 2, false);
+            bd.setNumber("-123");
 
-        SensibleBigDecimal bd = new SensibleBigDecimal(5, 2, false);
-        bd.setNumber("-123");
+        });
+        assertEquals(SensibleContext.getMessage("BIGD_ERR_INVALID_STRING"), ex.getMessage());
     }
 
     @Test

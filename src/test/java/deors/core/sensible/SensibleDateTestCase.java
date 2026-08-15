@@ -1,22 +1,18 @@
 package deors.core.sensible;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Calendar;
 import java.util.Date;
 
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.edt.GuiTask;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 public class SensibleDateTestCase {
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     public SensibleDateTestCase() {
 
@@ -98,341 +94,374 @@ public class SensibleDateTestCase {
     @Test
     public void testDateFormatInvalid1() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDateFormat("invalid");
 
-        SensibleDate d = new SensibleDate();
-        d.setDateFormat("invalid");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid2() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDateFormat(SensibleDate.MDY_DATE_FORMAT);
+            d.setDate("15/1/2009");
 
-        SensibleDate d = new SensibleDate();
-        d.setDateFormat(SensibleDate.MDY_DATE_FORMAT);
-        d.setDate("15/1/2009");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid3() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDateFormat(SensibleDate.YMD_DATE_FORMAT);
+            d.setDate("2009/15/1");
 
-        SensibleDate d = new SensibleDate();
-        d.setDateFormat(SensibleDate.YMD_DATE_FORMAT);
-        d.setDate("2009/15/1");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid4() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDate("1/15/2009");
 
-        SensibleDate d = new SensibleDate();
-        d.setDate("1/15/2009");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid5() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDate("1");
 
-        SensibleDate d = new SensibleDate();
-        d.setDate("1");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid6() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDate("1/");
 
-        SensibleDate d = new SensibleDate();
-        d.setDate("1/");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid7() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDate("1/12");
 
-        SensibleDate d = new SensibleDate();
-        d.setDate("1/12");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid8() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDate("1/12/");
 
-        SensibleDate d = new SensibleDate();
-        d.setDate("1/12/");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid9() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDate("1/12/2010/");
 
-        SensibleDate d = new SensibleDate();
-        d.setDate("1/12/2010/");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid10() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDate("111/12/2010");
 
-        SensibleDate d = new SensibleDate();
-        d.setDate("111/12/2010");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid11() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDate("1/121/2010");
 
-        SensibleDate d = new SensibleDate();
-        d.setDate("1/121/2010");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid12() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDate("1/12/20101");
 
-        SensibleDate d = new SensibleDate();
-        d.setDate("1/12/20101");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid13() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDate("A/12/2010");
 
-        SensibleDate d = new SensibleDate();
-        d.setDate("A/12/2010");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid14() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDateFormat(SensibleDate.MDY_DATE_FORMAT);
+            d.setDate("111/12/2010");
 
-        SensibleDate d = new SensibleDate();
-        d.setDateFormat(SensibleDate.MDY_DATE_FORMAT);
-        d.setDate("111/12/2010");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid15() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDateFormat(SensibleDate.MDY_DATE_FORMAT);
+            d.setDate("1/121/2010");
 
-        SensibleDate d = new SensibleDate();
-        d.setDateFormat(SensibleDate.MDY_DATE_FORMAT);
-        d.setDate("1/121/2010");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid16() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDateFormat(SensibleDate.MDY_DATE_FORMAT);
+            d.setDate("1/12/20101");
 
-        SensibleDate d = new SensibleDate();
-        d.setDateFormat(SensibleDate.MDY_DATE_FORMAT);
-        d.setDate("1/12/20101");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid17() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDateFormat(SensibleDate.MDY_DATE_FORMAT);
+            d.setDate("A/12/2010");
 
-        SensibleDate d = new SensibleDate();
-        d.setDateFormat(SensibleDate.MDY_DATE_FORMAT);
-        d.setDate("A/12/2010");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid18() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDateFormat(SensibleDate.YMD_DATE_FORMAT);
+            d.setDate("20101/15/1");
 
-        SensibleDate d = new SensibleDate();
-        d.setDateFormat(SensibleDate.YMD_DATE_FORMAT);
-        d.setDate("20101/15/1");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid19() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDateFormat(SensibleDate.YMD_DATE_FORMAT);
+            d.setDate("2010/151/1");
 
-        SensibleDate d = new SensibleDate();
-        d.setDateFormat(SensibleDate.YMD_DATE_FORMAT);
-        d.setDate("2010/151/1");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid20() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDateFormat(SensibleDate.YMD_DATE_FORMAT);
+            d.setDate("2010/15/111");
 
-        SensibleDate d = new SensibleDate();
-        d.setDateFormat(SensibleDate.YMD_DATE_FORMAT);
-        d.setDate("2010/15/111");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid21() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDateFormat(SensibleDate.YMD_DATE_FORMAT);
+            d.setDate("A/15/1");
 
-        SensibleDate d = new SensibleDate();
-        d.setDateFormat(SensibleDate.YMD_DATE_FORMAT);
-        d.setDate("A/15/1");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid22() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDate("31/4/2010");
 
-        SensibleDate d = new SensibleDate();
-        d.setDate("31/4/2010");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid23() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDate("29/2/2010");
 
-        SensibleDate d = new SensibleDate();
-        d.setDate("29/2/2010");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testDateFormatInvalid24() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDate("30/2/2012");
 
-        SensibleDate d = new SensibleDate();
-        d.setDate("30/2/2012");
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE_FORMAT"), ex.getMessage());
     }
 
     @Test
     public void testInvalidDate1() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDate(2009, 1, 32);
 
-        SensibleDate d = new SensibleDate();
-        d.setDate(2009, 1, 32);
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE"), ex.getMessage());
     }
 
     @Test
     public void testInvalidDate2() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDate(2009, 2, 31);
 
-        SensibleDate d = new SensibleDate();
-        d.setDate(2009, 2, 31);
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE"), ex.getMessage());
     }
 
     @Test
     public void testInvalidDate3() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDate(2007, 2, 29);
 
-        SensibleDate d = new SensibleDate();
-        d.setDate(2007, 2, 29);
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE"), ex.getMessage());
     }
 
     @Test
     public void testInvalidDate4() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDate(2009, 2, -1);
 
-        SensibleDate d = new SensibleDate();
-        d.setDate(2009, 2, -1);
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE"), ex.getMessage());
     }
 
     @Test
     public void testInvalidDate5() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDate(2009, -1, 28);
 
-        SensibleDate d = new SensibleDate();
-        d.setDate(2009, -1, 28);
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE"), ex.getMessage());
     }
 
     @Test
     public void testInvalidDate6() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDate(-1, 2, 28);
 
-        SensibleDate d = new SensibleDate();
-        d.setDate(-1, 2, 28);
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE"), ex.getMessage());
     }
 
     @Test
     public void testInvalidDate7() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDate(2009, 4, 31);
 
-        SensibleDate d = new SensibleDate();
-        d.setDate(2009, 4, 31);
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE"), ex.getMessage());
     }
 
     @Test
     public void testInvalidDate8() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDate(2008, 2, 30);
 
-        SensibleDate d = new SensibleDate();
-        d.setDate(2008, 2, 30);
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE"), ex.getMessage());
     }
 
     @Test
     public void testInvalidDate9() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("DATE_ERR_INVALID_DATE"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleDate d = new SensibleDate();
+            d.setDate(2008, 13, 30);
 
-        SensibleDate d = new SensibleDate();
-        d.setDate(2008, 13, 30);
+        });
+        assertEquals(SensibleContext.getMessage("DATE_ERR_INVALID_DATE"), ex.getMessage());
     }
 
     @Test

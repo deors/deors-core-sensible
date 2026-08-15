@@ -1,20 +1,16 @@
 package deors.core.sensible;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 public class SensibleBooleanTestCase {
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     public SensibleBooleanTestCase() {
 
@@ -144,10 +140,11 @@ public class SensibleBooleanTestCase {
     @Test
     public void testCreateStringInvalid() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("BOOL_ERR_INVALID_STRING"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            new SensibleBoolean("invalid");
 
-        new SensibleBoolean("invalid");
+        });
+        assertEquals(SensibleContext.getMessage("BOOL_ERR_INVALID_STRING"), ex.getMessage());
     }
 
     @Test
@@ -316,12 +313,13 @@ public class SensibleBooleanTestCase {
     @Test
     public void testChangeValueInvalidValue() {
 
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage(SensibleContext.getMessage("BOOL_ERR_INVALID_STRING"));
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
+            SensibleBoolean bt = new SensibleBoolean(true);
 
-        SensibleBoolean bt = new SensibleBoolean(true);
+            bt.changeValue("invalid");
 
-        bt.changeValue("invalid");
+        });
+        assertEquals(SensibleContext.getMessage("BOOL_ERR_INVALID_STRING"), ex.getMessage());
     }
 
     @Test
