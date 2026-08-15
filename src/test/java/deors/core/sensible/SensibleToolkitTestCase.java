@@ -2,6 +2,7 @@ package deors.core.sensible;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -9,6 +10,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JWindow;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class SensibleToolkitTestCase {
@@ -16,9 +19,23 @@ public class SensibleToolkitTestCase {
     private static final int WIDTH = 400;
     private static final int HEIGHT = 300;
 
+    private static boolean desktopAvailable;
+
     public SensibleToolkitTestCase() {
 
         super();
+    }
+
+    @BeforeAll
+    public static void detectDesktop() {
+
+        desktopAvailable = DesktopConditions.isAvailable();
+    }
+
+    @BeforeEach
+    public void assumeDesktopAvailable() {
+
+        assumeTrue(desktopAvailable, "requires a graphical display and AWT Robot");
     }
 
     @Test

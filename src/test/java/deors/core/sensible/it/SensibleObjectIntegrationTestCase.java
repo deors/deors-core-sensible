@@ -3,6 +3,7 @@ package deors.core.sensible.it;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.awt.event.KeyEvent;
 
@@ -15,7 +16,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import deors.core.sensible.DesktopConditions;
+
 public class SensibleObjectIntegrationTestCase {
+
+    private static boolean desktopAvailable;
 
     private FrameFixture testFrame;
     private AllTypesFrame frame;
@@ -23,11 +28,15 @@ public class SensibleObjectIntegrationTestCase {
     @BeforeAll
     public static void setUpOnce() {
 
+        desktopAvailable = DesktopConditions.isAvailable();
+
         FailOnThreadViolationRepaintManager.install();
     }
 
     @BeforeEach
     public void setUp() {
+
+        assumeTrue(desktopAvailable, "requires a graphical display and AWT Robot");
 
         frame = GuiActionRunner.execute(new GuiQuery<AllTypesFrame>() {
             protected AllTypesFrame executeInEDT() {
@@ -41,7 +50,9 @@ public class SensibleObjectIntegrationTestCase {
     @AfterEach
     public void tearDown () {
 
-        testFrame.cleanUp();
+        if (testFrame != null) {
+            testFrame.cleanUp();
+        }
     }
 
     @Test
